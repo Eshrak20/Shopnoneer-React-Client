@@ -1,0 +1,25 @@
+/* Existing styles... */
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  .filter-section {
+    transition: all 0.5s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .open {
+    max-height: 1000px; /* or any large value to accommodate contents */
+  }
+  
+  .closed {
+    max-height: 0;
+  }
+  
+  

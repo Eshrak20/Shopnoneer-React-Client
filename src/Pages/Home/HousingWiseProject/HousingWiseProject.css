@@ -1,0 +1,31 @@
+/* Enhanced card styling */
+.project-card {
+  background: linear-gradient(135deg, #e6fffa, #b2f5ea); /* Soft teal gradient */
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 128, 128, 0.2); /* Initial shadow */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 128, 128, 0.3); /* Teal shadow on hover */
+}
+
+.project-card h2 {
+  color: #065f46; /* Darker teal for title */
+  transition: color 0.3s ease;
+}
+
+.project-card:hover h2 {
+  color: #a8a8a8; /* Light gray on hover */
+}
+
+.project-card span {
+  color: #2c7a7b; /* Accent color for project count */
+  transition: color 0.3s ease;
+}
+
+.project-card:hover span {
+  color: #a8a8a8; /* Light gray on hover */
+}

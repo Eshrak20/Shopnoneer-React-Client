@@ -1,0 +1,109 @@
+import React, { useEffect, useState, forwardRef } from "react";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import image1 from "../../../assets/Card Images/interior-design-house-and-modern-white-kitchen-Z53XFYH-min-600x400.jpg";
+import image2 from "../../../assets/Card Images/interior-living-room-of-a-forest-house-3d-6VHM3GK-min-600x400.jpg";
+import image3 from "../../../assets/Card Images/enjoying-a-cozy-new-kitchen-in-an-open-concept-home-copy-space-light-bright-airy-decoration-interior_rox9lX-600x400.jpg"; 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBath, faBed, faHome } from "@fortawesome/free-solid-svg-icons";
+import MinCard from "../MinCard/MinCard";
+import { Link } from "react-router-dom";
+import fetchHomeCardData from "../../../Models/HomeModel/HomeCardModel/HomeCardModel"; // Import the model function
+
+const HomeCard = forwardRef((props, ref) => {
+  const [homeCard, setHomeCard] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await fetchHomeCardData(); // Use the model to fetch data
+        setHomeCard(data);
+      } catch (error) {
+        console.error("Failed to fetch home card data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const images = [image1, image2, image3];
+  const displayedCards = homeCard.slice(0, 6);
+
+  return (
+    <>
+      <MinCard />
+      <section ref={ref} className="my-7 px-10 sm:px-6 lg:px-8">
+        <SectionTitle
+          heading="Most Recent Properties"
+          subHeading="Check out some of our latest properties"
+        />
+        {loading ? (
+          <div className="flex justify-center items-center my-10">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-teal-500"></div>
+          </div>
+        ) : (
+          <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 my-4">
+            {displayedCards.map((data, index) => (
+              <div
+                key={data.id || index}
+                className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full"
+              >
+                <figure>
+                  <img
+                    src={images[index % images.length]}
+                    alt={data.title}
+                    className="w-full h-48 sm:h-56 object-cover rounded-t-lg"
+                  />
+                </figure>
+                <div className="card-body p-4 sm:p-6">
+                  <h2 className="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+                    {data.title}
+                  </h2>
+                  <p className="text-gray-500 text-sm sm:text-base my-2">
+                  {data.description?.length > 35
+                      ? `${data.description.substring(0, 135).trim().replace(/[,;:.!?]$/, "")}...`
+                      : data.description || ""}
+                  </p>
+                  <div className="flex gap-3 my-3">
+                    <FontAwesomeIcon icon={faBed} />
+                    <span className="border-r-2 pr-2">{data.no_of_beds}</span>
+                    <FontAwesomeIcon icon={faBath} />
+                    <span className="border-r-2 pr-2">{data.no_of_baths}</span>
+                    <FontAwesomeIcon icon={faHome} />
+                    <span>{data.no_of_balcony}</span>
+                  </div>
+                  <h2 className="text-base sm:text-lg font-semibold text-teal-600 my-2">
+                    From ৳{" "}
+                    {data.total_price
+                      ? data.total_price.toLocaleString()
+                      : "Price is upcoming"}
+                  </h2>
+                  <div className="card-actions justify-end">
+                    <Link
+                      to={`/detailsPropMain/${data.id}`}
+                      className="btn btn-accent text-white px-4 sm:px-6 py-2 hover:bg-accent-focus"
+                    >
+                      Details
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="text-center my-6">
+          <Link
+            to="/detail"
+            className="btn bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"
+          >
+            View All Properties
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+});
+
+export default HomeCard;
