@@ -7,7 +7,7 @@ const fetchProjects = async () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ page: 2, size: 30 }),
+      body: JSON.stringify({ page: 1, size: 30 }),
     });
   
     if (!response.ok) throw new Error("Network response was not ok");

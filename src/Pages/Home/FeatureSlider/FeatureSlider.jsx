@@ -58,7 +58,7 @@ const FeatureSlider = () => {
             >
               <div className="relative overflow-hidden w-full rounded-md group">
                 <img
-                  src={project.project_image}
+                  src={project.images[0]}
                   alt={project.housing}
                   className="w-full h-[600px] object-cover transition-transform duration-300 group-hover:scale-110"
                 />
