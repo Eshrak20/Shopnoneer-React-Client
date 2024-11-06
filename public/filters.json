@@ -1,9 +1,0 @@
-{
-    "priceRanges": ["Below BDT 20,000", "BDT 20,000 - BDT 50,000", "Above BDT 50,000"],
-    "bedrooms": ["1", "2", "3", "4", "5+"],
-    "subcategories": ["New", "Used"],
-    "bathrooms": ["1", "2", "3", "4", "5+"],
-    "floorAreas": ["Below 800 sqft", "800 - 1500 sqft", "Above 1500 sqft"],
-    "amenities": ["Parking", "Garden", "Swimming Pool", "Gym"]
-  }
-  
