@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import useProjectList from "../../../Models/FilterSectionModel/FilterSectionModel"; // Assuming this is a custom hook
-import { Link } from "react-router-dom"; // Assuming you're using react-router for navigation
-import { FaBed, FaBath } from "react-icons/fa"; // Assuming you're using these icons
-import { MdSquareFoot } from "react-icons/md"; // Assuming you're using this icon
-import FilterSection from "../FilterSection/FilterSection"; // Make sure you import your FilterSection component
+import useProjectList from "../../../Models/FilterSectionModel/FilterSectionModel";
+import { Link } from "react-router-dom";
+import { FaBed, FaBath } from "react-icons/fa";
+import { MdSquareFoot } from "react-icons/md";
+import FilterSection from "../FilterSection/FilterSection";
 
 const DetailCard = () => {
   const { filters, filteredProjects, applyFilters } = useProjectList();
@@ -26,20 +26,16 @@ const DetailCard = () => {
   );
 
   useEffect(() => {
-    // Apply filters when selectedFilters or filters change
     applyFilters(selectedFilters);
   }, [selectedFilters, applyFilters]);
 
   useEffect(() => {
-    // Implement sorting logic based on selected sortOption
     if (sortOption === "newest") {
       filteredProjects.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     } else if (sortOption === "priceHighToLow") {
       filteredProjects.sort((a, b) => b.total_price - a.total_price);
     } else if (sortOption === "priceLowToHigh") {
       filteredProjects.sort((a, b) => a.total_price - b.total_price);
-    } else if (sortOption === "popularity") {
-      // Add popularity sorting logic here if available
     }
   }, [sortOption, filteredProjects]);
 
@@ -47,27 +43,30 @@ const DetailCard = () => {
 
   return (
     <>
-      <div className="flex justify-end mb-4">
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          className="border rounded-lg p-2 bg-white text-teal-600"
-        >
-          <option value="newest">Newest</option>
-          <option value="priceHighToLow">Price: High to Low</option>
-          <option value="priceLowToHigh">Price: Low to High</option>
-          <option value="popularity">Popularity</option>
-        </select>
-      </div>
-
-      <div className="flex justify-between mx-auto mb-3 border-none rounded-lg max-w-screen-2xl">
-        {/* Filter Section */}
+      <div className="flex flex-col items-center mb-4 space-y-4">
+        {/* Filter Section at the top */}
         <FilterSection
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
           filters={filters}
         />
-        <div className="flex flex-col w-full">
+
+        {/* Sort Options */}
+        <div className="flex justify-end mb-4 w-full max-w-screen-lg">
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="border rounded-lg p-2 bg-white text-teal-600"
+          >
+            <option value="newest">Newest</option>
+            <option value="priceHighToLow">Price: High to Low</option>
+            <option value="priceLowToHigh">Price: Low to High</option>
+            <option value="popularity">Popularity</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="flex flex-col mb-10 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
             {filteredProjects.map((item) => (
               <div
@@ -79,7 +78,7 @@ const DetailCard = () => {
                   <img
                     src={item.images[0] || "https://via.placeholder.com/350x200"}
                     alt="Project"
-                    className="rounded-lg w-[350px] h-[200px] md:w-[500px] md:h-[300px]"
+                    className="rounded-lg w-[350px] h-[200px] md:w-[700px] md:h-[450px]"
                   />
                 </Link>
 
@@ -146,8 +145,6 @@ const DetailCard = () => {
             ))}
           </div>
         </div>
-        
-      </div>
     </>
   );
 };
