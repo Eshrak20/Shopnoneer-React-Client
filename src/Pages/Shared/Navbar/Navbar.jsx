@@ -71,7 +71,7 @@ const Navbar = ({ visible }) => {
           className={`navbar ${
             isFixed
               ? "bg-base-100 bg-opacity-20 fixed "
-              : "bg-black bg-opacity-70 sticky top-0"
+              : "bg-black  sticky top-0"
           } z-10 max-w-screen-2xl px-7`}
         >
           <div className="navbar-start">
