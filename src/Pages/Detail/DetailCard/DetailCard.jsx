@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react"; // Add useCallback
 import useProjectList from "../../../Models/FilterSectionModel/FilterSectionModel";
 import { Link } from "react-router-dom";
-import { FaBed, FaBath } from "react-icons/fa";
+import { FaBed, FaBath } from "react-icons/fa"; 
 import { MdSquareFoot } from "react-icons/md";
 import FilterSection from "../FilterSection/FilterSection";
 
@@ -25,9 +25,14 @@ const DetailCard = () => {
     </div>
   );
 
-  useEffect(() => {
+  // Memoize applyFilters function using useCallback to prevent unnecessary re-renders
+  const memoizedApplyFilters = useCallback(() => {
     applyFilters(selectedFilters);
-  }, [selectedFilters, applyFilters]);
+  }, [applyFilters, selectedFilters]);
+
+  useEffect(() => {
+    memoizedApplyFilters(); // Call the memoized applyFilters when selectedFilters changes
+  }, [memoizedApplyFilters]); // Now depend on the memoized callback
 
   useEffect(() => {
     if (sortOption === "newest") {
@@ -67,9 +72,9 @@ const DetailCard = () => {
       </div>
 
       <div className="flex flex-col mb-10 w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
-            {filteredProjects.map((item) => (
-              <div
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
+          {filteredProjects.map((item) => (
+            <div
               key={item.id}
               className="border rounded-lg shadow-md p-4 bg-white transition-transform duration-300 transform"
             >
@@ -142,9 +147,9 @@ const DetailCard = () => {
                 </div>
               </div>
             </div>
-            ))}
-          </div>
+          ))}
         </div>
+      </div>
     </>
   );
 };

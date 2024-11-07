@@ -10,7 +10,7 @@ const Detail = () => {
         <title>Shopnoneer | Properties</title>
       </Helmet>
       <Navbar visible={true} />
-      <BrandName></BrandName>
+      {/* <BrandName></BrandName> */}
       <DetailCard></DetailCard>
     </div>
   );

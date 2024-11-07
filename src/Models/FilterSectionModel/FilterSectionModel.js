@@ -4,7 +4,6 @@ const useProjectList = () => {
   const [projects, setProjects] = useState([]); // Store the project data
   const [filters, setFilters] = useState({}); // Store the filters data
   const [filteredProjects, setFilteredProjects] = useState([]); // Store filtered projects
-  const [isFiltersInitialized, setIsFiltersInitialized] = useState(false); // Flag to prevent unnecessary updates
   const [isLoading, setIsLoading] = useState(true); // Loading state while fetching data
   const [error, setError] = useState(null); // Error state for handling API errors
 
@@ -29,7 +28,6 @@ const useProjectList = () => {
         
         if (data.success) {
           setProjects(data.data);
-          initializeFilters(data.data); // Initialize filters after successful data fetch
         } else {
           setError(data.message); // Handle case when API response indicates failure
         }
@@ -45,31 +43,33 @@ const useProjectList = () => {
   }, []); // Empty dependency array ensures this effect runs once on mount
 
   // Initialize filters after projects are fetched
-  const initializeFilters = (projectData) => {
-    const divisions = [...new Set(projectData.map(project => project.division))];
-    const districts = [...new Set(projectData.map(project => project.district))];
-    const upazilas = [...new Set(projectData.map(project => project.upazila))];
-    const housings = [...new Set(projectData.map(project => project.housing))];
-    const baths = [...new Set(projectData.map(project => project.no_of_baths))];
-    const beds = [...new Set(projectData.map(project => project.no_of_beds))];
-    const balconies = [...new Set(projectData.map(project => project.no_of_balconies))];
+  useEffect(() => {
+    if (projects.length === 0) return; // Ensure it runs only when projects are available
 
-    setFilters({
-      division: divisions,
-      district: districts,
-      upazila: upazilas,
-      housing: housings,
-      bath: baths,
-      bed: beds,
-      balcony: balconies,
-    });
+    const initializeFilters = (projectData) => {
+      const divisions = [...new Set(projectData.map(project => project.division))];
+      const districts = [...new Set(projectData.map(project => project.district))];
+      const upazilas = [...new Set(projectData.map(project => project.upazila))];
+      const housings = [...new Set(projectData.map(project => project.housing))];
+      const baths = [...new Set(projectData.map(project => project.no_of_baths))];
+      const beds = [...new Set(projectData.map(project => project.no_of_beds))];
+      const balconies = [...new Set(projectData.map(project => project.no_of_balcony))];
 
-    // Set filtered projects only once after filters are initialized and avoid updates on rerender
-    if (!isFiltersInitialized) {
+      setFilters({
+        division: divisions,
+        district: districts,
+        upazila: upazilas,
+        housing: housings,
+        bath: baths,
+        bed: beds,
+        balcony: balconies,
+      });
+
       setFilteredProjects(projectData); // Set initial filtered projects
-      setIsFiltersInitialized(true); // Mark filters as initialized
-    }
-  };
+    };
+
+    initializeFilters(projects); // Initialize filters after data is fetched
+  }, [projects]); // Runs only when `projects` are updated
 
   // Apply filters
   const applyFilters = (selectedFilters) => {
@@ -82,7 +82,7 @@ const useProjectList = () => {
       const matchesHousing = housing.length === 0 || housing.includes(project.housing);
       const matchesBath = bath.length === 0 || bath.includes(project.no_of_baths);
       const matchesBed = bed.length === 0 || bed.includes(project.no_of_beds);
-      const matchesBalcony = balcony.length === 0 || balcony.includes(project.no_of_balconies);
+      const matchesBalcony = balcony.length === 0 || balcony.includes(project.no_of_balcony);
 
       return matchesDivision && matchesDistrict && matchesUpazila && matchesHousing && matchesBath && matchesBed && matchesBalcony;
     });
