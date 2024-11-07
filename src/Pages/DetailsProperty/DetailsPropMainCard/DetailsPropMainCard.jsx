@@ -67,7 +67,7 @@ const DetailsPropMainCard = () => {
     if (!str || str.trim() === "") {
       return "Input string is empty."; // Return a message if the string is empty
     }
-    
+
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
@@ -141,9 +141,7 @@ const DetailsPropMainCard = () => {
             {/* Amenities Section */}
             <div className="my-4">
               <h4 className="text-lg font-semibold text-gray-900">Amenities</h4>
-              <p className="text-gray-600 text-lg">
-                {property.amenities}
-              </p>
+              <p className="text-gray-600 text-lg">{property.amenities}</p>
             </div>
 
             {/* Location Details */}
@@ -163,8 +161,7 @@ const DetailsPropMainCard = () => {
                 Plot: {property.plot}, Road: {property.road}
               </p>
               <p className="text-gray-600 text-lg">
-                Block: {property.block}, Plot Size:{" "}
-                {property.plot_size} sqft
+                Block: {property.block}, Plot Size: {property.plot_size} sqft
               </p>
               <p className="text-gray-600 text-lg">
                 Floor Area: {property.floor_area} sqft, Floor Number:{" "}
@@ -179,19 +176,12 @@ const DetailsPropMainCard = () => {
 
           {/* Right: Property Images */}
           <div className="space-y-4">
-            {/* <div className="relative overflow-hidden">
-              <img
-                src={property.images[0]}
-                alt={`Property image`}
-                className="w-full h-56 object-cover rounded-lg shadow-lg transition duration-300 transform scale-100 hover:scale-105"
-              />
-            </div> */}
-            {images.map((img, index) => (
-              <div key={index+1} className="relative overflow-hidden">
+            {images.slice(0, 3).map((img, index) => (
+              <div key={index + 1} className="relative overflow-hidden">
                 <img
                   src={img}
                   alt={`Property additional image ${index + 1}`}
-                  className="w-full h-56 object-cover rounded-lg shadow-lg transition duration-300 transform scale-100 hover:scale-105"
+                  className="w-full h-64 object-cover rounded-lg shadow-lg transition duration-300 transform scale-100 hover:scale-105"
                 />
               </div>
             ))}
