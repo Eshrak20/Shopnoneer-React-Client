@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-
-const FilterSection = ({ selectedFilters, setSelectedFilters, filters }) => {
+const FilterSection = ({
+  selectedFilters,
+  setSelectedFilters,
+  filters,
+  sortOption,
+  setSortOption,
+}) => {
   const handleDropdownChange = (category, value) => {
-    const updatedFilters = { ...selectedFilters, [category]: [value] };
+    const updatedFilters = { ...selectedFilters };
+
+    if (value === "") {
+      delete updatedFilters[category];
+    } else {
+      updatedFilters[category] = [value];
+    }
+
     setSelectedFilters(updatedFilters);
   };
 
@@ -24,14 +34,33 @@ const FilterSection = ({ selectedFilters, setSelectedFilters, filters }) => {
               onChange={(e) => handleDropdownChange(category, e.target.value)}
             >
               <option value="">Select {category}</option>
-              {filters[category].map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
+              {Array.isArray(filters[category]) &&
+              filters[category].length > 0 ? (
+                filters[category].map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))
+              ) : (
+                <option value="">No options available</option>
+              )}
             </select>
           </div>
         ))}
+        {/* Sort Options */}
+        <div className="">
+          <label className="text-teal-600 font-medium">Sort By</label>
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="border rounded-lg p-2 bg-white text-teal-600 w-full mt-2"
+          >
+            <option value="newest">Newest</option>
+            <option value="priceHighToLow">Price: High to Low</option>
+            <option value="priceLowToHigh">Price: Low to High</option>
+            <option value="popularity">Popularity</option>
+          </select>
+        </div>
       </div>
     </div>
   );

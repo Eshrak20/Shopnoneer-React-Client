@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"; // Add useCallback
+import { useEffect, useState, useCallback } from "react";
 import useProjectList from "../../../Models/FilterSectionModel/FilterSectionModel";
 import { Link } from "react-router-dom";
 import { FaBed, FaBath } from "react-icons/fa"; 
@@ -34,15 +34,15 @@ const DetailCard = () => {
     memoizedApplyFilters(); // Call the memoized applyFilters when selectedFilters changes
   }, [memoizedApplyFilters]); // Now depend on the memoized callback
 
-  useEffect(() => {
-    if (sortOption === "newest") {
-      filteredProjects.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    } else if (sortOption === "priceHighToLow") {
-      filteredProjects.sort((a, b) => b.total_price - a.total_price);
-    } else if (sortOption === "priceLowToHigh") {
-      filteredProjects.sort((a, b) => a.total_price - b.total_price);
-    }
-  }, [sortOption, filteredProjects]);
+  // Apply sorting here based on selected sortOption
+  const sortedProjects = [...filteredProjects];
+  if (sortOption === "newest") {
+    sortedProjects.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  } else if (sortOption === "priceHighToLow") {
+    sortedProjects.sort((a, b) => b.total_price - a.total_price);
+  } else if (sortOption === "priceLowToHigh") {
+    sortedProjects.sort((a, b) => a.total_price - b.total_price);
+  }
 
   if (!filteredProjects.length) return <LoadingSpinner />;
 
@@ -54,26 +54,14 @@ const DetailCard = () => {
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
           filters={filters}
+          sortOption={sortOption}
+          setSortOption={setSortOption}
         />
-
-        {/* Sort Options */}
-        <div className="flex justify-end mb-4 w-full max-w-screen-lg">
-          <select
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-            className="border rounded-lg p-2 bg-white text-teal-600"
-          >
-            <option value="newest">Newest</option>
-            <option value="priceHighToLow">Price: High to Low</option>
-            <option value="priceLowToHigh">Price: Low to High</option>
-            <option value="popularity">Popularity</option>
-          </select>
-        </div>
       </div>
 
       <div className="flex flex-col mb-10 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
-          {filteredProjects.map((item) => (
+        <div className="grid grid-cols-1 p-5 md:p-0 md:grid-cols-2 gap-6 ">
+          {sortedProjects.map((item) => (
             <div
               key={item.id}
               className="border rounded-lg shadow-md p-4 bg-white transition-transform duration-300 transform"
@@ -83,7 +71,7 @@ const DetailCard = () => {
                   <img
                     src={item.images[0] || "https://via.placeholder.com/350x200"}
                     alt="Project"
-                    className="rounded-lg w-[350px] h-[200px] md:w-[700px] md:h-[450px]"
+                    className="rounded-lg w-[450px] h-[270px] md:w-[720px] md:h-[450px]"
                   />
                 </Link>
 
