@@ -75,13 +75,13 @@ const DetailsPropMainCard = () => {
 
   return (
     <>
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 pb-4">
         <Carousel
           showArrows
           showThumbs={false}
           autoPlay
           infiniteLoop
-          className="max-w-screen-2xl mx-auto my-5"
+          className="max-w-screen-2xl mx-auto mb-5"
         >
           {images.map((img, index) => (
             <div key={index}>
@@ -94,7 +94,7 @@ const DetailsPropMainCard = () => {
           ))}
         </Carousel>
 
-        <section className="md:max-w-screen-xl lg:max-w-screen-2xl mx-auto my-5 px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <section className="md:max-w-screen-2xl lg:max-w-screen-2xl mx-auto my-5 px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Left: Property Details */}
           <div className="lg:col-span-2 space-y-6 p-10 bg-white rounded-lg shadow-lg">
             {/* Property Title and Price */}
