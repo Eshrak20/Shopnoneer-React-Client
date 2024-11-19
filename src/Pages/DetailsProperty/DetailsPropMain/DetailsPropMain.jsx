@@ -7,7 +7,7 @@ import Navbar from "../../Shared/Navbar/Navbar";
 
 const DetailsPropMain = () => {
   return (
-    <div className="md:max-w-screen-md lg:max-w-screen-lg mx-auto mb-5 px-4 sm:px-6 lg:px-8">
+    <div className="md:max-w-screen-md mx-auto mb-5">
       <Navbar  visible={true}></Navbar>
       <DetailsPropMainCard></DetailsPropMainCard>
       <Amenities></Amenities>

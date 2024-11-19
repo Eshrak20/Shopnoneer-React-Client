@@ -61,6 +61,14 @@ const Navbar = ({ visible }) => {
           New Development
         </Link>
       </li>
+      <li className="">
+        <Link
+          to="/contact"
+          className={`nav-item text-${isFixed ? "black" : "white"}`}
+        >
+          Contact
+        </Link>
+      </li>
     </>
   );
 

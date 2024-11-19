@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -15,6 +15,7 @@ const DetailsPropMainCard = () => {
   const { id } = useParams(); // Use the id from URL parameters
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +38,6 @@ const DetailsPropMainCard = () => {
 
         const propertyModel = new DetailsPropertyModel(data.data); // Create a new instance of the property model
         setProperty(propertyModel); // Set the property data
-        // console.log(propertyModel);
       } catch (error) {
         console.error("Failed to fetch home card data:", error);
       } finally {
@@ -47,6 +47,45 @@ const DetailsPropMainCard = () => {
 
     fetchData();
   }, [id]); // Fetch data when id changes
+
+  useEffect(() => {
+    if (!property) return;
+
+    // Initialize the Google Map
+    const initializeMap = () => {
+      const map = new google.maps.Map(mapRef.current, {
+        center: {
+          lat: parseFloat(property.latitude) || 23.756724360562256,
+          lng: parseFloat(property.longitude) || 90.35648582209016,
+        }, // Default center (or fetched from property)
+        zoom: 18,
+      });
+
+      // Add a marker
+      new google.maps.Marker({
+        position: {
+          lat: parseFloat(property.latitude) || 37.7749,
+          lng: parseFloat(property.longitude) || -122.4194,
+        },
+        map,
+        title: property.title || "Default Location",
+      });
+    };
+
+    // Load the Google Maps script dynamically
+    const script = document.createElement("script");
+    script.src =
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyABnAbo9ifTK9aGO-2oBameLdIKPxVKoXI&libraries=places";
+    script.async = true;
+    script.defer = true;
+    script.onload = initializeMap;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [property]);
 
   if (loading) {
     return (
@@ -63,9 +102,8 @@ const DetailsPropMainCard = () => {
   }
 
   const capitalizeFirstChar = (str) => {
-    // Check if the string is empty or only contains whitespace
     if (!str || str.trim() === "") {
-      return "Input string is empty."; // Return a message if the string is empty
+      return "Input string is empty.";
     }
 
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -95,21 +133,17 @@ const DetailsPropMainCard = () => {
         </Carousel>
 
         <section className="md:max-w-screen-2xl lg:max-w-screen-2xl mx-auto my-5 px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Left: Property Details */}
           <div className="lg:col-span-2 space-y-6 p-10 bg-white rounded-lg shadow-lg">
-            {/* Property Title and Price */}
             <h1 className="text-5xl font-bold text-gray-900 mb-4">
               {property.title}
             </h1>
             <h4 className="text-xl text-teal-600 flex flex-col mb-4">
               <span className="flex items-center">
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
-                {capitalizeFirstChar(property.division.name)},{" "}
-                {capitalizeFirstChar(property.district.name)},{" "}
-                {capitalizeFirstChar(property.upazila.name)},{" "}
-                {capitalizeFirstChar(property.housing.name)}
-              </span>
-              <span>
+                {capitalizeFirstChar(property.division)},{" "}
+                {capitalizeFirstChar(property.district)},{" "}
+                {capitalizeFirstChar(property.upazila)},{" "}
+                {capitalizeFirstChar(property.housing)}
                 Road: {property.road}, Block: {property.block}, Plot:{" "}
                 {property.plot}
               </span>
@@ -122,7 +156,6 @@ const DetailsPropMainCard = () => {
                 : "Upcoming"}
             </h3>
 
-            {/* Property Details */}
             <div className="flex gap-4 my-4 items-center text-gray-600 text-lg">
               <FontAwesomeIcon icon={faBed} />
               <span>{property.no_of_beds} Beds</span>
@@ -132,27 +165,11 @@ const DetailsPropMainCard = () => {
               <span>{property.rate_per_sqft} sqft</span>
             </div>
 
-            {/* Overview Section */}
             <div className="my-4">
               <h4 className="text-lg font-semibold text-gray-900">Overview</h4>
               <p className="text-gray-600 text-lg">{property.description}</p>
             </div>
 
-            {/* Amenities Section */}
-            <div className="my-4">
-              <h4 className="text-lg font-semibold text-gray-900">Amenities</h4>
-              <p className="text-gray-600 text-lg">{property.amenities}</p>
-            </div>
-
-            {/* Location Details */}
-            <div className="my-4">
-              <h4 className="text-lg font-semibold text-gray-900">Location</h4>
-              <p className="text-gray-600 text-lg">
-                {property.location_details}
-              </p>
-            </div>
-
-            {/* Additional Info */}
             <div className="my-4">
               <h4 className="text-lg font-semibold text-gray-900">
                 Additional Information
@@ -168,24 +185,18 @@ const DetailsPropMainCard = () => {
                 {property.floor_no}
               </p>
             </div>
-
-            <button className="mt-6 px-8 py-4 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-700 transition duration-300 text-xl">
-              Inquire Now
-            </button>
           </div>
 
-          {/* Right: Property Images */}
-          <div className="space-y-4">
-            {images.slice(0, 3).map((img, index) => (
-              <div key={index + 1} className="relative overflow-hidden">
-                <img
-                  src={img}
-                  alt={`Property additional image ${index + 1}`}
-                  className="w-full h-64 object-cover rounded-lg shadow-lg transition duration-300 transform scale-100 hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
+          {/* Google Map */}
+          <div
+            ref={mapRef}
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "8px",
+            }}
+            className="shadow-lg"
+          ></div>
         </section>
       </div>
     </>
