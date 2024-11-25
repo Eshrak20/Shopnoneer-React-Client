@@ -6,6 +6,8 @@ import { MdSquareFoot } from "react-icons/md";
 import FilterSection from "../FilterSection/FilterSection";
 
 const DetailCard = () => {
+
+
   const { filters, filteredProjects, applyFilters } = useProjectList();
   const [selectedFilters, setSelectedFilters] = useState({
     division: [],

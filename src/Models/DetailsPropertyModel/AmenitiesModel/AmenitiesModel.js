@@ -10,3 +10,22 @@ class AmenitiesModel {
   
   export default AmenitiesModel;
   
+
+  // Models/AmenityModel.js
+
+
+  
+// export default class AmenityModel {
+//   constructor(data) {
+//     this.id = data.id || null;
+//     this.name = data.name || "Unnamed Amenity";
+//     this.android_icon = data.android_icon || "faDefaultIcon";
+//     this.ios_icon = data.ios_icon || "faDefaultIcon";
+//     this.web_icon = data.web_icon || "faDefaultIcon";
+//     this.created_at = data.created_at || null;
+//     this.updated_at = data.updated_at || null;
+//     this.pivot = data.pivot || {};
+//   }
+
+//   // You can add additional methods related to amenities here
+// }

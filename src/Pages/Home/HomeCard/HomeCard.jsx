@@ -1,8 +1,5 @@
 import React, { useEffect, useState, forwardRef } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import image1 from "../../../assets/Card Images/interior-design-house-and-modern-white-kitchen-Z53XFYH-min-600x400.jpg";
-import image2 from "../../../assets/Card Images/interior-living-room-of-a-forest-house-3d-6VHM3GK-min-600x400.jpg";
-import image3 from "../../../assets/Card Images/enjoying-a-cozy-new-kitchen-in-an-open-concept-home-copy-space-light-bright-airy-decoration-interior_rox9lX-600x400.jpg"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBath, faBed, faHome } from "@fortawesome/free-solid-svg-icons";
 import MinCard from "../MinCard/MinCard";
@@ -28,7 +25,6 @@ const HomeCard = forwardRef((props, ref) => {
     loadData();
   }, []);
 
-  const images = [image1, image2, image3];
   const displayedCards = homeCard.slice(0, 6);
 
   return (
@@ -52,7 +48,7 @@ const HomeCard = forwardRef((props, ref) => {
               >
                 <figure>
                   <img
-                    src={images[index % images.length]}
+                    src={data.images[0]}
                     alt={data.title}
                     className="w-full h-48 sm:h-56 object-cover rounded-t-lg"
                   />
@@ -96,12 +92,13 @@ const HomeCard = forwardRef((props, ref) => {
         <div className="text-center my-6">
           <Link
             to="/detail"
-            className="btn bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"
+            className="btn mb-14 bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"
           >
             View All Properties
           </Link>
         </div>
       </section>
+      <hr />
     </>
   );
 });

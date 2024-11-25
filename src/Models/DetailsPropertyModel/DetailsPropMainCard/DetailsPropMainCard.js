@@ -1,29 +1,101 @@
-// src/Models/DetailsPropertyModel/DetailsPropertyModel.js
+// In your module file
+export class Facility {
+  constructor(data) {
 
-class DetailsPropertyModel {
-    constructor(data) {
-      this.title = data.title || "N/A";
-      this.images = data.images || [];
-      this.description = data.description || "No description available.";
-      this.amenities = data.amenities || "No amenities listed for this property.";
-      this.location_details = data.location_details || "No additional location details available.";
-      this.division = data.division || { name: "N/A" };
-      this.district = data.district || { name: "N/A" };
-      this.upazila = data.upazila || { name: "N/A" };
-      this.housing = data.housing || { name: "N/A" };
-      this.road = data.road || "N/A";
-      this.block = data.block || "N/A";
-      this.plot = data.plot || "N/A";
-      this.total_price = data.total_price || "Upcoming";
-      this.no_of_beds = data.no_of_beds || "N/A";
-      this.no_of_baths = data.no_of_baths || "N/A";
-      this.rate_per_sqft = data.rate_per_sqft || "N/A";
-      this.plot_size = data.plot_size || "N/A";
-      this.floor_area = data.floor_area || "N/A";
-      this.floor_no = data.floor_no || "N/A";
-      this.project_image = data.project_image || "";
+    this.name =  data.name||"Unknown Facility";
+    this.category_id =  data.category_id|| "Unknown Facility";
+  }
+}
+
+export class Amenity {
+  constructor(data) {
+
+    this.name =  data.name||"Unknown Facility";
+    this.web_icon =  data.web_icon|| "Unknown Facility";
+  }
+}
+
+export class DetailsPropertyModel {
+  constructor(data) {
+    this.id = data.id || null;
+    this.title = data.title || "Untitled Property";
+    this.division = data.division || "Unknown Division";
+    this.district = data.district || "Unknown District";
+    this.upazila = data.upazila || "Unknown Upazila";
+    this.housing = data.housing || "Unknown Housing";
+    this.road = data.road || "N/A";
+    this.block = data.block || "N/A";
+    this.plot = data.plot || "N/A";
+    this.plot_size = data.plot_size || 0;
+    this.plot_face = data.plot_face || "Unknown";
+    this.is_corner = data.is_corner || 0;
+    this.storied = data.storied || 0;
+    this.no_of_units = data.no_of_units || 0;
+    this.floor_area = data.floor_area || 0;
+    this.floor_no = data.floor_no || "N/A";
+    this.no_of_beds = data.no_of_beds || 0;
+    this.no_of_baths = data.no_of_baths || 0;
+    this.no_of_balcony = data.no_of_balcony || 0;
+    this.parking_available = data.parking_available || 0;
+    this.owner_name = data.owner_name || "Unknown Owner";
+    this.owner_phone = data.owner_phone || "N/A";
+    this.owner_email = data.owner_email || "N/A";
+    this.rate_per_sqft = data.rate_per_sqft || 0;
+    this.total_price = data.total_price || null;
+    this.description = data.description || "No description available.";
+    this.google_map = data.google_map || null;
+    this.created_at = data.created_at || null;
+    this.updated_at = data.updated_at || null;
+    this.is_active = data.is_active || 0;
+    this.images = data.images || [];
+
+    // Initialize facilities array (if exists)
+    this.facilities = (data.facilities || []).map(facility => new Facility(facility));
+  }
+
+  static async fetchById(id) {
+    const token = localStorage.getItem("user_token");
+
+    try {
+      const response = await fetch(
+        "https://sna.shopnoneer.com/api/get-project-by-id",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Correct template literal syntax
+          },
+          body: JSON.stringify({ project_id: id }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch project data.");
+
+      const result = await response.json();
+
+      // Create the DetailsPropertyModel instance
+      const propertyModel = new DetailsPropertyModel(result.data);
+      
+
+      // Create the Facility model instances, if facilities exist
+      const facilities = result.data.facilities || [];
+      const facilityModel = facilities.map(facility => new Facility(facility));
+
+
+      const amenity = result.data.amenities || [];
+    //  console.log(amenity);
+     
+      const amenityModel = amenity.map(amenity => new Amenity(amenity));
+
+      return {
+        property: propertyModel,
+        facilities: facilityModel,
+        amenities: amenityModel,
+      };
+
+    } catch (error) {
+      console.error("Error fetching property data:", error);
+      throw error;
     }
   }
-  
-  export default DetailsPropertyModel;
-  
+}

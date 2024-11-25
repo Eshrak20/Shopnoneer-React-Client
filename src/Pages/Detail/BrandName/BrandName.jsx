@@ -19,7 +19,7 @@ const BrandName = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-2xl px-1 md:mx-auto p-5">
+    <div className="px-1 p-5">
       <h1 className="text-3xl font-bold text-gray-600 mb-4 text-left">
         Flat Sales In Dhaka
       </h1>

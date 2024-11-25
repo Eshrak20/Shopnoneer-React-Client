@@ -1,139 +1,134 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { useEffect, useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 import {
   faBath,
   faBed,
   faHome,
+  faCity,
   faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import DetailsPropertyModel from "../../../Models/DetailsPropertyModel/DetailsPropMainCard/DetailsPropMainCard"; // Adjust the import path
+import GoogleMap from "../../../Components/GoogleMap/GoogleMap";
 
-const DetailsPropMainCard = () => {
-  const { id } = useParams(); // Use the id from URL parameters
-  const [property, setProperty] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("user_token");
-        const response = await fetch(
-          "https://sna.shopnoneer.com/api/get-project-by-id",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ project_id: id }), // Send project_id in the body
-          }
-        );
-
-        if (!response.ok) throw new Error("Network response was not ok");
-        const data = await response.json();
-
-        const propertyModel = new DetailsPropertyModel(data.data); // Create a new instance of the property model
-        setProperty(propertyModel); // Set the property data
-      } catch (error) {
-        console.error("Failed to fetch home card data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [id]); // Fetch data when id changes
-
-  useEffect(() => {
-    if (!property) return;
-
-    // Initialize the Google Map
-    const initializeMap = () => {
-      const map = new google.maps.Map(mapRef.current, {
-        center: {
-          lat: parseFloat(property.latitude) || 23.756724360562256,
-          lng: parseFloat(property.longitude) || 90.35648582209016,
-        }, // Default center (or fetched from property)
-        zoom: 18,
-      });
-
-      // Add a marker
-      new google.maps.Marker({
-        position: {
-          lat: parseFloat(property.latitude) || 37.7749,
-          lng: parseFloat(property.longitude) || -122.4194,
-        },
-        map,
-        title: property.title || "Default Location",
-      });
-    };
-
-    // Load the Google Maps script dynamically
-    const script = document.createElement("script");
-    script.src =
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyABnAbo9ifTK9aGO-2oBameLdIKPxVKoXI&libraries=places";
-    script.async = true;
-    script.defer = true;
-    script.onload = initializeMap;
-
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, [property]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-teal-500"></div>
-      </div>
-    );
-  }
-
-  if (!property) {
-    return (
-      <div className="text-center text-gray-500 my-10">Property not found.</div>
-    );
-  }
+const DetailsPropMainCard = ({ property }) => {
+  const [activeIndex, setActiveIndex] = useState(0); // Track active image in carousel
+  const [lightboxOpen, setLightboxOpen] = useState(false); // Control lightbox visibility
 
   const capitalizeFirstChar = (str) => {
     if (!str || str.trim() === "") {
       return "Input string is empty.";
     }
-
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
-  const images = property.images; // Get images from property data
+  const images = property.images.map((img) => ({
+    src: img,
+  }));
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 100,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>
-      <div className="bg-gray-100 pb-4">
-        <Carousel
-          showArrows
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          className="max-w-screen-2xl mx-auto mb-5"
-        >
-          {images.map((img, index) => (
-            <div key={index}>
-              <img
-                src={img}
-                alt={`Slide ${index + 1}`}
-                className="object-cover h-[600px]"
-              />
-            </div>
-          ))}
-        </Carousel>
+      {/* Carousel Section */}
+      <Carousel
+        showArrows={true}
+        showThumbs={true}
+        className="custom-carousel"
+        selectedItem={activeIndex}
+        onChange={(index) => setActiveIndex(index)} // Update active image
+        thumbWidth={100} // Thumbnail width
+      >
+        {images.map((img, index) => (
+          <div key={index} onClick={() => setLightboxOpen(true)}> {/* Open Lightbox */}
+            <img
+              src={img.src}
+              alt={`Slide ${index + 1}`}
+              className="w-full h-[550px] object-cover cursor-pointer"
+            />
+          </div>
+        ))}
+      </Carousel>
 
-        <section className="md:max-w-screen-2xl lg:max-w-screen-2xl mx-auto my-5 px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-6 p-10 bg-white rounded-lg shadow-lg">
+      {/* Lightbox Section */}
+      {lightboxOpen && (
+        <Lightbox
+          open={lightboxOpen}
+          close={() => setLightboxOpen(false)} // Close lightbox
+          slides={images}
+          index={activeIndex} // Start with the active image
+        />
+      )}
+
+      {/* Inline CSS */}
+      <style>
+        {`
+        .custom-carousel .thumbs-wrapper {
+          display: flex;
+          overflow-x: auto;
+          white-space: nowrap;
+          scroll-behavior: smooth;
+        }
+
+        .custom-carousel .thumb {
+          display: inline-flex;
+          max-height: 60px;
+          max-width: 100px;
+          align-items: center;
+          justify-content: center;
+          margin: 0 5px;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .custom-carousel .thumb img {
+          object-fit: contain;
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        .custom-carousel .thumb.active {
+          transform: scale(0.9); 
+          opacity: 0.5;
+        }
+
+        .custom-carousel .thumbs-wrapper {
+          scrollbar-width: thin;
+          scrollbar-color: #888 #ccc;
+        }
+
+        .custom-carousel .thumbs-wrapper::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .custom-carousel .thumbs-wrapper::-webkit-scrollbar-thumb {
+          background-color: #888;
+          border-radius: 10px;
+        }
+
+        .custom-carousel .thumbs-wrapper::-webkit-scrollbar-track {
+          background-color: #ccc;
+        }
+
+        .custom-carousel .thumb.selected {
+          border: 2px solid #00b4d8; 
+          transform: scale(1.1); 
+        }
+        `}
+      </style>
+
+
+      <div className="pb-4 mb-7">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-2  ">
+          <div className="lg:col-span-2 space-y-6  bg-white rounded-lg ">
             <h1 className="text-5xl font-bold text-gray-900 mb-4">
               {property.title}
             </h1>
@@ -143,9 +138,7 @@ const DetailsPropMainCard = () => {
                 {capitalizeFirstChar(property.division)},{" "}
                 {capitalizeFirstChar(property.district)},{" "}
                 {capitalizeFirstChar(property.upazila)},{" "}
-                {capitalizeFirstChar(property.housing)}
-                Road: {property.road}, Block: {property.block}, Plot:{" "}
-                {property.plot}
+                {capitalizeFirstChar(property.housing)},{" "}
               </span>
             </h4>
 
@@ -161,12 +154,16 @@ const DetailsPropMainCard = () => {
               <span>{property.no_of_beds} Beds</span>
               <FontAwesomeIcon icon={faBath} />
               <span>{property.no_of_baths} Baths</span>
+              <FontAwesomeIcon icon={faCity} />
+              <span>{property.no_of_balcony} Balcony</span>
               <FontAwesomeIcon icon={faHome} />
               <span>{property.rate_per_sqft} sqft</span>
             </div>
 
             <div className="my-4">
-              <h4 className="text-lg font-semibold text-gray-900">Overview</h4>
+              <h4 className="text-xl mb-2 font-semibold text-gray-900">
+                Overview
+              </h4>
               <p className="text-gray-600 text-lg">{property.description}</p>
             </div>
 
@@ -186,17 +183,9 @@ const DetailsPropMainCard = () => {
               </p>
             </div>
           </div>
-
-          {/* Google Map */}
-          <div
-            ref={mapRef}
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "8px",
-            }}
-            className="shadow-lg"
-          ></div>
+          <div className="-mt-16">
+            <GoogleMap></GoogleMap>
+          </div>
         </section>
       </div>
     </>

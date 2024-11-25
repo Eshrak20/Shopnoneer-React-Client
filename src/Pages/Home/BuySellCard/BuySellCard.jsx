@@ -7,7 +7,7 @@ const BuySellCard = () => {
   return (
     <>
       <Parallax
-        className="h-56 md:h-96 lg:h-auto my-20"
+        className="h-[calc(60vh)] lg:h-auto my-10"
         blur={{ min: -15, max: 15 }}
         bgImage={adviserImage}
         bgImageAlt="the banner"
@@ -15,7 +15,7 @@ const BuySellCard = () => {
       >
         <div className="hero min-h-screen">
           <div className="hero-overlay bg-opacity-80"></div>
-          <div className="hero-content text-neutral-content text-center">
+          <div className="mt-[-350px] lg:mt-0 hero-content text-neutral-content text-center">
             <div className="max-w-md">
               <h1 className="mb-5 text-5xl font-bold text-white drop-shadow-lg">
                 Buy or Sell

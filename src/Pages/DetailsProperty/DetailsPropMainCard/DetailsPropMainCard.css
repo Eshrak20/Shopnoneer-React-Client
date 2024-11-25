@@ -1,0 +1,21 @@
+/* Customize the inactive dots */
+.react-responsive-carousel .control-dots .dot {
+    background-color: rgba(254, 0, 0, 0.5); /* Change dot color */
+    width: 10px;  /* Dot width */
+    height: 10px;  /* Dot height */
+    border-radius: 50%;  /* Circular shape */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Customize the active dot */
+  .react-responsive-carousel .control-dots .dot.selected {
+    background-color: #4caf50; /* Active dot color */
+    transform: scale(1.2);  /* Enlarge active dot */
+  }
+  
+  /* Optionally, add hover effect for the dots */
+  .react-responsive-carousel .control-dots .dot:hover {
+    background-color: #ff5722; /* Hover color */
+    transform: scale(1.1);  /* Slightly enlarge on hover */
+  }
+  
