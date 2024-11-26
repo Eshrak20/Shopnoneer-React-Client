@@ -1,64 +1,18 @@
-const FilterSection = ({
-  selectedFilters,
-  setSelectedFilters,
-  filters,
-  sortOption,
-  setSortOption,
-}) => {
-  const handleDropdownChange = (category, value) => {
-    const updatedFilters = { ...selectedFilters };
-
-    if (value === "") {
-      delete updatedFilters[category];
-    } else {
-      updatedFilters[category] = [value];
-    }
-
-    setSelectedFilters(updatedFilters);
-  };
-
+const FilterSection = ({ sortOption, setSortOption }) => {
   return (
     <div className="flex flex-col w-full max-w-screen-lg px-4 py-6 bg-white shadow-md rounded-lg space-y-4">
-      <h3 className="text-xl font-semibold text-teal-600 border-b pb-3">
-        Filter by
-      </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {Object.keys(filters).map((category) => (
-          <div key={category} className="flex flex-col space-y-2">
-            <label className="text-teal-600 font-medium capitalize">
-              {category.replace(/([A-Z])/g, " $1")}
-            </label>
-            <select
-              className="border rounded-lg p-2 bg-white text-gray-700"
-              value={selectedFilters[category]?.[0] || ""}
-              onChange={(e) => handleDropdownChange(category, e.target.value)}
-            >
-              <option value="">Select {category}</option>
-              {Array.isArray(filters[category]) &&
-              filters[category].length > 0 ? (
-                filters[category].map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
-                  </option>
-                ))
-              ) : (
-                <option value="">No options available</option>
-              )}
-            </select>
-          </div>
-        ))}
-        {/* Sort Options */}
         <div className="">
-          <label className="text-teal-600 font-medium">Sort By</label>
+          <label className="text-teal-600 font-medium p-2">Sort By</label>
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
             className="border rounded-lg p-2 bg-white text-teal-600 w-full mt-2"
           >
             <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
             <option value="priceHighToLow">Price: High to Low</option>
             <option value="priceLowToHigh">Price: Low to High</option>
-            <option value="popularity">Popularity</option>
           </select>
         </div>
       </div>

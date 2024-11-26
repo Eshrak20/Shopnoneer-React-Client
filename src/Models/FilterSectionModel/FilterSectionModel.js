@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const useProjectList = () => {
   const [projects, setProjects] = useState([]);
   const [filters, setFilters] = useState({});
-  const [filteredProjects, setFilteredProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch project data on initial render
   useEffect(() => {
     const fetchProjects = async () => {
       setIsLoading(true);
@@ -25,7 +25,7 @@ const useProjectList = () => {
         if (!response.ok) throw new Error("Network response was not ok");
 
         const data = await response.json();
-        
+
         if (data.success) {
           setProjects(data.data);
         } else {
@@ -42,8 +42,9 @@ const useProjectList = () => {
     fetchProjects();
   }, []); // Fetch projects only once on mount
 
+  // Initialize filters when projects data changes
   useEffect(() => {
-    if (projects.length === 0) return; // Only initialize filters if projects exist
+    if (projects.length === 0) return;
 
     const initializeFilters = (projectData) => {
       const upazilas = [...new Set(projectData.map(project => project.upazila))];
@@ -53,24 +54,30 @@ const useProjectList = () => {
         upazila: upazilas,
         housing: housings,
       });
-
-      setFilteredProjects(projectData); // Set filtered projects only when necessary
     };
 
     initializeFilters(projects);
   }, [projects]); // Only run when `projects` change
 
-  const applyFilters = (selectedFilters) => {
-    const { upazila = [], housing = [] } = selectedFilters;
+  // Memoize the filtered projects to avoid recalculating on every render
+  const filteredProjects = useMemo(() => {
+    if (!projects || projects.length === 0 || Object.keys(filters).length === 0) {
+      return projects;
+    }
 
-    const newFilteredProjects = projects.filter(project => {
+    return projects.filter(project => {
+      const { upazila = [], housing = [] } = filters;
+
       const matchesUpazila = upazila.length === 0 || upazila.includes(project.upazila);
       const matchesHousing = housing.length === 0 || housing.includes(project.housing);
 
       return matchesHousing && matchesUpazila;
     });
+  }, [projects, filters]); // Only recompute when `projects` or `filters` change
 
-    setFilteredProjects(newFilteredProjects);
+  // Apply filters when necessary (this ensures filters are applied only once)
+  const applyFilters = (selectedFilters) => {
+    setFilters(selectedFilters);
   };
 
   return {

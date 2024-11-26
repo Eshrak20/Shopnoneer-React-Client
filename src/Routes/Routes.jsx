@@ -39,12 +39,11 @@ export const router = createBrowserRouter([
         element: <ResetPass />,
       },
       {
-        path: "/detail",
+        path: "/detail/:housingId?",
         element: <Detail />,
       },
       {
-        path: "/detailsPropMain/:id", // Added ":id" to make it dynamic
-        // path: "/detailsPropMain/",
+        path: "/detailsPropMain/:id",
         element: <DetailsPropMain></DetailsPropMain>,
       },
     ],

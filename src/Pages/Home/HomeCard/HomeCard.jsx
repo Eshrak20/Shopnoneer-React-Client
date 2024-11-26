@@ -58,8 +58,11 @@ const HomeCard = forwardRef((props, ref) => {
                     {data.title}
                   </h2>
                   <p className="text-gray-500 text-sm sm:text-base my-2">
-                  {data.description?.length > 35
-                      ? `${data.description.substring(0, 135).trim().replace(/[,;:.!?]$/, "")}...`
+                    {data.description?.length > 35
+                      ? `${data.description
+                          .substring(0, 135)
+                          .trim()
+                          .replace(/[,;:.!?]$/, "")}...`
                       : data.description || ""}
                   </p>
                   <div className="flex gap-3 my-3">
@@ -70,26 +73,26 @@ const HomeCard = forwardRef((props, ref) => {
                     <FontAwesomeIcon icon={faHome} />
                     <span>{data.no_of_balcony}</span>
                   </div>
-                  <h2 className="text-base sm:text-lg font-semibold text-teal-600 my-2">
+                  <h2 className="flex justify-between text-base sm:text-lg font-semibold text-teal-600 my-2">
                     From ৳{" "}
                     {data.total_price
                       ? data.total_price.toLocaleString()
                       : "Price is upcoming"}
+                       <div className="-mt-4">
+                       <Link
+                        to={`/detailsPropMain/${data.id}`}
+                        className="btn btn-accent text-white px-4 sm:px-6 py-2 hover:bg-accent-focus"
+                      >
+                        Details
+                      </Link>
+                       </div>
                   </h2>
-                  <div className="card-actions justify-end">
-                    <Link
-                      to={`/detailsPropMain/${data.id}`}
-                      className="btn btn-accent text-white px-4 sm:px-6 py-2 hover:bg-accent-focus"
-                    >
-                      Details
-                    </Link>
-                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
-        <div className="text-center my-6">
+        <div className="text-center my-14">
           <Link
             to="/detail"
             className="btn mb-14 bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"

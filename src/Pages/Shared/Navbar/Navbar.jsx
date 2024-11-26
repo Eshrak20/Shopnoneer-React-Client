@@ -78,9 +78,9 @@ const Navbar = ({ visible }) => {
         <div
           className={`navbar ${
             isFixed
-              ? "bg-base-100 bg-opacity-20 fixed"
-              : "bg-black sticky top-0"
-          } z-10 max-auto max-w-screen-xl  px-7`}
+              ? "bg-base-100 max-w-screen-2xl  bg-opacity-20 fixed"
+              : "bg-black max-w-screen-xl  sticky top-0"
+          } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
             <div className="dropdown lg:hidden">

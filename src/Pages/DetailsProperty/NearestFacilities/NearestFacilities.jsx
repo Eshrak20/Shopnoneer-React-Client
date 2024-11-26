@@ -49,7 +49,6 @@ const NearestFacilities = ({ facilities }) => {
                             <span className="font-semibold text-lg">
                               {facility.name || "No facilities"}
                             </span>
-
                             <span className="flex items-center text-sm">
                               <LocationMarkerIcon
                                 className="text-red-600 w-4 h-4 mr-1"

@@ -1,14 +1,14 @@
-// src/Models/DetailModel/DetailCardModel/DetailCardModel.js
-
 import { useEffect, useState } from "react";
 
-const useDetailCardModel = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [sortOption, setSortOption] = useState("newest");
+const useProjectList = (housingId) => {
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProjects = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const token = localStorage.getItem("user_token");
         const response = await fetch("https://sna.shopnoneer.com/api/projectlist", {
@@ -17,44 +17,33 @@ const useDetailCardModel = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ page: 1, size: 100 }),
+          body: JSON.stringify({ page: 1, size: 30 , housingId }),
         });
 
         if (!response.ok) throw new Error("Network response was not ok");
-        const jsonData = await response.json();
 
-        if (jsonData.success) {
-          setData(jsonData.data);
+        const data = await response.json();
+        
+        if (data.success) {
+          setProjects(data.data);
         } else {
-          console.error("Failed to fetch data:", jsonData.message);
+          setError(data.message);
         }
       } catch (error) {
-        console.error("Error fetching the data:", error);
+        console.error("Error fetching project data:", error);
+        setError("An error occurred while fetching project data.");
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
-    fetchData();
-  }, []);
-
-  const sortedData = () => {
-    const dataCopy = [...data];
-    switch (sortOption) {
-      case "priceHighToLow":
-        return dataCopy.sort((a, b) => b.total_price - a.total_price);
-      case "priceLowToHigh":
-        return dataCopy.sort((a, b) => a.total_price - b.total_price);
-      case "newest":
-        return dataCopy.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-      case "popularity":
-        return dataCopy.sort((a, b) => b.popularity - a.popularity);
-      default:
-        return dataCopy;
-    }
+    fetchProjects();
+  }, [housingId]);
+  return {
+    projects,
+    isLoading,
+    error,
   };
-
-  return { data, loading, sortOption, setSortOption, sortedData };
 };
 
-export default useDetailCardModel;
+export default useProjectList;

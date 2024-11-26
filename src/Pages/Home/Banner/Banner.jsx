@@ -10,7 +10,6 @@ const Banner = () => {
   // Create a ref for the next section
   const nextSectionRef = useRef(null);
 
-  // Function to handle scroll
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     if (scrollTop > 640) {
@@ -34,7 +33,7 @@ const Banner = () => {
 
   return (
     <>
-      <Navbar visible={isNavbarVisible} />
+    <Navbar visible={isNavbarVisible} />
       <Parallax
         className="h-[calc(60vh)] lg:h-auto"
         blur={{ min: -15, max: 15 }}
@@ -45,7 +44,7 @@ const Banner = () => {
         <div className="hero min-h-screen ">
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="mt-[-350px] lg:mt-0 hero-content text-neutral-content text-center">
-            <div className="max-w-md mx-auto px-4">
+            <div className="mx-auto px-4">
               <div className="relative z-10 text-center text-white">
                 <h1 className="text-3xl sm:text-5xl font-bold mb-2">
                   Find Your Dream
