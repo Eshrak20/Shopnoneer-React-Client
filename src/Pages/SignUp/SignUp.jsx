@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2"; // Import SweetAlert
-import img from "../../../src/assets/Auth/authentication1.png"; // Import the image
+import "@lottiefiles/lottie-player"; // Import Lottie Player
+// import { Player } from "@lottiefiles/react-lottie-player";
+// import signUpAnimation from "../../assets/lottie/signUpAnimation.json";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -46,7 +48,8 @@ const SignUp = () => {
     } catch (err) {
       Swal.fire({
         title: "Error!",
-        text: err.message || "An error occurred during sign-up. Please try again.",
+        text:
+          err.message || "An error occurred during sign-up. Please try again.",
         icon: "error",
         confirmButtonText: "Okay",
       });
@@ -57,11 +60,18 @@ const SignUp = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row">
-        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 pb-11">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body" noValidate>
-            <h2 className="text-2xl font-semibold text-center mb-4">Create Your Account</h2>
-            
+      <div className="hero-content flex flex-col lg:flex-row justify-between">
+        {/* Form Section */}
+        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 pb-5">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="card-body"
+            noValidate
+          >
+            <h2 className="text-2xl font-semibold text-center mb-4">
+              Create Your Account
+            </h2>
+
             {/* Name Field */}
             <div className="form-control">
               <label className="label">
@@ -73,10 +83,15 @@ const SignUp = () => {
                 className="input input-bordered"
                 {...register("name", {
                   required: "Name is required",
-                  minLength: { value: 2, message: "Name must be at least 2 characters" },
+                  minLength: {
+                    value: 2,
+                    message: "Name must be at least 2 characters",
+                  },
                 })}
               />
-              {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+              {errors.name && (
+                <p className="text-red-500">{errors.name.message}</p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -96,7 +111,9 @@ const SignUp = () => {
                   },
                 })}
               />
-              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )}
             </div>
 
             {/* Phone Number Field */}
@@ -116,7 +133,9 @@ const SignUp = () => {
                   },
                 })}
               />
-              {errors.phone_number && <p className="text-red-500">{errors.phone_number.message}</p>}
+              {errors.phone_number && (
+                <p className="text-red-500">{errors.phone_number.message}</p>
+              )}
             </div>
 
             {/* Password Field */}
@@ -130,10 +149,15 @@ const SignUp = () => {
                 className="input input-bordered"
                 {...register("password", {
                   required: "Password is required",
-                  minLength: { value: 6, message: "Password must be at least 6 characters" },
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
                 })}
               />
-              {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+              {errors.password && (
+                <p className="text-red-500">{errors.password.message}</p>
+              )}
             </div>
 
             {/* Confirm Password Field */}
@@ -147,14 +171,23 @@ const SignUp = () => {
                 className="input input-bordered"
                 {...register("confirm_password", {
                   required: "Confirm Password is required",
-                  validate: (value) => value === password || "Passwords do not match",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
                 })}
               />
-              {errors.confirm_password && <p className="text-red-500">{errors.confirm_password.message}</p>}
+              {errors.confirm_password && (
+                <p className="text-red-500">
+                  {errors.confirm_password.message}
+                </p>
+              )}
             </div>
 
+            {/* Submit Button */}
             <div className="form-control mt-6">
-              <button disabled={loading} className="btn bg-teal-500 text-white hover:bg-teal-600">
+              <button
+                disabled={loading}
+                className="btn bg-teal-500 text-white hover:bg-teal-600"
+              >
                 {loading ? "Creating account..." : "Sign Up"}
               </button>
             </div>
@@ -168,8 +201,17 @@ const SignUp = () => {
           </form>
         </div>
 
-        <div className="hidden lg:flex lg:w-1/2 justify-center items-center">
-          <img src={img} alt="Authentication" />
+        {/* Lottie Animation Section */}
+        <div className="mt-0 lg:-mt-20">
+          <lottie-player
+            // src={sampleAnimation}
+            src="https://lottie.host/8673874b-0fe1-4782-bac9-06aacf38122c/L9OgGPdNSm.json"
+            background="transparent"
+            speed="1"
+            style={{ width: "700px", height: "700px" }}
+            loop
+            autoplay
+          ></lottie-player>
         </div>
       </div>
     </div>
