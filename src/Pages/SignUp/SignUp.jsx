@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 import "@lottiefiles/lottie-player";
 import { Player } from "@lottiefiles/react-lottie-player";
-import loadingAnimation from "../../assets/loadingLottie/loadingLottie.json"; 
-
+import loadingAnimation from "../../assets/loadingLottie/loadingLottie.json";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -69,9 +68,20 @@ const SignUp = () => {
             className="card-body"
             noValidate
           >
-            <h2 className="text-2xl font-semibold text-center mb-4">
-              Create Your Account
-            </h2>
+            {/* Header Section */}
+            <div className="flex items-center mb-4">
+              <Link
+                to="/login"
+                className="text-teal-500 hover:text-teal-600 transition duration-200 mr-4"
+              >
+                <span role="img" aria-label="Go back" className="text-2xl">
+                  ←
+                </span>
+              </Link>
+              <h2 className="text-2xl font-semibold text-center">
+                Create Your Account
+              </h2>
+            </div>
 
             {/* Name Field */}
             <div className="form-control">
@@ -202,11 +212,12 @@ const SignUp = () => {
           </form>
         </div>
 
+        {/* Animation Section */}
         <div className="mt-0 lg:-mt-20">
           <Player
             autoplay
             loop
-            src={loadingAnimation} 
+            src={loadingAnimation}
             background="transparent"
             style={{ width: "700px", height: "700px" }}
             speed="1"

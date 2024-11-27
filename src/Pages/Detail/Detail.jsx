@@ -16,7 +16,6 @@ const Detail = () => {
   const [sortOption, setSortOption] = useState("newest");
 
   const LoadingSpinner = () => (
-    
     <LoadingLottie />
   );
 

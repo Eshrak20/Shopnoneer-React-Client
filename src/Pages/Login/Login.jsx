@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -11,7 +11,6 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -50,7 +49,22 @@ const Login = () => {
       <div className="bubble"><div className="dot"></div></div>
       <div className="bubble"><div className="dot"></div></div>
 
-      <div className="card w-full max-w-md mx-auto shadow-2xl bg-gray-100">
+      <div className="card w-full max-w-md mx-auto shadow-2xl bg-gray-100 relative">
+        {/* Back Arrow */}
+        <Link
+          to="/"
+          className="absolute top-4 left-4 text-gray-50 hover:text-gray-200  transition duration-200"
+        >
+          <span role="img" aria-label="Go back" className="text-2xl">←</span>
+        </Link>
+        <Link
+          to="/signUp"
+          className="absolute top-4 right-4 text-gray-50 hover:text-gray-200  transition duration-200"
+        >
+          <span role="img" aria-label="Go back" className="text-2xl">→</span>
+        </Link>
+       
+
         <div className="bg-teal-500 text-white p-4 rounded-t-lg">
           <h1 className="text-2xl font-bold text-center">Shopnoneer</h1>
         </div>
@@ -100,9 +114,9 @@ const Login = () => {
                 className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
               >
                 {showPassword ? (
-                  <span role="img" aria-label="Hide password">🙈</span>
+                  <span role="img" aria-label="Hide password">🐵</span>
                 ) : (
-                  <span role="img" aria-label="Show password">👁️</span>
+                  <span role="img" aria-label="Show password">🙈</span>
                 )}
               </button>
             </div>

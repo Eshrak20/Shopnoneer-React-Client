@@ -9,7 +9,7 @@ const LoadingLottie = () => {
         autoplay
         loop
         src={loadingAnimation} 
-        style={{ height: "100px", width: "100px" }} 
+        style={{ height: "700px", width: "500px" }} 
       />
     </div>
   );

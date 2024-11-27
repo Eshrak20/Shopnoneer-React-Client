@@ -4,8 +4,10 @@ import Navbar from "../Shared/Navbar/Navbar";
 const ContactPage = () => {
   return (
     <>
-      <Navbar visible={true}></Navbar>
-      <div className="container mx-auto px-8 py-12 bg-gray-100 min-h-screen">
+      <div className="max-w-screen-xl mx-auto">
+        <Navbar visible={true} />
+      </div>
+      <div className="container  mx-auto px-8 py-12 bg-gray-100 min-h-screen">
         {/* Header Section */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-800">

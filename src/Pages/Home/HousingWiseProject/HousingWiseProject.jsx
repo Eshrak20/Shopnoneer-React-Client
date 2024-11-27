@@ -3,6 +3,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import fetchHousingWiseProjects from "../../../Models/HomeModel/HousingWiseProjectModel/HousingWiseProjectModel";
 import { Link } from "react-router-dom";
 import "./HousingWiseProject.css";
+import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 
 const HousingWiseProject = () => {
   const [projects, setProjects] = useState([]);
