@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { useEffect, useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
+import { useEffect, useState, useRef } from "react";
+import Lightbox from "yet-another-react-lightbox"; // Import Thumbnails directly
 import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/thumbnails.css"; // Import the Thumbnails CSS
 import {
   faBath,
   faBed,
@@ -13,9 +14,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleMap from "../../../Components/GoogleMap/GoogleMap";
 
+// Import the CSS
+import "./DetailsPropMainCard.css";
+
 const DetailsPropMainCard = ({ property }) => {
   const [activeIndex, setActiveIndex] = useState(0); // Track active image in carousel
   const [lightboxOpen, setLightboxOpen] = useState(false); // Control lightbox visibility
+  const thumbnailsRef = useRef(null); // Ref for controlling thumbnails visibility
 
   const capitalizeFirstChar = (str) => {
     if (!str || str.trim() === "") {
@@ -26,6 +31,7 @@ const DetailsPropMainCard = ({ property }) => {
 
   const images = property.images.map((img) => ({
     src: img,
+    thumbnail: img, // You can specify a different thumbnail image here if needed
   }));
 
   useEffect(() => {
@@ -38,7 +44,6 @@ const DetailsPropMainCard = ({ property }) => {
 
   return (
     <>
-      {/* Carousel Section */}
       <Carousel
         showArrows={true}
         showThumbs={true}
@@ -48,7 +53,8 @@ const DetailsPropMainCard = ({ property }) => {
         thumbWidth={100} // Thumbnail width
       >
         {images.map((img, index) => (
-          <div key={index} onClick={() => setLightboxOpen(true)}> {/* Open Lightbox */}
+          <div key={index} onClick={() => setLightboxOpen(true)}>
+            {/* Open Lightbox */}
             <img
               src={img.src}
               alt={`Slide ${index + 1}`}
@@ -63,72 +69,26 @@ const DetailsPropMainCard = ({ property }) => {
         <Lightbox
           open={lightboxOpen}
           close={() => setLightboxOpen(false)} // Close lightbox
-          slides={images}
+          slides={images} // Pass images array
           index={activeIndex} // Start with the active image
+          // plugins={[Downloads,Zoom]} // Pass Thumbnails directly here as a reference
+          thumbnails={{ ref: thumbnailsRef }} // Reference for controlling thumbnails visibility
+          on={{
+            click: () => {
+              // Toggle visibility of thumbnails when clicked on lightbox
+              if (thumbnailsRef.current?.visible) {
+                thumbnailsRef.current?.hide();
+              } else {
+                thumbnailsRef.current?.show();
+              }
+            },
+          }}
         />
       )}
 
-      {/* Inline CSS */}
-      <style>
-        {`
-        .custom-carousel .thumbs-wrapper {
-          display: flex;
-          overflow-x: auto;
-          white-space: nowrap;
-          scroll-behavior: smooth;
-        }
-
-        .custom-carousel .thumb {
-          display: inline-flex;
-          max-height: 60px;
-          max-width: 100px;
-          align-items: center;
-          justify-content: center;
-          margin: 0 5px;
-          transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .custom-carousel .thumb img {
-          object-fit: contain;
-          width: 100%;
-          height: auto;
-          display: block;
-        }
-
-        .custom-carousel .thumb.active {
-          transform: scale(0.9); 
-          opacity: 0.5;
-        }
-
-        .custom-carousel .thumbs-wrapper {
-          scrollbar-width: thin;
-          scrollbar-color: #888 #ccc;
-        }
-
-        .custom-carousel .thumbs-wrapper::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        .custom-carousel .thumbs-wrapper::-webkit-scrollbar-thumb {
-          background-color: #888;
-          border-radius: 10px;
-        }
-
-        .custom-carousel .thumbs-wrapper::-webkit-scrollbar-track {
-          background-color: #ccc;
-        }
-
-        .custom-carousel .thumb.selected {
-          border: 2px solid #00b4d8; 
-          transform: scale(1.1); 
-        }
-        `}
-      </style>
-
-
       <div className="pb-4 mb-7">
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-2  ">
-          <div className="lg:col-span-2 space-y-6  bg-white rounded-lg ">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+          <div className="lg:col-span-2 space-y-6 bg-white rounded-lg">
             <h1 className="text-5xl font-bold text-gray-900 mb-4">
               {property.title}
             </h1>
