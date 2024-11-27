@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useProjectList from "../../Models/DetailModel/DetailCardModel/DetailCardModel";
 import FilterSection from "./FilterSection/FilterSection";
+import LoadingLottie from "../../assets/loadingLottie/loadingLottie";
 const Detail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,9 +16,8 @@ const Detail = () => {
   const [sortOption, setSortOption] = useState("newest");
 
   const LoadingSpinner = () => (
-    <div className="flex items-center justify-center h-screen">
-      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-teal-500"></div>
-    </div>
+    
+    <LoadingLottie />
   );
 
   const ErrorMessage = () => (

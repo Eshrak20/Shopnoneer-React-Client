@@ -50,7 +50,7 @@ export class DetailsPropertyModel {
     this.images = data.images || [];
 
     // Initialize facilities array (if exists)
-    this.facilities = (data.facilities || []).map(facility => new Facility(facility));
+    // this.facilities = (data.facilities || []).map(facility => new Facility(facility));
   }
 
   static async fetchById(id) {
@@ -73,7 +73,6 @@ export class DetailsPropertyModel {
 
       const result = await response.json();
 
-      // Create the DetailsPropertyModel instance
       const propertyModel = new DetailsPropertyModel(result.data);
       
 

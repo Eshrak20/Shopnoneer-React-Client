@@ -5,6 +5,7 @@ import { faBath, faBed, faHome } from "@fortawesome/free-solid-svg-icons";
 import MinCard from "../MinCard/MinCard";
 import { Link } from "react-router-dom";
 import fetchHomeCardData from "../../../Models/HomeModel/HomeCardModel/HomeCardModel"; // Import the model function
+import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 
 const HomeCard = forwardRef((props, ref) => {
   const [homeCard, setHomeCard] = useState([]);
@@ -36,9 +37,7 @@ const HomeCard = forwardRef((props, ref) => {
           subHeading="Check out some of our latest properties"
         />
         {loading ? (
-          <div className="flex justify-center items-center my-10">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-teal-500"></div>
-          </div>
+          <LoadingLottie />
         ) : (
           <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 my-4">
             {displayedCards.map((data, index) => (

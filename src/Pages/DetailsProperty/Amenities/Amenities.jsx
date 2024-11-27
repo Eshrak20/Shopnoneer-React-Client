@@ -20,7 +20,7 @@ const Amenities = ({ amenities }) => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Amenities</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center items-center">
           {amenities.map((amenity) => {
-            console.log("Rendering:", amenity.web_icon); // Debugging
+            // console.log("Rendering:", amenity.web_icon); // Debugging
             return (
               <div
                 key={amenity.id}

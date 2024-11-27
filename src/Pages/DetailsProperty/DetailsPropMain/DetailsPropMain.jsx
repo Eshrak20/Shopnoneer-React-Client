@@ -6,6 +6,7 @@ import { DetailsPropertyModel } from "../../../Models/DetailsPropertyModel/Detai
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Amenities from "../Amenities/Amenities";
+import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 
 const DetailsPropMain = () => {
   useEffect(() => {
@@ -37,9 +38,8 @@ const DetailsPropMain = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-teal-500"></div>
-      </div>
+      <LoadingLottie />
+     
     );
   }
 

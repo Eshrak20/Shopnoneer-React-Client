@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
-import Swal from "sweetalert2"; // Import SweetAlert
-import "@lottiefiles/lottie-player"; // Import Lottie Player
-// import { Player } from "@lottiefiles/react-lottie-player";
-// import signUpAnimation from "../../assets/lottie/signUpAnimation.json";
+import Swal from "sweetalert2"; 
+import "@lottiefiles/lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
+import loadingAnimation from "../../assets/loadingLottie/loadingLottie.json"; 
+
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -201,17 +202,15 @@ const SignUp = () => {
           </form>
         </div>
 
-        {/* Lottie Animation Section */}
         <div className="mt-0 lg:-mt-20">
-          <lottie-player
-            // src={sampleAnimation}
-            src="https://lottie.host/8673874b-0fe1-4782-bac9-06aacf38122c/L9OgGPdNSm.json"
-            background="transparent"
-            speed="1"
-            style={{ width: "700px", height: "700px" }}
-            loop
+          <Player
             autoplay
-          ></lottie-player>
+            loop
+            src={loadingAnimation} 
+            background="transparent"
+            style={{ width: "700px", height: "700px" }}
+            speed="1"
+          />
         </div>
       </div>
     </div>
