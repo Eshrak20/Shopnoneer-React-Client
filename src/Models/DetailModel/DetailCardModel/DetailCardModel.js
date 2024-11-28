@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useProjectList = () => {
+const useProjectList = (housingId) => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const useProjectList = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ page: 1, size: 30  }),
+          body: JSON.stringify({ page: 1, size: 30 , housingId }),
         });
 
         if (!response.ok) throw new Error("Network response was not ok");
