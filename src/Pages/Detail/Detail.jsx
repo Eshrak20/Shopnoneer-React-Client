@@ -10,7 +10,6 @@ const Detail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   const { housingId } = useParams();
   const { projects, isLoading, error } = useProjectList(housingId);
   const [sortOption, setSortOption] = useState("newest");
@@ -18,11 +17,9 @@ const Detail = () => {
   const LoadingSpinner = () => (
     <LoadingLottie />
   );
-
   const ErrorMessage = () => (
     <div className="flex justify-center items-center text-red-600">{error}</div>
   );
-
   const sortedProjects = [...projects];
   if (sortOption === "newest") {
     sortedProjects.sort(
