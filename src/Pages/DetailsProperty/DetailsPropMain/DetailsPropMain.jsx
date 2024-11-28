@@ -50,7 +50,7 @@ const DetailsPropMain = () => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto mb-3">
+    <div className="max-w-screen-xl mx-auto mb-3 px-4 lg:px-0">
       <Navbar visible={true}></Navbar>
       <DetailsPropMainCard property={property} />
       <NearestFacilities facilities={facilities} />

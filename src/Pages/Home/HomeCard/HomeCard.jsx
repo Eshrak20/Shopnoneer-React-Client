@@ -1,7 +1,12 @@
 import React, { useEffect, useState, forwardRef } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBath, faBed, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBath,
+  faBed,
+  faHome,
+  faBookmark,
+} from "@fortawesome/free-solid-svg-icons"; // Import the bookmark icon
 import MinCard from "../MinCard/MinCard";
 import { Link } from "react-router-dom";
 import fetchHomeCardData from "../../../Models/HomeModel/HomeCardModel/HomeCardModel"; // Import the model function
@@ -43,15 +48,22 @@ const HomeCard = forwardRef((props, ref) => {
             {displayedCards.map((data, index) => (
               <div
                 key={data.id || index}
-                className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full"
+                className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative" // Added relative positioning for card
               >
-                <figure>
-                  <img
-                    src={data.images[0]}
-                    alt={data.title}
-                    className="w-full h-48 sm:h-56 object-cover rounded-t-lg"
+                {/* Bookmark icon */}
+                <div className="absolute top-2 right-2 z-10">
+                  <FontAwesomeIcon
+                    icon={faBookmark}
+                    className="text-gray-50 text-2xl cursor-pointer hover:text-teal-400 transition duration-300"
                   />
-                </figure>
+                </div>
+                  <Link to={`/detailsPropMain/${data.id}`}>
+                    <img
+                      src={data.images[0]}
+                      alt={data.title}
+                      className="w-full h-48 sm:h-56 object-cover rounded-t-lg"
+                    />
+                  </Link>
                 <div className="card-body p-4 sm:p-6">
                   <h2 className="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">
                     {data.title}
@@ -77,14 +89,14 @@ const HomeCard = forwardRef((props, ref) => {
                     {data.total_price
                       ? data.total_price.toLocaleString()
                       : "Price is upcoming"}
-                       <div className="-mt-4">
-                       <Link
+                    <div className="-mt-4">
+                      <Link
                         to={`/detailsPropMain/${data.id}`}
                         className="btn btn-accent text-white px-4 sm:px-6 py-2 hover:bg-accent-focus"
                       >
                         Details
                       </Link>
-                       </div>
+                    </div>
                   </h2>
                 </div>
               </div>

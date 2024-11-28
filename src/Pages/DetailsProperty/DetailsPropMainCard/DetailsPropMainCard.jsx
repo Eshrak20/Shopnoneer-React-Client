@@ -11,6 +11,7 @@ import {
   faHome,
   faCity,
   faMapMarkerAlt,
+  faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleMap from "../../../Components/GoogleMap/GoogleMap";
 
@@ -58,7 +59,7 @@ const DetailsPropMainCard = ({ property }) => {
             <img
               src={img.src}
               alt={`Slide ${index + 1}`}
-              className="w-full h-[550px] object-cover cursor-pointer"
+              className="w-full h-[250px] lg:h-[550px] object-cover cursor-pointer"
             />
           </div>
         ))}
@@ -86,68 +87,72 @@ const DetailsPropMainCard = ({ property }) => {
         />
       )}
 
-      <div className="pb-4 mb-7">
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-          <div className="lg:col-span-2 space-y-6 bg-white rounded-lg">
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              {property.title}
-            </h1>
-            <h4 className="text-xl text-teal-600 flex flex-col mb-4">
-              <span className="flex items-center">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
-                {capitalizeFirstChar(property.division)},{" "}
-                {capitalizeFirstChar(property.district)},{" "}
-                {capitalizeFirstChar(property.upazila)},{" "}
-                {capitalizeFirstChar(property.housing)},{" "}
-              </span>
-            </h4>
-
-            <h3 className="text-3xl font-semibold text-gray-900 mt-4 mb-4">
-              Price: ৳{" "}
-              {property.total_price
-                ? property.total_price.toLocaleString()
-                : "Upcoming"}
-            </h3>
-
-            <div className="flex gap-4 my-4 items-center text-gray-600 text-lg">
-              <FontAwesomeIcon icon={faBed} />
-              <span>{property.no_of_beds} Beds</span>
-              <FontAwesomeIcon icon={faBath} />
-              <span>{property.no_of_baths} Baths</span>
-              <FontAwesomeIcon icon={faCity} />
-              <span>{property.no_of_balcony} Balcony</span>
-              <FontAwesomeIcon icon={faHome} />
-              <span>{property.rate_per_sqft} sqft</span>
-            </div>
-
-            <div className="my-4">
-              <h4 className="text-xl mb-2 font-semibold text-gray-900">
-                Overview
-              </h4>
-              <p className="text-gray-600 text-lg">{property.description}</p>
-            </div>
-
-            <div className="my-4">
-              <h4 className="text-lg font-semibold text-gray-900">
-                Additional Information
-              </h4>
-              <p className="text-gray-600 text-lg">
-                Plot: {property.plot}, Road: {property.road}
-              </p>
-              <p className="text-gray-600 text-lg">
-                Block: {property.block}, Plot Size: {property.plot_size} sqft
-              </p>
-              <p className="text-gray-600 text-lg">
-                Floor Area: {property.floor_area} sqft, Floor Number:{" "}
-                {property.floor_no}
-              </p>
-            </div>
-          </div>
-          <div className="-mt-16">
-            <GoogleMap></GoogleMap>
-          </div>
-        </section>
+<div className="pb-4 mb-7">
+  <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+    <div className="lg:col-span-2 space-y-6 bg-white rounded-lg relative">
+      {/* Bookmark button */}
+      <div className="absolute top-10 right-4 lg:left-96 z-10">
+        <button className="text-teal-500 hover:text-teal-700 focus:outline-none">
+          <FontAwesomeIcon icon={faBookmark} className="text-lg lg:text-2xl" />
+        </button>
       </div>
+
+      <h1 className="text-5xl font-bold text-gray-900 mb-4">{property.title}</h1>
+      <h4 className="text-xl text-teal-600 flex flex-col mb-4">
+        <span className="flex items-center">
+          <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
+          {capitalizeFirstChar(property.division)},{" "}
+          {capitalizeFirstChar(property.district)},{" "}
+          {capitalizeFirstChar(property.upazila)},{" "}
+          {capitalizeFirstChar(property.housing)},{" "}
+        </span>
+      </h4>
+
+      <h3 className="text-3xl font-semibold text-gray-900 mt-4 mb-4">
+        Price: ৳{" "}
+        {property.total_price
+          ? property.total_price.toLocaleString()
+          : "Upcoming"}
+      </h3>
+
+      <div className="flex gap-4 my-4 items-center text-gray-600 text-lg">
+        <FontAwesomeIcon icon={faBed} />
+        <span>{property.no_of_beds} Beds</span>
+        <FontAwesomeIcon icon={faBath} />
+        <span>{property.no_of_baths} Baths</span>
+        <FontAwesomeIcon icon={faCity} />
+        <span>{property.no_of_balcony} Balcony</span>
+        <FontAwesomeIcon icon={faHome} />
+        <span>{property.rate_per_sqft} sqft</span>
+      </div>
+
+      <div className="my-4">
+        <h4 className="text-xl mb-2 font-semibold text-gray-900">Overview</h4>
+        <p className="text-gray-600 text-lg">{property.description}</p>
+      </div>
+
+      <div className="my-4">
+        <h4 className="text-lg font-semibold text-gray-900">
+          Additional Information
+        </h4>
+        <p className="text-gray-600 text-lg">
+          Plot: {property.plot}, Road: {property.road}
+        </p>
+        <p className="text-gray-600 text-lg">
+          Block: {property.block}, Plot Size: {property.plot_size} sqft
+        </p>
+        <p className="text-gray-600 text-lg">
+          Floor Area: {property.floor_area} sqft, Floor Number:{" "}
+          {property.floor_no}
+        </p>
+      </div>
+    </div>
+    <div className="-mt-16">
+      <GoogleMap></GoogleMap>
+    </div>
+  </section>
+</div>
+
     </>
   );
 };

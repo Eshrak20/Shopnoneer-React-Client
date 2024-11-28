@@ -34,7 +34,7 @@ const FeatureSlider = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[400px]">
-        <LoadingLottie /> {/* Show the loading animation */}
+        <LoadingLottie />
       </div>
     );
   }
@@ -73,7 +73,7 @@ const FeatureSlider = () => {
                 <img
                   src={project.images[0]}
                   alt={project.housing}
-                  className="w-full h-[600px] object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-[250px] lg:h-[500px] object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <h3 className="text-center text-white text-2xl font-bold">
@@ -86,7 +86,7 @@ const FeatureSlider = () => {
         </Swiper>
 
         {/* Custom Pagination Controls */}
-        <div className="custom-pagination-controls flex justify-between absolute top-1/2 transform -translate-y-1/2 w-full px-4">
+        <div className="custom-pagination-controls flex justify-between absolute bottom-1/2 transform translate-y-1/2 w-full px-4">
           <button onClick={() => swiper.slidePrev()} className="pagination-btn">
             <IoIosArrowBack size={30} color="#4A5568" />
           </button>
