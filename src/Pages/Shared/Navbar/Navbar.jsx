@@ -63,6 +63,14 @@ const Navbar = ({ visible }) => {
       </li>
       <li className="">
         <Link
+          to="/favouritePage"
+          className={`nav-item text-${isFixed ? "black" : "white"}`}
+        >
+          Saved
+        </Link>
+      </li>
+      <li className="">
+        <Link
           to="/contact"
           className={`nav-item text-${isFixed ? "black" : "white"}`}
         >

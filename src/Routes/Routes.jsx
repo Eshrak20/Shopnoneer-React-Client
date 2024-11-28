@@ -8,6 +8,7 @@ import ResetPass from "../Pages/ResetPass/ResetPass";
 import Detail from "../Pages/Detail/Detail";
 import DetailsPropMain from "../Pages/DetailsProperty/DetailsPropMain/DetailsPropMain";
 import ContactPage from "../Pages/ContactPage/ContactPage";
+import FavouritePage from "../Pages/FavouritePage/FavouritePage";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/detailsPropMain/:id",
         element: <DetailsPropMain></DetailsPropMain>,
+      },
+      {
+        path: "/favouritePage",
+        element: <FavouritePage/>,
       },
     ],
   },
