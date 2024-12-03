@@ -52,7 +52,7 @@ const DetailCard = ({ sortedProjects }) => {
               <div className="-mt-4">
                 <Link
                   to={`/detailsPropMain/${data.id}`}
-                  className="btn btn-accent text-white px-4 sm:px-6 py-2 hover:bg-accent-focus"
+                  className="btn bg-teal-500 hover:bg-teal-600 text-white px-4 sm:px-6 py-2"
                 >
                   Details
                 </Link>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Parallax } from "react-parallax";
-import bannerImage from "../../../assets/Banner Images/home-4.jpg";
+import bannerImage from "../../../assets/Banner Images/Favourite/banner-1.webp";
+
 import Navbar from "../../Shared/Navbar/Navbar";
 import HomeCard from "../../Home/HomeCard/HomeCard"; // Import your HomeCard component
 
@@ -33,9 +34,9 @@ const Banner = () => {
 
   return (
     <>
-    <Navbar visible={isNavbarVisible} />
+      <Navbar visible={isNavbarVisible} />
       <Parallax
-        className="h-[calc(60vh)] lg:h-auto"
+        className="h-[calc(40vh)]  lg:h-auto"
         blur={{ min: -15, max: 15 }}
         bgImage={bannerImage}
         bgImageAlt="the banner"
@@ -77,7 +78,7 @@ const Banner = () => {
                 </div>
               </div>
               <button
-                className="btn btn-accent my-3 text-yellow-50"
+                className="btn  bg-teal-500 hover:bg-teal-600 my-3 text-yellow-50"
                 onClick={scrollToNextSection} // Trigger scroll on click
               >
                 Get Started

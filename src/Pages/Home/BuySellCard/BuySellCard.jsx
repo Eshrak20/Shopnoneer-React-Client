@@ -1,5 +1,5 @@
 import { Parallax } from "react-parallax";
-import adviserImage from "../../../assets/Banner Images/adviser.jpg";
+import adviserImage from "../../../assets/Banner Images/Favourite/banner-2.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,7 +11,7 @@ const BuySellCard = () => {
         blur={{ min: -15, max: 15 }}
         bgImage={adviserImage}
         bgImageAlt="the banner"
-        strength={-300}
+        strength={-30}
       >
         <div className="hero min-h-screen">
           <div className="hero-overlay bg-opacity-80"></div>
