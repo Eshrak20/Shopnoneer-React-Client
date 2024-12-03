@@ -1,6 +1,6 @@
 import React from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
-import loadingAnimation from "./loadingLottie.json"; 
+import loadingAnimation from "./loadingLottie.json";
 
 const LoadingLottie = () => {
   return (
@@ -8,8 +8,13 @@ const LoadingLottie = () => {
       <Player
         autoplay
         loop
-        src={loadingAnimation} 
-        style={{ height: "700px", width: "500px" }} 
+        src={loadingAnimation}
+        style={{
+          height: "50vh", // 50% of the viewport height
+          width: "50vw", // 50% of the viewport width
+          maxWidth: "100%", // Ensures it doesn't overflow parent container
+          maxHeight: "100%",
+        }}
       />
     </div>
   );

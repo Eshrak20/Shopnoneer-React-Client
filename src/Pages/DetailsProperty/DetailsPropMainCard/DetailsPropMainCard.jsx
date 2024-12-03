@@ -1,10 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import { useEffect, useState, useRef } from "react";
-import Lightbox from "yet-another-react-lightbox"; // Import Thumbnails directly
-import "yet-another-react-lightbox/styles.css";
-import "yet-another-react-lightbox/plugins/thumbnails.css"; // Import the Thumbnails CSS
+import { useEffect } from "react";
 import {
   faBath,
   faBed,
@@ -14,27 +9,15 @@ import {
   faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleMap from "../../../Components/GoogleMap/GoogleMap";
-
-// Import the CSS
 import "./DetailsPropMainCard.css";
 
 const DetailsPropMainCard = ({ property }) => {
-  const [activeIndex, setActiveIndex] = useState(0); // Track active image in carousel
-  const [lightboxOpen, setLightboxOpen] = useState(false); // Control lightbox visibility
-  const thumbnailsRef = useRef(null); // Ref for controlling thumbnails visibility
-
   const capitalizeFirstChar = (str) => {
     if (!str || str.trim() === "") {
       return "Input string is empty.";
     }
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
-
-  const images = property.images.map((img) => ({
-    src: img,
-    thumbnail: img, // You can specify a different thumbnail image here if needed
-  }));
-
   useEffect(() => {
     window.scrollTo({
       top: 100,
@@ -42,56 +25,17 @@ const DetailsPropMainCard = ({ property }) => {
       behavior: "smooth",
     });
   }, []);
-
   return (
     <>
-      <Carousel
-        showArrows={true}
-        showThumbs={true}
-        className="custom-carousel"
-        selectedItem={activeIndex}
-        onChange={(index) => setActiveIndex(index)} // Update active image
-        thumbWidth={100} // Thumbnail width
-      >
-        {images.map((img, index) => (
-          <div key={index} onClick={() => setLightboxOpen(true)}>
-            {/* Open Lightbox */}
-            <img
-              src={img.src}
-              alt={`Slide ${index + 1}`}
-              className="w-full h-[250px] lg:h-[550px] object-cover cursor-pointer"
-            />
-          </div>
-        ))}
-      </Carousel>
-
-      {/* Lightbox Section */}
-      {lightboxOpen && (
-        <Lightbox
-          open={lightboxOpen}
-          close={() => setLightboxOpen(false)} // Close lightbox
-          slides={images} // Pass images array
-          index={activeIndex} // Start with the active image
-          // plugins={[Downloads,Zoom]} // Pass Thumbnails directly here as a reference
-          thumbnails={{ ref: thumbnailsRef }} // Reference for controlling thumbnails visibility
-          on={{
-            click: () => {
-              // Toggle visibility of thumbnails when clicked on lightbox
-              if (thumbnailsRef.current?.visible) {
-                thumbnailsRef.current?.hide();
-              } else {
-                thumbnailsRef.current?.show();
-              }
-            },
-          }}
-        />
-      )}
-
       <div className="pb-4 mb-7">
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-          <div className="lg:col-span-2 space-y-6 bg-white rounded-lg relative">
+          <div className="lg:col-span-2 space-y-6 bg-white rounded-lg">
             {/* Bookmark button */}
-            <div className="absolute top-7 right-4 lg:left-96 z-10">
+
+            <div className="flex items-center z-10 px-4 py-2 lg:px-0 lg:py-0">
+              <h1 className="text-3xl mr-4 font-bold text-gray-900 lg:text-5xl">
+                {property.title}
+              </h1>
               <button className="bg-teal-500 px-4 py-2 rounded group hover:bg-white">
                 <FontAwesomeIcon
                   icon={faBookmark}
@@ -100,9 +44,6 @@ const DetailsPropMainCard = ({ property }) => {
               </button>
             </div>
 
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              {property.title}
-            </h1>
             <h4 className="text-xl text-teal-600 flex flex-col mb-4">
               <span className="flex items-center">
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />

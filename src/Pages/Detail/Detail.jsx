@@ -14,9 +14,7 @@ const Detail = () => {
   const { projects, isLoading, error } = useProjectList(housingId);
   const [sortOption, setSortOption] = useState("newest");
 
-  const LoadingSpinner = () => (
-    <LoadingLottie />
-  );
+  const LoadingSpinner = () => <LoadingLottie />;
   const ErrorMessage = () => (
     <div className="flex justify-center items-center text-red-600">{error}</div>
   );
@@ -43,16 +41,18 @@ const Detail = () => {
       <Helmet>
         <title>Shopnoneer | Properties</title>
       </Helmet>
-      <div className="max-w-screen-xl mx-auto">
-        <Navbar visible={true} />
-        <div className="flex flex-col items-center mb-4 space-y-4">
-          <FilterSection
-            sortOption={sortOption}
-            setSortOption={setSortOption}
-            projects={projects}
-          />
+      <div className="max-w-screen-2xl mx-auto">
+      <div className="mx-7 lg:mx-20">
+          <Navbar visible={true} />
+          <div className="flex flex-col items-center mb-4 space-y-4">
+            <FilterSection
+              sortOption={sortOption}
+              setSortOption={setSortOption}
+              projects={projects}
+            />
+          </div>
+          <DetailCard sortedProjects={sortedProjects}></DetailCard>
         </div>
-        <DetailCard sortedProjects={sortedProjects}></DetailCard>
       </div>
     </div>
   );

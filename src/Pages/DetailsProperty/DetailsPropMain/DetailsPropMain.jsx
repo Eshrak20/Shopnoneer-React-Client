@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Amenities from "../Amenities/Amenities";
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
+import DetailPropBanner from "../DetailPropBanner/DetailPropBanner";
 
 const DetailsPropMain = () => {
   useEffect(() => {
@@ -37,10 +38,7 @@ const DetailsPropMain = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <LoadingLottie />
-     
-    );
+    return <LoadingLottie />;
   }
 
   if (!property) {
@@ -50,11 +48,14 @@ const DetailsPropMain = () => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto mb-3 px-4 lg:px-0">
-      <Navbar visible={true}></Navbar>
-      <DetailsPropMainCard property={property} />
-      <NearestFacilities facilities={facilities} />
-      <Amenities amenities={amenities}/>
+    <div className="max-w-screen-2xl mx-auto mb-3">
+      <div className="mx-7 lg:mx-20">
+        <Navbar visible={true}></Navbar>
+        <DetailPropBanner property={property} />
+        <DetailsPropMainCard property={property} />
+        <NearestFacilities facilities={facilities} />
+        <Amenities amenities={amenities} />
+      </div>
     </div>
   );
 };
