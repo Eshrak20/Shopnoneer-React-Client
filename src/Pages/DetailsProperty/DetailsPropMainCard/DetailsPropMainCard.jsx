@@ -32,8 +32,8 @@ const DetailsPropMainCard = ({ property }) => {
           <div className="lg:col-span-2 space-y-6 bg-white rounded-lg">
             {/* Bookmark button */}
 
-            <div className="flex items-center z-10 px-4 py-2 lg:px-0 lg:py-0">
-              <h1 className="text-3xl mr-4 font-bold text-gray-900 lg:text-5xl">
+            <div className="flex items-center z-10 py-2 lg:py-0">
+              <h1 className="text-3xl mr-4 font-bold text-gray-900 lg:text-5xl text-left">
                 {property.title}
               </h1>
               <button className="bg-teal-500 px-4 py-2 rounded group hover:bg-white">
@@ -61,16 +61,32 @@ const DetailsPropMainCard = ({ property }) => {
                 : "Upcoming"}
             </h3>
 
-            <div className="flex gap-4 my-4 items-center text-gray-600 text-lg">
-              <FontAwesomeIcon icon={faBed} />
-              <span>{property.no_of_beds} Beds</span>
-              <FontAwesomeIcon icon={faBath} />
-              <span>{property.no_of_baths} Baths</span>
-              <FontAwesomeIcon icon={faCity} />
-              <span>{property.no_of_balcony} Balcony</span>
-              <FontAwesomeIcon icon={faHome} />
-              <span>{property.rate_per_sqft} sqft</span>
+            <div className="flex flex-wrap gap-4 my-4 items-center text-gray-600 text-sm sm:text-lg">
+              {/* Beds */}
+              <div className="flex items-center gap-2">
+                <FontAwesomeIcon icon={faBed} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>{property.no_of_beds} Beds</span>
+              </div>
+
+              {/* Baths */}
+              <div className="flex items-center gap-2">
+                <FontAwesomeIcon icon={faBath} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>{property.no_of_baths} Baths</span>
+              </div>
+
+              {/* Balcony */}
+              <div className="flex items-center gap-2">
+                <FontAwesomeIcon icon={faCity} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>{property.no_of_balcony} Balcony</span>
+              </div>
+
+              {/* Square Footage */}
+              <div className="flex items-center gap-2">
+                <FontAwesomeIcon icon={faHome} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>{property.rate_per_sqft} sqft</span>
+              </div>
             </div>
+
 
             <div className="my-4">
               <h4 className="text-xl mb-2 font-semibold text-gray-900">
@@ -95,7 +111,7 @@ const DetailsPropMainCard = ({ property }) => {
               </p>
             </div>
           </div>
-          <div className="-mt-16">
+          <div className="relative -mt-16 h-64 sm:h-96 md:h-[400px] lg:h-[500px]">
             <GoogleMap></GoogleMap>
           </div>
         </section>
