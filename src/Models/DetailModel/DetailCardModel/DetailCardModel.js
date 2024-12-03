@@ -1,29 +1,38 @@
 import { useEffect, useState } from "react";
 
-const useProjectList = (housingId) => {
+const useProjectList = (housingId, bedCount, bathCount,balconyCount) => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchProjects = async () => {
       setIsLoading(true);
       setError(null);
       try {
         const token = localStorage.getItem("user_token");
-        const response = await fetch("https://sna.shopnoneer.com/api/projectlist", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ page: 1, size: 30 , housingId }),
-        });
+        const response = await fetch(
+          "https://sna.shopnoneer.com/api/get-project-by-filter",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              filters: {
+                housing_id: housingId,
+                no_of_beds: bedCount || "", // Use bed count filter
+                no_of_baths: bathCount || "", // Use bed count filter
+                no_of_balcony: balconyCount || "", // Use bed count filter
+              },
+            }),
+          }
+        );
 
         if (!response.ok) throw new Error("Network response was not ok");
 
         const data = await response.json();
-        
+
         if (data.success) {
           setProjects(data.data);
         } else {
@@ -38,7 +47,8 @@ const useProjectList = (housingId) => {
     };
 
     fetchProjects();
-  }, [housingId]);
+  }, [housingId, bedCount, bathCount, balconyCount]); // Re-fetch when bed count changes
+
   return {
     projects,
     isLoading,
