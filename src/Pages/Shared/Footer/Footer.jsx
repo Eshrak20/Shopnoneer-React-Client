@@ -53,7 +53,7 @@ const Footer = () => {
               </a>
             </nav>
           </footer>
-          <footer className="footer bg-gray-700 text-gray-500 border-t border-gray-700 px-10 py-6 flex flex-col md:flex-row justify-between items-center">
+          <footer className="footer bg-gray-700 text-gray-300 border-t border-gray-700 px-10 py-6 flex flex-col md:flex-row justify-between items-center">
             <aside className="flex items-center gap-4 mb-4 md:mb-0">
               <svg
                 width="30"
@@ -68,13 +68,13 @@ const Footer = () => {
               <p>
                 <span className="font-bold">Shopnoneer Propertise Ltd.</span>
                 <br />
-                <span className="text-gray-400 text-sm">
+                <span className="text-gray-300 text-sm">
                   Providing reliable propertise since 2024.
                 </span>
               </p>
             </aside>
             <p>
-              <span className="flex font-bold justify-items-center">
+              <span className="flex font-bold justify-items-center ">
                 Copyright ©️ {new Date().getFullYear()} - All right reserved by
                 Shopnoneer Propertise Ltd.
               </span>
