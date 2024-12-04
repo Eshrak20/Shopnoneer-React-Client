@@ -4,10 +4,10 @@ import Navbar from "../Shared/Navbar/Navbar";
 const ContactPage = () => {
   return (
     <>
-      <div className="max-w-screen-xl mx-auto">
+      <div className=" mx-auto">
         <Navbar visible={true} />
       </div>
-      <div className="container  mx-auto px-8 py-12 bg-gray-100 min-h-screen">
+      <div className="container   mx-auto px-8 py-12 bg-gray-100 min-h-screen">
         {/* Header Section */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-800">
@@ -81,14 +81,14 @@ const ContactPage = () => {
             .
           </p>
           {/* Share and Report Buttons */}
-          <div className="flex justify-center mt-8 space-x-4">
+          {/* <div className="flex justify-center mt-8 space-x-4">
             <button className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-teal-500 transition duration-300">
               Share
             </button>
             <button className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300">
               Report
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
