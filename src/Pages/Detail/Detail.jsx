@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../Shared/Navbar/Navbar";
 import FilterSection from "./FilterSection/FilterSection";
-import LoadingLottie from "../../assets/loadingLottie/loadingLottie";
 import useProjectList from "../../Models/DetailModel/DetailCardModel/DetailCardModel";
 import DetailCard from "./DetailCard/DetailCard";
 
@@ -16,9 +15,13 @@ const Detail = () => {
   const [bedCount, setBedCount] = useState(""); // Add bed count state
   const [bathCount, setBathCount] = useState(""); // Add bed count state
   const [balconyCount, setBalconyCount] = useState(""); // Add bed count state
-  const { projects, isLoading, error } = useProjectList(housingId, bedCount,bathCount,balconyCount); // Pass bed count
+  const { projects, isLoading, error } = useProjectList(
+    housingId,
+    bedCount,
+    bathCount,
+    balconyCount
+  ); // Pass bed count
 
-  const LoadingSpinner = () => <LoadingLottie />;
   const ErrorMessage = () => (
     <div className="flex justify-center items-center text-red-600">{error}</div>
   );
@@ -38,7 +41,7 @@ const Detail = () => {
     sortedProjects.sort((a, b) => a.total_price - b.total_price);
   }
 
-  if (isLoading) return <LoadingSpinner />;
+  // if (isLoading) return <LoadingSpinner />;
   if (error) return <ErrorMessage />;
 
   return (
@@ -53,12 +56,15 @@ const Detail = () => {
             <FilterSection
               sortOption={sortOption}
               setSortOption={setSortOption}
-              setBedCount={setBedCount} 
-              setBathCount={setBathCount} 
-              setBalconyCount={setBalconyCount} 
+              setBedCount={setBedCount}
+              setBathCount={setBathCount}
+              setBalconyCount={setBalconyCount}
             />
           </div>
-          <DetailCard sortedProjects={sortedProjects}></DetailCard>
+          <DetailCard
+            sortedProjects={sortedProjects}
+            isLoading={isLoading}
+          ></DetailCard>
         </div>
       </div>
     </div>

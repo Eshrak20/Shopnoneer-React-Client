@@ -1,9 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBath, faBed, faBookmark, faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 
-const DetailCard = ({ sortedProjects }) => {
-  // if (isLoading) return <LoadingSpinner />;
+
+const DetailCard = ({ sortedProjects , isLoading }) => {
+  const LoadingSpinner = () => <LoadingLottie />;
+
+  if (isLoading) return <LoadingSpinner />;
+
 
 
   return (
