@@ -87,7 +87,15 @@ const HomeCard = forwardRef((props, ref) => {
                     <FontAwesomeIcon icon={faHome} />
                     <span>{data.no_of_balcony}</span>
                   </div>
-                  <div className="flex justify-end items-center -mr-3 ">
+                  <h2 className="flex justify-between text-base sm:text-lg font-semibold text-teal-600 my-2">
+                    From ৳{" "}
+                    {data.total_price
+                      ? data.total_price.toLocaleString()
+                      : "Price is upcoming"}
+                    <div className="-mt-4">
+                      <Link to={`/detailsPropMain/${data.id}`}></Link>
+                    </div>
+                    <div className="flex justify-end items-center -mr-3 ">
                     <button
                       onClick={() => window.open(`tel:${data.phone}`, "_self")}
                       className=" px-4  py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1 "
@@ -103,6 +111,8 @@ const HomeCard = forwardRef((props, ref) => {
                       Email
                     </button>
                   </div>
+                  </h2>
+                  
                 </div>
               </div>
             ))}
