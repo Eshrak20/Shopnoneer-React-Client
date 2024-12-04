@@ -16,7 +16,7 @@
     bottom: -2px;
     width: 0;
     height: 2px;
-    background-color: #ffffff; /* Underline color matching hover text color */
+    background-color: #53d2a6; /* Underline color matching hover text color */
     transition: width 0.3s ease;
   }
   

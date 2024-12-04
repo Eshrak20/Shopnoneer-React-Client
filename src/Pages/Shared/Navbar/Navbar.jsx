@@ -25,7 +25,9 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/detail"
-          className={`nav-item  lg:text-xl text-${isFixed ? "black" : "white"}`}
+          className={`nav-item  lg:text-xl text-${
+            isFixed ? "black" : "teal-500"
+          }`}
         >
           Properties
         </Link>
@@ -34,7 +36,9 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/contact"
-          className={`nav-item  lg:text-xl text-${isFixed ? "black" : "white"}`}
+          className={`nav-item  lg:text-xl text-${
+            isFixed ? "black" : "teal-500"
+          }`}
         >
           Contact
         </Link>
@@ -43,7 +47,9 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/favouritePage"
-          className={`nav-item  lg:text-xl text-${isFixed ? "black" : "white"}`}
+          className={`nav-item  lg:text-xl text-${
+            isFixed ? "black" : "teal-500"
+          }`}
         >
           Saved
         </Link>
@@ -62,9 +68,11 @@ const Navbar = ({ visible }) => {
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
-            <div className={`font-bold text-3xl dropdown  lg:hidden text-${
+            <div
+              className={`font-bold text-3xl dropdown  lg:hidden text-${
                 isFixed ? "black" : "white"
-              }`}  >
+              }`}
+            >
               <button tabIndex={0} className="mr-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -85,15 +93,17 @@ const Navbar = ({ visible }) => {
                 tabIndex={0}
                 className="font-semibold menu menu-sm dropdown-content mt-3 w-52  shadow"
               >
-                <div className={`bg-${
-                isFixed ? "white" : "black"
-              }`} >{navOptions}</div>
+                <div className={`bg-${isFixed ? "white" : "black"}`}>
+                  {navOptions}
+                </div>
               </ul>
             </div>
             <Link
               to="/"
-              className={`font-bold text-3xl text-${
-                isFixed ? "black" : "white"
+              className={`font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
+                isFixed
+                  ? "from-gray-100 via-gray-100 to-gray-200"
+                  : "from-teal-500 via-teal-500 to-teal-400"
               }`}
             >
               Shopnoneer

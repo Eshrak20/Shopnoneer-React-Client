@@ -96,23 +96,28 @@ const HomeCard = forwardRef((props, ref) => {
                       <Link to={`/detailsPropMain/${data.id}`}></Link>
                     </div>
                     <div className="flex justify-end items-center -mr-3 ">
-                    <button
-                      onClick={() => window.open(`tel:${data.phone}`, "_self")}
-                      className=" px-4  py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1 "
-                    >
-                      Call
-                    </button>
-                    <button
-                      onClick={() =>
-                        window.open(`mailto:${data.email}`, "_self")
-                      }
-                      className=" px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
-                    >
-                      Email
-                    </button>
-                  </div>
+                      <button
+                        onClick={() =>
+                          window.open(
+                            `tel:${data.phone || "+1234567890"}`,
+                            "_self"
+                          )
+                        }
+                        className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"
+                      >
+                        Call
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          window.open(`mailto:${data.email}`, "_self")
+                        }
+                        className=" px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
+                      >
+                        Email
+                      </button>
+                    </div>
                   </h2>
-                  
                 </div>
               </div>
             ))}
