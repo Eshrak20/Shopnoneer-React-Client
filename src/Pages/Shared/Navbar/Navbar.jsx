@@ -21,60 +21,31 @@ const Navbar = ({ visible }) => {
 
   const navOptions = (
     <>
-      <li className="">
-        <Link
-          to="/login"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
-        >
-          Buy
-        </Link>
-      </li>
-      <li className="">
-        <Link
-          to="/signUp"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
-        >
-          Rent
-        </Link>
-      </li>
-      <li className="">
+      {/* main part */}
+      <li>
         <Link
           to="/detail"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
+          className={`nav-item  lg:text-xl text-${isFixed ? "black" : "white"}`}
         >
           Properties
         </Link>
       </li>
-      <li className="">
-        <Link
-          to="/resetPass"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
-        >
-          Reset Password
-        </Link>
-      </li>
-      <li className="">
-        <Link
-          to="/detailsPropMain/30"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
-        >
-          New Development
-        </Link>
-      </li>
-      <li className="">
-        <Link
-          to="/favouritePage"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
-        >
-          Saved
-        </Link>
-      </li>
-      <li className="">
+
+      <li>
         <Link
           to="/contact"
-          className={`nav-item text-${isFixed ? "black" : "white"}`}
+          className={`nav-item  lg:text-xl text-${isFixed ? "black" : "white"}`}
         >
           Contact
+        </Link>
+      </li>
+
+      <li>
+        <Link
+          to="/favouritePage"
+          className={`nav-item  lg:text-xl text-${isFixed ? "black" : "white"}`}
+        >
+          Saved
         </Link>
       </li>
     </>
@@ -86,16 +57,18 @@ const Navbar = ({ visible }) => {
         <div
           className={`navbar ${
             isFixed
-              ? "bg-base-100 max-w-screen-2xl  bg-opacity-20 fixed"
+              ? "bg-base-100 max-w-screen-2xl  bg-opacity-35 fixed"
               : "bg-black max-w-screen-2xl  sticky top-0"
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
-            <div className="dropdown lg:hidden">
-              <button tabIndex={0} className="btn btn-ghost">
+            <div className={`font-bold text-3xl dropdown  lg:hidden text-${
+                isFixed ? "black" : "white"
+              }`}  >
+              <button tabIndex={0} className="mr-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-7 w-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -110,14 +83,16 @@ const Navbar = ({ visible }) => {
               </button>
               <ul
                 tabIndex={0}
-                className="font-semibold menu menu-sm dropdown-content mt-3 w-52 p-2 shadow"
+                className="font-semibold menu menu-sm dropdown-content mt-3 w-52  shadow"
               >
-                {navOptions}
+                <div className={`bg-${
+                isFixed ? "white" : "black"
+              }`} >{navOptions}</div>
               </ul>
             </div>
             <Link
               to="/"
-              className={`font-bold text-2xl text-${
+              className={`font-bold text-3xl text-${
                 isFixed ? "black" : "white"
               }`}
             >
@@ -141,16 +116,20 @@ const Navbar = ({ visible }) => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-lg shadow-lg transition-transform duration-300 scale-95 opacity-0 transform-gpu origin-top-right mt-3 w-52 p-2 group-open:scale-100 group-open:opacity-100"
                 >
-                  <li className="nav-item">
-                    <Link to="/profile" className="p-2 block">
-                      Profile
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/settings" className="p-2 block">
-                      Settings
-                    </Link>
-                  </li>
+                  <Link to="#" className="p-2 block">
+                    Profile
+                  </Link>
+                  <Link to="/signUp" className={` p-2 block `}>
+                    Sign Up
+                  </Link>
+
+                  <Link to="/login" className={`p-2 block `}>
+                    Login
+                  </Link>
+
+                  <Link to="/resetPass" className={`p-2 block `}>
+                    Reset Password
+                  </Link>
                   <li>
                     <Link
                       to="/login"

@@ -3,6 +3,9 @@ import { faBath, faBed, faBookmark, faHome } from "@fortawesome/free-solid-svg-i
 import { Link } from "react-router-dom";
 
 const DetailCard = ({ sortedProjects }) => {
+  // if (isLoading) return <LoadingSpinner />;
+
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-10 gap-x-6 my-4 mx-7 lg:mx-0">
       {sortedProjects.map((data, index) => (
