@@ -119,7 +119,7 @@ const Navbar = ({ visible }) => {
             </Link>
           </div>
           <div className="navbar-center  lg:flex">
-            <ul className="text-lg font-semibold menu-horizontal px-1">
+            <ul className="hidden lg:flex text-lg font-semibold menu-horizontal px-1">
               {navOptions}
             </ul>
           </div>
