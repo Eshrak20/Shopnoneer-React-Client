@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -42,43 +42,42 @@ const Login = () => {
 
   return (
     <div className="wrapper flex justify-center items-center min-h-screen">
-      {/* Animated Bubbles */}
-      <div className="bubble"><div className="dot"></div></div>
-      <div className="bubble"><div className="dot"></div></div>
-      <div className="bubble"><div className="dot"></div></div>
-      <div className="bubble"><div className="dot"></div></div>
-      <div className="bubble"><div className="dot"></div></div>
-      <div className="bubble"><div className="dot"></div></div>
+      {/* Animated Bubbles (hidden on small screens) */}
+      <div className="bubble sm:hidden"><div className="dot"></div></div>
+      <div className="bubble sm:hidden"><div className="dot"></div></div>
+      <div className="bubble sm:hidden"><div className="dot"></div></div>
+      <div className="bubble sm:hidden"><div className="dot"></div></div>
+      <div className="bubble sm:hidden"><div className="dot"></div></div>
+      <div className="bubble sm:hidden"><div className="dot"></div></div>
 
-      <div className="card w-full max-w-md mx-auto shadow-2xl bg-gray-100 relative">
+      <div className="-top-44 lg:p-0 lg:-top-0 card w-full max-w-md mx-auto lg:shadow-2xl bg-transparent lg:bg-gray-100 relative">
         {/* Back Arrow */}
         <Link
           to="/"
-          className="absolute top-4 left-4 text-gray-50 hover:text-gray-200  transition duration-200"
+          className="absolute top-4 left-4 text-gray-50 hover:text-gray-200 transition duration-200"
         >
           <span role="img" aria-label="Go back" className="text-2xl">←</span>
         </Link>
         <Link
           to="/signUp"
-          className="absolute top-4 right-4 text-gray-50 hover:text-gray-200  transition duration-200"
+          className="absolute top-4 right-4 text-gray-50 hover:text-gray-200 transition duration-200"
         >
           <span role="img" aria-label="Go back" className="text-2xl">→</span>
         </Link>
-       
 
-        <div className="bg-teal-500 text-white p-4 rounded-t-lg">
-          <h1 className="text-2xl font-bold text-center">Shopnoneer</h1>
+        <div className="lg:bg-teal-500 text-white p-4 rounded-t-lg lg:bg-transparent sm:text-black">
+          <h1 className="text-2xl font-bold text-center sm:text-lg">Shopnoneer</h1>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body p-6 rounded-b-lg" noValidate>
+        <form onSubmit={handleSubmit(onSubmit)} className="card-body p-6 rounded-b-lg sm:p-4" noValidate>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text text-white lg:text-black">Email</span>
             </label>
             <input
               type="email"
               placeholder="Email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full sm:text-sm"
               aria-invalid={errors.email ? "true" : "false"}
               {...register("email", {
                 required: "Email is required",
@@ -88,18 +87,18 @@ const Login = () => {
                 },
               })}
             />
-            {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+            {errors.email && <p className="text-red-500 sm:text-xs">{errors.email.message}</p>}
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text text-white lg:text-black">Password</span>
             </label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full sm:text-sm"
                 aria-invalid={errors.password ? "true" : "false"}
                 {...register("password", {
                   required: "Password is required",
@@ -121,28 +120,28 @@ const Login = () => {
                 )}
               </button>
             </div>
-            {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+            {errors.password && <p className="text-red-500 sm:text-xs">{errors.password.message}</p>}
           </div>
 
           <div className="form-control mt-6">
             <button
               disabled={loading}
-              className="btn bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg w-full"
+              className="btn bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg w-full sm:text-sm"
             >
               {loading ? "Logging in..." : "Login"}
             </button>
           </div>
 
           <label className="label mt-4">
-            <Link to="/resetPass" className="label-text-alt link link-hover">
+            <Link to="/resetPass" className="label-text-alt link link-hover text-white lg:text-black">
               Forgot password?
             </Link>
           </label>
 
-          <p className="text-center mt-2 text-teal-500">
+          <p className="text-center mt-2  text-white lg:text-teal-500 ">
             New here? Create a new account
           </p>
-          <p className="text-center font-semibold text-teal-600 cursor-pointer">
+          <p className="text-center font-semibold  cursor-pointer text-white lg:text-teal-600">
             <Link to="/signUp">Sign Up</Link>
           </p>
         </form>

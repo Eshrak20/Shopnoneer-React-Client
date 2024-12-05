@@ -106,12 +106,16 @@ const Navbar = ({ visible }) => {
                   : "from-lime-200 via-lime-200 to-lime-200"
               }`}
             >
-              <img
-                src="/public/final-removebg-preview.png"
-                alt="Shopnoneer Logo"
-                className="w-36 h-auto -mt-10"
-              />
-              <span className="lg:text-3xl font-semibold -ml-4 -mt-4">Shopnoneer</span>
+              <div className="flex items-center space-x-2 lg:space-x-4">
+                <img
+                  src="/final-removebg-preview.png"
+                  alt="Shopnoneer Logo"
+                  className="w-24 sm:w-32  lg:w-24 h-auto hidden lg:flex"
+                />
+                <span className="text-2xl lg:text-3xl font-semibold">
+                  Shopnoneer
+                </span>
+              </div>
             </Link>
           </div>
           <div className="navbar-center  lg:flex">
@@ -129,7 +133,7 @@ const Navbar = ({ visible }) => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-lg shadow-lg transition-transform duration-300 scale-95 opacity-0 transform-gpu origin-top-right mt-3 w-52 p-2 group-open:scale-100 group-open:opacity-100"
+                  className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-lg shadow-lg transition-transform duration-300 scale-95 opacity-0 transform-gpu origin-top-right mt-3 w-52 p-2 group-open:scale-100 group-open:opacity-100 z-10"
                 >
                   <Link to="#" className="p-2 block">
                     Profile
