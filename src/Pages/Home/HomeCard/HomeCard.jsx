@@ -99,7 +99,7 @@ const HomeCard = forwardRef((props, ref) => {
                       <button
                         onClick={() =>
                           window.open(
-                            `tel:${data.phone || "+1234567890"}`,
+                            `tel:${data.phone || "+880 1521-498303"}`,
                             "_self"
                           )
                         }
@@ -110,7 +110,7 @@ const HomeCard = forwardRef((props, ref) => {
 
                       <button
                         onClick={() =>
-                          window.open(`mailto:${data.email}`, "_self")
+                          window.open(`mailto:${data.email}|| "Shohag.cse3@gmail.com"`, "_self")
                         }
                         className=" px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
                       >

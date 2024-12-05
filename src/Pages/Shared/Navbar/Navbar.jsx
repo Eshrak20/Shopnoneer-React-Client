@@ -25,7 +25,7 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/detail"
-          className={`nav-item  lg:text-xl text-${
+          className={`nav-item   lg:text-2xl text-${
             isFixed ? "black" : "teal-500"
           }`}
         >
@@ -36,7 +36,7 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/contact"
-          className={`nav-item  lg:text-xl text-${
+          className={`nav-item   lg:text-2xl text-${
             isFixed ? "black" : "teal-500"
           }`}
         >
@@ -47,7 +47,7 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/favouritePage"
-          className={`nav-item  lg:text-xl text-${
+          className={`nav-item   lg:text-2xl text-${
             isFixed ? "black" : "teal-500"
           }`}
         >
@@ -100,13 +100,18 @@ const Navbar = ({ visible }) => {
             </div>
             <Link
               to="/"
-              className={`font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
+              className={`flex bg-transparent items-center  font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
                 isFixed
                   ? "from-gray-100 via-gray-100 to-gray-200"
                   : "from-teal-500 via-teal-500 to-teal-400"
               }`}
             >
-              Shopnoneer
+              <img
+                src="/public/final-removebg-preview.png"
+                alt="Shopnoneer Logo"
+                className="w-36 h-auto -mt-10"
+              />
+              <span className="text-3xl font-semibold -ml-4 -mt-4 ">Shopnoneer</span>
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
