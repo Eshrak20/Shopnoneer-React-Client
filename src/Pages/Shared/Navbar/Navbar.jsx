@@ -26,7 +26,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/detail"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "white" : "white"
+            isFixed ? "gray-800" : "gray-100"
           }`}
         >
           Properties
@@ -37,7 +37,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/contact"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "white" : "white"
+            isFixed ? "gray-800" : "gray-100"
           }`}
         >
           Contact
@@ -48,7 +48,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/favouritePage"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "white" : "white"
+            isFixed ? "gray-800" : "gray-100"
           }`}
         >
           Saved
@@ -63,8 +63,8 @@ const Navbar = ({ visible }) => {
         <div
           className={`navbar ${
             isFixed
-              ? "bg-teal-100 max-w-screen-2xl  bg-opacity-20 fixed"
-              : "bg-black max-w-screen-2xl  sticky top-0"
+              ? "lg:bg-base-100 lg:max-w-screen-2xl lg:bg-opacity-35 lg:fixed "
+              : "bg-black max-w-screen-2xl sticky top-0"
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
@@ -102,7 +102,7 @@ const Navbar = ({ visible }) => {
               to="/"
               className={`flex bg-transparent items-center  font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
                 isFixed
-                  ? "from-gray-100 via-gray-100 to-gray-200"
+                  ? "from-gray-800 via-gray-800 to-gray-800"
                   : "from-lime-200 via-lime-200 to-lime-200"
               }`}
             >
@@ -115,7 +115,7 @@ const Navbar = ({ visible }) => {
             </Link>
           </div>
           <div className="navbar-center  lg:flex">
-            <ul className="hidden lg:flex text-lg font-semibold menu-horizontal px-1">
+            <ul className="text-lg font-semibold menu-horizontal px-1">
               {navOptions}
             </ul>
           </div>
