@@ -26,7 +26,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/detail"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-800" : "gray-100"
+            isFixed ? "white" : "white"
           }`}
         >
           Properties
@@ -37,7 +37,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/contact"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-800" : "gray-100"
+            isFixed ? "white" : "white"
           }`}
         >
           Contact
@@ -48,7 +48,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/favouritePage"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-800" : "gray-100"
+            isFixed ? "white" : "white"
           }`}
         >
           Saved
@@ -63,8 +63,8 @@ const Navbar = ({ visible }) => {
         <div
           className={`navbar ${
             isFixed
-              ? "lg:bg-base-100 lg:max-w-screen-2xl lg:bg-opacity-35 lg:fixed "
-              : "bg-black max-w-screen-2xl sticky top-0"
+              ? "bg-teal-100 max-w-screen-2xl  bg-opacity-20 fixed"
+              : "bg-black max-w-screen-2xl  sticky top-0"
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
@@ -102,7 +102,7 @@ const Navbar = ({ visible }) => {
               to="/"
               className={`flex bg-transparent items-center  font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
                 isFixed
-                  ? "from-gray-800 via-gray-800 to-gray-800"
+                  ? "from-gray-100 via-gray-100 to-gray-200"
                   : "from-lime-200 via-lime-200 to-lime-200"
               }`}
             >
