@@ -49,12 +49,14 @@ const DetailsPropMain = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto mb-3">
-      <div className="mx-7 lg:mx-20">
+      <div className="lg:mx-20">
         <Navbar visible={true}></Navbar>
         <DetailPropBanner property={property} />
+        <div className="mx-5">
         <DetailsPropMainCard property={property} />
         <NearestFacilities facilities={facilities} />
         <Amenities amenities={amenities} />
+        </div>
       </div>
     </div>
   );

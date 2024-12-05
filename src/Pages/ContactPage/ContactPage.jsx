@@ -5,7 +5,7 @@ const ContactPage = () => {
   return (
     <>
       <div className="max-w-screen-2xl mx-auto">
-      <div className="mx-7 lg:mx-20">
+      <div className="lg:mx-20">
         <Navbar visible={true} />
         <div className="container px-8 py-12 bg-gray-100 min-h-screen">
           {/* Header Section */}

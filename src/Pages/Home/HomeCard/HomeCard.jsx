@@ -35,7 +35,13 @@ const HomeCard = forwardRef((props, ref) => {
 
   return (
     <>
-      <MinCard />
+    <div className="hidden lg:block">
+    <MinCard />
+
+    </div>
+
+
+
       <section ref={ref} className="my-7 px-10 sm:px-6 lg:px-8">
         <SectionTitle
           heading="Most Recent Properties"

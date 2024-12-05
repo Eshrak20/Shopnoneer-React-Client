@@ -36,7 +36,7 @@ const Banner = () => {
     <>
       <Navbar visible={isNavbarVisible} />
       <Parallax
-        className="h-[calc(40vh)]  lg:h-auto"
+        className="h-[calc(40vh)] hidden lg:h-auto lg:block"
         blur={{ min: -15, max: 15 }}
         bgImage={bannerImage}
         bgImageAlt="the banner"

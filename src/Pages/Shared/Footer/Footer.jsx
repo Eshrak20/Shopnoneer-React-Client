@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <>
       <div className="max-w-screen-2xl mx-auto">
-      <div className="mx-7 lg:mx-20">
+      <div className="lg:mx-20">
           <footer className="footer bg-base-300 text-black p-10 grid grid-cols-2 md:grid-cols-3 gap-8">
             <nav>
               <h6 className="footer-title text-lg font-semibold text-black mb-4">

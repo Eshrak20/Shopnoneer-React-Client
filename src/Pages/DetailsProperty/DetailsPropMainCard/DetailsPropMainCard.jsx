@@ -54,39 +54,76 @@ const DetailsPropMainCard = ({ property }) => {
               </span>
             </h4>
 
-            <h3 className="text-3xl font-semibold text-gray-900 mt-4 mb-4">
-              Price: ৳{" "}
-              {property.total_price
-                ? property.total_price.toLocaleString()
-                : "Upcoming"}
-            </h3>
+            <div className="flex justify-start items-center">
+              <h3 className="text-3xl font-semibold text-gray-900 mt-4 mb-4 mr-3 lg:mr-16">
+                Price: ৳{" "}
+                {property.total_price
+                  ? property.total_price.toLocaleString()
+                  : "Upcoming"}
+              </h3>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() =>
+                    window.open(
+                      `tel:${property.phone || "+880 1521-498303"}`,
+                      "_self"
+                    )
+                  }
+                  className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg"
+                >
+                  Call
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      `mailto:${property.email || "Shohag.cse3@gmail.com"}`,
+                      "_self"
+                    )
+                  }
+                  className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
+                >
+                  Email
+                </button>
+              </div>
+            </div>
 
             <div className="flex flex-wrap gap-4 my-4 items-center text-gray-600 text-sm sm:text-lg">
               {/* Beds */}
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faBed} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <FontAwesomeIcon
+                  icon={faBed}
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                />
                 <span>{property.no_of_beds} Beds</span>
               </div>
 
               {/* Baths */}
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faBath} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <FontAwesomeIcon
+                  icon={faBath}
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                />
                 <span>{property.no_of_baths} Baths</span>
               </div>
 
               {/* Balcony */}
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faCity} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <FontAwesomeIcon
+                  icon={faCity}
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                />
                 <span>{property.no_of_balcony} Balcony</span>
               </div>
 
               {/* Square Footage */}
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon icon={faHome} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <FontAwesomeIcon
+                  icon={faHome}
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                />
                 <span>{property.rate_per_sqft} sqft</span>
               </div>
             </div>
-
 
             <div className="my-4">
               <h4 className="text-xl mb-2 font-semibold text-gray-900">

@@ -14,7 +14,7 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-10 gap-x-6 my-4 mx-7 lg:mx-0">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-6 my-4 mx-2 lg:mx-0">
       {sortedProjects.map((data, index) => (
         <div
           key={data.id || index}

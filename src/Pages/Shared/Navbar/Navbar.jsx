@@ -26,7 +26,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/detail"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "black" : "teal-500"
+            isFixed ? "gray-800" : "gray-100"
           }`}
         >
           Properties
@@ -37,7 +37,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/contact"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "black" : "teal-500"
+            isFixed ? "gray-800" : "gray-100"
           }`}
         >
           Contact
@@ -48,7 +48,7 @@ const Navbar = ({ visible }) => {
         <Link
           to="/favouritePage"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "black" : "teal-500"
+            isFixed ? "gray-800" : "gray-100"
           }`}
         >
           Saved
@@ -63,8 +63,8 @@ const Navbar = ({ visible }) => {
         <div
           className={`navbar ${
             isFixed
-              ? "bg-base-100 max-w-screen-2xl  bg-opacity-35 fixed"
-              : "bg-black max-w-screen-2xl  sticky top-0"
+              ? "lg:bg-base-100 lg:max-w-screen-2xl lg:bg-opacity-35 lg:fixed "
+              : "bg-black max-w-screen-2xl sticky top-0"
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
@@ -93,7 +93,7 @@ const Navbar = ({ visible }) => {
                 tabIndex={0}
                 className="font-semibold menu menu-sm dropdown-content mt-3 w-52  shadow"
               >
-                <div className={`bg-${isFixed ? "white" : "black"}`}>
+                <div className={`bg-${isFixed ? "black" : "black"}`}>
                   {navOptions}
                 </div>
               </ul>
@@ -102,8 +102,8 @@ const Navbar = ({ visible }) => {
               to="/"
               className={`flex bg-transparent items-center  font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
                 isFixed
-                  ? "from-gray-100 via-gray-100 to-gray-200"
-                  : "from-teal-500 via-teal-500 to-teal-400"
+                  ? "from-gray-800 via-gray-800 to-gray-800"
+                  : "from-lime-200 via-lime-200 to-lime-200"
               }`}
             >
               <img
@@ -111,7 +111,7 @@ const Navbar = ({ visible }) => {
                 alt="Shopnoneer Logo"
                 className="w-36 h-auto -mt-10"
               />
-              <span className="text-3xl font-semibold -ml-4 -mt-4 ">Shopnoneer</span>
+              <span className="lg:text-3xl font-semibold -ml-4 -mt-4 ">Shopnoneer</span>
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">

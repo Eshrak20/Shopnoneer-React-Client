@@ -57,15 +57,19 @@ const FilterSection = ({
   ]);
 
   return (
-    <div className="flex flex-col w-full max-w-screen-lg px-4 py-6 bg-white shadow-md rounded-lg space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <>
+      <div className="w-full lg:w-1/4 h-full bg-white shadow-lg rounded-lg p-6 space-y-6 lg:sticky top-36 mb-10">
+        <h2 className="text-2xl font-bold text-teal-600 mb-4">Filters</h2>
+
         {/* Sort Option */}
         <div>
-          <label className="text-teal-600 font-medium p-2">Sort By</label>
+          <label className="text-teal-600 font-medium block mb-2">
+            Sort By
+          </label>
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="border rounded-lg p-2 bg-white text-teal-600 w-full mt-2"
+            className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
@@ -76,11 +80,13 @@ const FilterSection = ({
 
         {/* Bed Count */}
         <div>
-          <label className="text-teal-600 font-medium p-2">Number of Beds</label>
+          <label className="text-teal-600 font-medium block mb-2">
+            Number of Beds
+          </label>
           <select
-            value={initialBedCount} // Set the value from query params
-            onChange={(e) => handleBedChange(e.target.value)} // Update state and query params
-            className="border rounded-lg p-2 bg-white text-teal-600 w-full mt-2"
+            value={initialBedCount}
+            onChange={(e) => handleBedChange(e.target.value)}
+            className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
             <option value="">All</option>
             <option value="1">1</option>
@@ -93,11 +99,13 @@ const FilterSection = ({
 
         {/* Bath Count */}
         <div>
-          <label className="text-teal-600 font-medium p-2">Number of Baths</label>
+          <label className="text-teal-600 font-medium block mb-2">
+            Number of Baths
+          </label>
           <select
-            value={initialBathCount} // Set the value from query params
-            onChange={(e) => handleBathChange(e.target.value)} // Update state and query params
-            className="border rounded-lg p-2 bg-white text-teal-600 w-full mt-2"
+            value={initialBathCount}
+            onChange={(e) => handleBathChange(e.target.value)}
+            className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
             <option value="">All</option>
             <option value="1">1</option>
@@ -110,11 +118,13 @@ const FilterSection = ({
 
         {/* Balcony Count */}
         <div>
-          <label className="text-teal-600 font-medium p-2">Number of Balconies</label>
+          <label className="text-teal-600 font-medium block mb-2">
+            Number of Balconies
+          </label>
           <select
-            value={initialBalconyCount} // Set the value from query params
-            onChange={(e) => handleBalconyChange(e.target.value)} // Update state and query params
-            className="border rounded-lg p-2 bg-white text-teal-600 w-full mt-2"
+            value={initialBalconyCount}
+            onChange={(e) => handleBalconyChange(e.target.value)}
+            className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
             <option value="">All</option>
             <option value="1">1</option>
@@ -125,7 +135,7 @@ const FilterSection = ({
           </select>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

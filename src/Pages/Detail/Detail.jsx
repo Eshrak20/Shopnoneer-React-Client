@@ -50,9 +50,9 @@ const Detail = () => {
         <title>Shopnoneer | Properties</title>
       </Helmet>
       <div className="max-w-screen-2xl mx-auto">
-        <div className="mx-7 lg:mx-20">
           <Navbar visible={true} />
-          <div className="flex flex-col items-center mb-4 space-y-4">
+        <div className="lg:mx-20">
+          <div className="flex flex-wrap">
             <FilterSection
               sortOption={sortOption}
               setSortOption={setSortOption}
@@ -60,11 +60,14 @@ const Detail = () => {
               setBathCount={setBathCount}
               setBalconyCount={setBalconyCount}
             />
+            <div className="flex-1 p-6">
+              <DetailCard
+                sortedProjects={sortedProjects}
+                isLoading={isLoading}
+              ></DetailCard>{" "}
+              {/* Main content here */}
+            </div>
           </div>
-          <DetailCard
-            sortedProjects={sortedProjects}
-            isLoading={isLoading}
-          ></DetailCard>
         </div>
       </div>
     </div>

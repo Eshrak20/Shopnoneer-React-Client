@@ -13,7 +13,7 @@ const Home = () => {
       </Helmet>
       <div className="max-w-screen-2xl mx-auto">
         <Banner />
-        <div className="mx-7 lg:mx-20">
+        <div className="lg:mx-20">
           <HousingWiseProject />
           <FeatureSlider />
           <BuySellCard />

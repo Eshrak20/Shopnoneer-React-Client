@@ -6,7 +6,8 @@ import { faUpload, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 const BuySellCard = () => {
   return (
     <>
-      <Parallax
+    <div className="hidden lg:block">
+    <Parallax
         className="h-[calc(60vh)] lg:h-auto my-10"
         blur={{ min: -15, max: 15 }}
         bgImage={adviserImage}
@@ -38,6 +39,8 @@ const BuySellCard = () => {
           </div>
         </div>
       </Parallax>
+    </div>
+     
     </>
   );
 };
