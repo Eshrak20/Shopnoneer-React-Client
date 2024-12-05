@@ -91,9 +91,9 @@ const Navbar = ({ visible }) => {
               </button>
               <ul
                 tabIndex={0}
-                className="font-semibold menu menu-sm dropdown-content mt-3 w-52  shadow"
+                className="font-semibold menu menu-sm dropdown-content mt-3 w-52 shadow"
               >
-                <div className={`bg-${isFixed ? "black" : "black"}`}>
+                <div className={`bg-${isFixed ? "white" : "black"}`}>
                   {navOptions}
                 </div>
               </ul>
@@ -111,11 +111,11 @@ const Navbar = ({ visible }) => {
                 alt="Shopnoneer Logo"
                 className="w-36 h-auto -mt-10"
               />
-              <span className="lg:text-3xl font-semibold -ml-4 -mt-4 ">Shopnoneer</span>
+              <span className="lg:text-3xl font-semibold -ml-4 -mt-4">Shopnoneer</span>
             </Link>
           </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="text-lg font-semibold menu-horizontal px-1">
+          <div className="navbar-center  lg:flex">
+            <ul className="hidden lg:flex text-lg font-semibold menu-horizontal px-1">
               {navOptions}
             </ul>
           </div>

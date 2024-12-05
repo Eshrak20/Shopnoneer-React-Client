@@ -52,7 +52,7 @@ const DetailsPropMain = () => {
       <div className="lg:mx-20">
         <Navbar visible={true}></Navbar>
         <DetailPropBanner property={property} />
-        <div className="mx-5">
+        <div className="mx-5 lg:mx-0">
         <DetailsPropMainCard property={property} />
         <NearestFacilities facilities={facilities} />
         <Amenities amenities={amenities} />
