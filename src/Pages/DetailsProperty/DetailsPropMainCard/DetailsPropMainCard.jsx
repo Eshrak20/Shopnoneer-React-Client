@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   faBath,
   faBed,
@@ -10,14 +10,40 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleMap from "../../../Components/GoogleMap/GoogleMap";
 import "./DetailsPropMainCard.css";
+import FavAdd from "../../../Models/FavModel/FavAdd.js"; 
+import FavRemove from "../../../Models/FavModel/FavRemove.js";
+import Swal from "sweetalert2"; 
+import FavModel from "../../../Models/FavModel/FavModel.js";
 
 const DetailsPropMainCard = ({ property }) => {
+  const [bookmarked, setBookmarked] = useState({}); 
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const FavItem = await FavModel(); 
+        const initialBookmarks = FavItem.reduce((acc, item) => {
+          acc[item.project_id] = true; 
+          return acc;
+        }, {});
+        setBookmarked(initialBookmarks);
+      } catch (error) {
+        console.error("Failed to fetch home card data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    loadData();
+  }, []);
+  
+
   const capitalizeFirstChar = (str) => {
     if (!str || str.trim() === "") {
       return "Input string is empty.";
     }
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
+
   useEffect(() => {
     window.scrollTo({
       top: 100,
@@ -25,21 +51,60 @@ const DetailsPropMainCard = ({ property }) => {
       behavior: "smooth",
     });
   }, []);
+
+  const handleBookmarkClick = async (id) => {
+    try {
+      if (bookmarked[id]) {
+        await FavRemove(id); // Remove from favorites
+        setBookmarked((prev) => ({ ...prev, [id]: false }));
+        Swal.fire({
+          icon: "success",
+          title: "Bookmark Removed",
+          text: "This property has been removed from your favorites.",
+          confirmButtonColor: "#e53e3e",
+        });
+      } else {
+        await FavAdd(id); // Add to favorites
+        setBookmarked((prev) => ({ ...prev, [id]: true }));
+        Swal.fire({
+          icon: "success",
+          title: "Bookmarked!",
+          text: "This property has been added to your favorites.",
+          confirmButtonColor: "#38b2ac",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Action Failed",
+        text: "An error occurred while processing your request.",
+        confirmButtonColor: "#e53e3e",
+      });
+      console.error("Failed to toggle bookmark:", error);
+    }
+  };
   return (
     <>
       <div className="pb-4 mb-7">
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
           <div className="lg:col-span-2 space-y-6 bg-white rounded-lg">
-            {/* Bookmark button */}
-
             <div className="flex items-center z-10 py-2 lg:py-0">
               <h1 className="text-3xl mr-4 font-bold text-gray-900 lg:text-5xl text-left">
                 {property.title}
               </h1>
-              <button className="bg-teal-500 px-4 py-2 rounded group hover:bg-white">
+              <button
+                className={`px-4 py-2 rounded group ${
+                  bookmarked[property.id] ? "bg-white" : " bg-teal-500"
+                }`}
+              >
                 <FontAwesomeIcon
                   icon={faBookmark}
-                  className="text-lg text-gray-100 group-hover:text-teal-600 lg:text-2xl"
+                  className={`text-lg lg:text-2xl ${
+                    bookmarked[property.id]
+                      ? "text-teal-500 "
+                      : " text-gray-100"
+                  }`}
+                  onClick={() => handleBookmarkClick(property.id)}
                 />
               </button>
             </div>
@@ -88,7 +153,6 @@ const DetailsPropMainCard = ({ property }) => {
             </div>
 
             <div className="flex flex-wrap gap-4 my-4 items-center text-gray-600 text-sm sm:text-lg">
-              {/* Beds */}
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon
                   icon={faBed}
@@ -97,7 +161,6 @@ const DetailsPropMainCard = ({ property }) => {
                 <span>{property.no_of_beds} Beds</span>
               </div>
 
-              {/* Baths */}
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon
                   icon={faBath}
@@ -106,7 +169,6 @@ const DetailsPropMainCard = ({ property }) => {
                 <span>{property.no_of_baths} Baths</span>
               </div>
 
-              {/* Balcony */}
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon
                   icon={faCity}
@@ -115,7 +177,6 @@ const DetailsPropMainCard = ({ property }) => {
                 <span>{property.no_of_balcony} Balcony</span>
               </div>
 
-              {/* Square Footage */}
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon
                   icon={faHome}
@@ -149,7 +210,7 @@ const DetailsPropMainCard = ({ property }) => {
             </div>
           </div>
           <div className="relative -mt-16 h-64 sm:h-96 md:h-[400px] lg:h-[500px]">
-            <GoogleMap></GoogleMap>
+            <GoogleMap property={property} />
           </div>
         </section>
       </div>

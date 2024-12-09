@@ -6,9 +6,48 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import FavAdd from "../../../Models/FavModel/FavAdd";
+import FavRemove from "../../../Models/FavModel/FavRemove";
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const DetailCard = ({ sortedProjects, isLoading }) => {
+  const [bookmarked, setBookmarked] = useState({}); // Track bookmark state
+
+  // Function to toggle bookmark
+  const handleBookmarkClick = async (id) => {
+    try {
+      if (bookmarked[id]) {
+        await FavRemove(id); // Remove from favorites
+        setBookmarked((prev) => ({ ...prev, [id]: false }));
+        Swal.fire({
+          icon: "success",
+          title: "Bookmark Removed",
+          text: "This property has been removed from your favorites.",
+          confirmButtonColor: "#e53e3e",
+        });
+      } else {
+        await FavAdd(id); // Add to favorites
+        setBookmarked((prev) => ({ ...prev, [id]: true }));
+        Swal.fire({
+          icon: "success",
+          title: "Bookmarked!",
+          text: "This property has been added to your favorites.",
+          confirmButtonColor: "#38b2ac",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Action Failed",
+        text: "An error occurred while processing your request.",
+        confirmButtonColor: "#e53e3e",
+      });
+      console.error("Failed to toggle bookmark:", error);
+    }
+  };
+
   const LoadingSpinner = () => <LoadingLottie />;
 
   if (isLoading) return <LoadingSpinner />;
@@ -18,13 +57,16 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
       {sortedProjects.map((data, index) => (
         <div
           key={data.id || index}
-          className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative" // Added relative positioning for card
+          className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative"
         >
           {/* Bookmark icon */}
           <div className="absolute top-2 right-2 z-10">
             <FontAwesomeIcon
               icon={faBookmark}
-              className="text-gray-50 text-2xl cursor-pointer hover:text-teal-400 transition duration-300"
+              className={`text-2xl cursor-pointer transition duration-300 ${
+                bookmarked[data.id] ? "text-teal-400" : "text-gray-50"
+              }`}
+              onClick={() => handleBookmarkClick(data.id)}
             />
           </div>
           <Link to={`/detailsPropMain/${data.id}`}>
@@ -61,19 +103,16 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               {data.total_price
                 ? data.total_price.toLocaleString()
                 : "Price is upcoming"}
-              <div className="-mt-4">
-                <Link to={`/detailsPropMain/${data.id}`}></Link>
-              </div>
-              <div className="flex justify-end items-center -mr-3 ">
+              <div className="flex justify-end items-center -mr-3">
                 <button
                   onClick={() => window.open(`tel:${data.phone}`, "_self")}
-                  className=" px-4  py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1 "
+                  className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"
                 >
                   Call
                 </button>
                 <button
                   onClick={() => window.open(`mailto:${data.email}`, "_self")}
-                  className=" px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
+                  className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
                 >
                   Email
                 </button>

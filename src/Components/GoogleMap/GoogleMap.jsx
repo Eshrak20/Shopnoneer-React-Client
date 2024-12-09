@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-const GoogleMap = () => {
+const GoogleMap = ({ property }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -21,17 +21,18 @@ const GoogleMap = () => {
     };
 
     const initializeMap = () => {
+      // Get the latitude and longitude, fallback to default values if null
+      const lat = property?.latitude || 23.756724360562256;
+      const lng = property?.longitude || 90.35648582209016;
+
       const map = new google.maps.Map(mapRef.current, {
-        center: {
-          lat: 23.756724360562256,
-          lng: 90.35648582209016,
-        },
+        center: { lat, lng },
         zoom: 18,
       });
 
       // Use the standard marker if AdvancedMarkerElement is unavailable
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(23.756724360562256, 90.35648582209016),
+        position: new google.maps.LatLng(lat, lng),
         map: map,
         title: "Property Location",
       });
@@ -46,7 +47,7 @@ const GoogleMap = () => {
         document.body.removeChild(script);
       }
     };
-  }, []);
+  }, [property]);
 
   return (
     <div

@@ -20,7 +20,7 @@ const useProjectList = (housingId, bedCount, bathCount,balconyCount) => {
             },
             body: JSON.stringify({
               filters: {
-                housing_id: housingId,
+                housing_id: housingId || "",
                 no_of_beds: bedCount || "", // Use bed count filter
                 no_of_baths: bathCount || "", // Use bed count filter
                 no_of_balcony: balconyCount || "", // Use bed count filter

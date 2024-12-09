@@ -103,7 +103,7 @@ const Navbar = ({ visible }) => {
               className={`flex bg-transparent items-center  font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
                 isFixed
                   ? "from-gray-800 via-gray-800 to-gray-800"
-                  : "from-lime-200 via-lime-200 to-lime-200"
+                  : "from-lime-100 via-lime-100 to-lime-100"
               }`}
             >
               <div className="flex items-center space-x-2 lg:space-x-4">
