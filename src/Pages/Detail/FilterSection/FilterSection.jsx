@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
 const FilterSection = ({
   sortOption,
   setSortOption,
@@ -8,6 +7,23 @@ const FilterSection = ({
   setBathCount,
   setBalconyCount,
 }) => {
+
+// working on going .... here 
+  // const [housings, setHousings] = useState([]);
+  // useEffect(() => {
+  //   const loadhousings = async () => {
+  //     try {
+  //       const { housing } = await fetchHousingWiseProjects();
+  //       setHousings(housing);
+  //     } catch (error) {
+  //       console.error("Failed to fetch project data:", error);
+  //     }
+  //   };
+  //   loadhousings();
+  // }, []);
+
+
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Retrieve initial values from query parameters
