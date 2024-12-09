@@ -11,23 +11,23 @@ import MinCard from "../MinCard/MinCard";
 import { Link } from "react-router-dom";
 import fetchHomeCardData from "../../../Models/HomeModel/HomeCardModel/HomeCardModel";
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
-import FavAdd from "../../../Models/FavModel/FavAdd.js"; 
-import FavRemove from "../../../Models/FavModel/FavRemove"; 
-import Swal from "sweetalert2"; 
+import FavAdd from "../../../Models/FavModel/FavAdd.js";
+import FavRemove from "../../../Models/FavModel/FavRemove";
+import Swal from "sweetalert2";
 import FavModel from "../../../Models/FavModel/FavModel.js";
 
 const HomeCard = forwardRef((props, ref) => {
   const [homeCard, setHomeCard] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [bookmarked, setBookmarked] = useState({}); 
+  const [bookmarked, setBookmarked] = useState({});
   useEffect(() => {
     const loadData = async () => {
       try {
-        const FavItem = await FavModel(); 
-        const data = await fetchHomeCardData(); 
+        const FavItem = await FavModel();
+        const data = await fetchHomeCardData();
         setHomeCard(data);
         const initialBookmarks = FavItem.reduce((acc, item) => {
-          acc[item.project_id] = true; 
+          acc[item.project_id] = true;
           return acc;
         }, {});
         setBookmarked(initialBookmarks);
@@ -37,10 +37,9 @@ const HomeCard = forwardRef((props, ref) => {
         setLoading(false);
       }
     };
-  
+
     loadData();
   }, []);
-  
 
   const displayedCards = homeCard.slice(0, 6);
 
@@ -84,8 +83,8 @@ const HomeCard = forwardRef((props, ref) => {
 
       <section ref={ref} className="px-6 lg:px-0">
         <SectionTitle
-          heading="Most Recent Properties"
-          subHeading="Check out some of our latest properties"
+          heading="সর্বশেষ প্রপার্টি "
+          subHeading="আমাদের নতুন প্রপার্টি গুলি দেখে নিন"
         />
         {loading ? (
           <LoadingLottie />
@@ -136,10 +135,16 @@ const HomeCard = forwardRef((props, ref) => {
                     <span>{data.no_of_balcony}</span>
                   </div>
                   <h2 className="flex justify-between text-base sm:text-lg font-semibold text-teal-600 my-2">
-                    From ৳{" "}
-                    {data.total_price
-                      ? data.total_price.toLocaleString()
-                      : "Price is upcoming"}
+                    <div>
+                      {data.total_price ? (
+                        <>
+                          শুরু মাত্র ৳ {data.total_price.toLocaleString()}
+                          &nbsp;থেকে
+                        </>
+                      ) : (
+                        <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
+                      )}
+                    </div>
                     <div className="flex justify-end items-center -mr-3">
                       <button
                         onClick={() =>
@@ -150,7 +155,7 @@ const HomeCard = forwardRef((props, ref) => {
                         }
                         className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"
                       >
-                        Call
+                        কল
                       </button>
                       <button
                         onClick={() =>
@@ -161,7 +166,7 @@ const HomeCard = forwardRef((props, ref) => {
                         }
                         className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
                       >
-                        Email
+                        ইমেইল
                       </button>
                     </div>
                   </h2>
@@ -175,7 +180,7 @@ const HomeCard = forwardRef((props, ref) => {
             to="/detail"
             className="btn mb-14 bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"
           >
-            View All Properties
+            সব অ্যাপার্টমেন্ট দেখুন
           </Link>
         </div>
       </section>

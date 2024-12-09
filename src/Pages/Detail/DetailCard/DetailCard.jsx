@@ -10,16 +10,15 @@ import { useState } from "react";
 import FavAdd from "../../../Models/FavModel/FavAdd";
 import FavRemove from "../../../Models/FavModel/FavRemove";
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2";
 
 const DetailCard = ({ sortedProjects, isLoading }) => {
-  const [bookmarked, setBookmarked] = useState({}); // Track bookmark state
+  const [bookmarked, setBookmarked] = useState({});
 
-  // Function to toggle bookmark
   const handleBookmarkClick = async (id) => {
     try {
       if (bookmarked[id]) {
-        await FavRemove(id); // Remove from favorites
+        await FavRemove(id);
         setBookmarked((prev) => ({ ...prev, [id]: false }));
         Swal.fire({
           icon: "success",
@@ -28,7 +27,7 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
           confirmButtonColor: "#e53e3e",
         });
       } else {
-        await FavAdd(id); // Add to favorites
+        await FavAdd(id);
         setBookmarked((prev) => ({ ...prev, [id]: true }));
         Swal.fire({
           icon: "success",
@@ -59,7 +58,6 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
           key={data.id || index}
           className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative"
         >
-          {/* Bookmark icon */}
           <div className="absolute top-2 right-2 z-10">
             <FontAwesomeIcon
               icon={faBookmark}
@@ -99,22 +97,29 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               <span>{data.no_of_balcony}</span>
             </div>
             <h2 className="flex justify-between text-base sm:text-lg font-semibold text-teal-600 my-2">
-              From ৳{" "}
-              {data.total_price
-                ? data.total_price.toLocaleString()
-                : "Price is upcoming"}
+              <div>
+                {data.total_price ? (
+                  <>
+                    শুরু মাত্র ৳ {data.total_price.toLocaleString()}
+                    &nbsp;থেকে
+                  </>
+                ) : (
+                  <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
+                )}
+              </div>
+
               <div className="flex justify-end items-center -mr-3">
                 <button
                   onClick={() => window.open(`tel:${data.phone}`, "_self")}
                   className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"
                 >
-                  Call
+                  কল
                 </button>
                 <button
                   onClick={() => window.open(`mailto:${data.email}`, "_self")}
                   className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
                 >
-                  Email
+                  ইমেইল
                 </button>
               </div>
             </h2>

@@ -41,7 +41,7 @@ const FeatureSlider = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-20 relative">
-      <SectionTitle heading="Featured Projects" subHeading="Explore our recent work" />
+      <SectionTitle heading="হাইলাইটেড প্রজেক্টস" subHeading="আমাদের নতুন কাজগুলো এক নজরে দেখুন" />
       <div>
         <Swiper
           onSwiper={setSwiper}

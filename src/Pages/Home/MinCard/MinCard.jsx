@@ -10,27 +10,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const cardData = [
   {
-    title: "Perfect Location",
+    title: "পারফেক্ট লোকেশন",
     description:
-      "Eos an high ceilings delicata. Quo ei noted architect discere facilisi. Eos dico historic delicata e",
+      "উচ্চ সিলিং সহ চমৎকার স্থানে বসবাস। উল্লেখযোগ্য স্থপতির নকশা এবং সহজীকরণের প্রতীক এটি। ঐতিহাসিক দিক দিয়ে এটি অনন্য।",
     icon: faBuilding,
   },
   {
-    title: "Modern Living",
+    title: "আধুনিক জীবনযাপন",
     description:
-      "Pro in stunning environments and high-end finishings. Ut eos rising theme delicata.",
+      "আকর্ষণীয় পরিবেশ এবং উন্নতমানের ফিনিশিং। এখানে আধুনিক থিমের সাথে একত্রে উন্নতির ছোঁয়া।",
     icon: faHome,
   },
   {
-    title: "Serene Nature",
+    title: "প্রাকৃতিক শান্তি",
     description:
-      "In the heart of nature with tranquil surroundings. Eos ideal community delicata.",
+      "প্রকৃতির মাঝে প্রশান্তিময় পরিবেশে বসবাস। এটি আদর্শ সম্প্রদায়ের জন্য একটি উপযুক্ত স্থান।",
     icon: faTree,
   },
   {
-    title: "Luxury Comfort",
+    title: "লাক্সারি আরাম",
     description:
-      "Quo ei luxury amenities facilisi. Experience the comfort of the finest homes.",
+      "উচ্চমানের সুবিধাসমূহের সঙ্গে বিলাসবহুল জীবনযাপনের অভিজ্ঞতা। সেরা বাড়ির আরামের স্বাদ নিন।",
     icon: faBed,
   },
 ];

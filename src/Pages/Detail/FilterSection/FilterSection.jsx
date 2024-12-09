@@ -59,79 +59,79 @@ const FilterSection = ({
   return (
     <>
       <div className="w-full lg:w-1/4 h-full bg-white shadow-lg rounded-lg p-6 space-y-6 lg:sticky top-36 mb-10">
-        <h2 className="text-2xl font-bold text-teal-600 mb-4">Filters</h2>
+        <h2 className="text-2xl font-bold text-teal-600 mb-4">ফিল্টার</h2>
 
         {/* Sort Option */}
         <div>
           <label className="text-teal-600 font-medium block mb-2">
-            Sort By
+          বাছাই করুন
           </label>
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
             className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="priceHighToLow">Price: High to Low</option>
-            <option value="priceLowToHigh">Price: Low to High</option>
+            <option value="newest">নতুন</option>
+            <option value="oldest">পুরাতুন</option>
+            <option value="priceHighToLow">মূল্য: উচ্চ থেকে নিম্ন</option>
+            <option value="priceLowToHigh">মূল্য: নিম্ন থেকে উচ্চ </option>
           </select>
         </div>
 
         {/* Bed Count */}
         <div>
           <label className="text-teal-600 font-medium block mb-2">
-            Number of Beds
+          বেডের সংখ্যা
           </label>
           <select
             value={initialBedCount}
             onChange={(e) => handleBedChange(e.target.value)}
             className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
-            <option value="">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="">সব</option>
+            <option value="1">১</option>
+            <option value="2">২</option>
+            <option value="3">৩</option>
+            <option value="4">৪</option>
+            <option value="5">৫</option>
           </select>
         </div>
 
         {/* Bath Count */}
         <div>
           <label className="text-teal-600 font-medium block mb-2">
-            Number of Baths
+          বাথরুমের সংখ্যা
           </label>
           <select
             value={initialBathCount}
             onChange={(e) => handleBathChange(e.target.value)}
             className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
-            <option value="">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="">সব</option>
+            <option value="1">১</option>
+            <option value="2">২</option>
+            <option value="3">৩</option>
+            <option value="4">৪</option>
+            <option value="5">৫</option>
           </select>
         </div>
 
         {/* Balcony Count */}
         <div>
           <label className="text-teal-600 font-medium block mb-2">
-            Number of Balconies
+          ব্যালকনির সংখ্যা
           </label>
           <select
             value={initialBalconyCount}
             onChange={(e) => handleBalconyChange(e.target.value)}
             className="border rounded-lg p-2 bg-white text-teal-600 w-full"
           >
-            <option value="">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+           <option value="">সব</option>
+            <option value="1">১</option>
+            <option value="2">২</option>
+            <option value="3">৩</option>
+            <option value="4">৪</option>
+            <option value="5">৫</option>
           </select>
         </div>
       </div>

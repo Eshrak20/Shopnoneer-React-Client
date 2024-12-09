@@ -22,8 +22,8 @@ const HousingWiseProject = () => {
   return (
     <>
       <SectionTitle
-        heading="Housing Wise Projects"
-        subHeading="Explore our projects by housing type"
+        heading="হাউজিং অনুযায়ী প্রজেক্টস"
+        subHeading="আমাদের প্রজেক্টগুলি হাউজিং টাইপ অনুযায়ী দেখুন"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-6 mt-14 mb-24">
         {projects.slice(0, 6).map((project, index) => (

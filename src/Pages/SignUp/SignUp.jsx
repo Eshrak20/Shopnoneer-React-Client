@@ -60,10 +60,10 @@ const SignUp = () => {
 
   return (
     <>
-      {/* Head Section with Shopnoneer Branding */}
+      {/* Head Section with স্বপ্ননীড়  Branding */}
       <div className="hero min-h-screen bg-base-100 relative flex items-center justify-center overflow-hidden">
         <div className="text-center mb-8 absolute top-5 lg:mb-0 lg:w-1/2">
-          <h1 className="text-4xl font-extrabold text-teal-500">Shopnoneer</h1>
+          <h1 className="text-4xl font-extrabold text-teal-500">স্বপ্ননীড় </h1>
           <p className="text-lg mt-2 text-gray-600">
             Your one-stop solution for everything!
           </p>
@@ -113,17 +113,17 @@ const SignUp = () => {
                 )}
               </div>
 
-              {/* Email Field */}
+              {/* ইমেইল Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">ইমেইল</span>
                 </label>
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="ইমেইল"
                   className="input input-bordered"
                   {...register("email", {
-                    required: "Email is required",
+                    required: "ইমেইল is required",
                     pattern: {
                       value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                       message: "Invalid email format",

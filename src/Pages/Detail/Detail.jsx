@@ -47,7 +47,7 @@ const Detail = () => {
   return (
     <div>
       <Helmet>
-        <title>Shopnoneer | Properties</title>
+        <title>স্বপ্ননীড়  | Properties </title>
       </Helmet>
       <div className="max-w-screen-2xl mx-auto">
         <div className="lg:mx-20">

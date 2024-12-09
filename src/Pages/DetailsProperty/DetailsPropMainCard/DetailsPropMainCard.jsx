@@ -136,7 +136,7 @@ const DetailsPropMainCard = ({ property }) => {
                   }
                   className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg"
                 >
-                  Call
+                  কল
                 </button>
                 <button
                   onClick={() =>
@@ -147,7 +147,7 @@ const DetailsPropMainCard = ({ property }) => {
                   }
                   className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
                 >
-                  Email
+                  ইমেইল
                 </button>
               </div>
             </div>

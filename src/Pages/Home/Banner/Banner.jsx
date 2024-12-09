@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Parallax } from "react-parallax";
-import bannerImage from "../../../assets/Banner Images/Favourite/banner-1.webp";
+import bannerImage from "../../../assets/Banner Images/Favourite/ban-s1.jpg";
 
 import Navbar from "../../Shared/Navbar/Navbar";
 import HomeCard from "../../Home/HomeCard/HomeCard"; // Import your HomeCard component
@@ -48,31 +48,31 @@ const Banner = () => {
             <div className="mx-auto px-4">
               <div className="relative z-10 text-center text-white">
                 <h1 className="text-3xl sm:text-5xl font-bold mb-2">
-                  Find Your Dream
+                  আপনার স্বপ্নের
                 </h1>
                 <h1 className="text-2xl sm:text-4xl font-semibold mb-2">
-                  Project
+                  প্রজেক্ট
                 </h1>
                 <h1 className="text-xl sm:text-3xl font-light mb-6">
-                  In Just 1 Click
+                  শুধু ১ ক্লিকে খুঁজুন
                 </h1>
                 <div className="join text-black mb-4 flex flex-col sm:flex-row items-center">
                   <input
                     className="input input-bordered join-item mb-2 sm:mb-0 sm:w-2/3"
-                    placeholder="Search"
+                    placeholder="অনুসন্ধান"
                   />
                   <select className="select select-bordered join-item mb-2 sm:mb-0 sm:w-1/3">
-                    <option>Apartment</option>
-                    <option>House</option>
-                    <option>Vila</option>
-                    <option>Land</option>
+                    <option>অ্যাপার্টমেন্ট</option>
+                    <option>বাড়ি</option>
+                    <option>ভিলা</option>
+                    <option>জমি</option>
                   </select>
                   <div className="indicator mt-2 sm:mt-0 sm:ml-2">
                     <span className="indicator-item badge badge-accent text-yellow-50">
-                      OFFER!
+                      অফার!
                     </span>
                     <button className="btn join-item mt-2 sm:mt-0 sm:ml-2">
-                      Search
+                      অনুসন্ধান করুন
                     </button>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ const Banner = () => {
                 className="btn  bg-teal-500 hover:bg-teal-600 my-3 text-yellow-50"
                 onClick={scrollToNextSection} // Trigger scroll on click
               >
-                Get Started
+                শুরু করুন
               </button>
             </div>
           </div>

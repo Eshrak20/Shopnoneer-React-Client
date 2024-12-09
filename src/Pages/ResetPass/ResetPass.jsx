@@ -43,7 +43,7 @@ const ResetPass = () => {
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="form-control">
                         <label className="block text-gray-700 font-semibold mb-2">
-                            Email Address
+                            ইমেইল Address
                         </label>
                         <input
                             type="email"

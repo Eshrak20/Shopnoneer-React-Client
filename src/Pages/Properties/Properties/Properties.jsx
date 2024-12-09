@@ -1,7 +1,7 @@
 import React from 'react';
 import PropertiesNavbar from '../PropertiesNavbar/PropertiesNavbar';
 import PropertiesCard from '../PropertiesCard/PropertiesCard';
-const Properties = () => {
+const Properties  = () => {
     return (
         <>
         <PropertiesNavbar></PropertiesNavbar>   
@@ -11,4 +11,4 @@ const Properties = () => {
     );
 };
 
-export default Properties;
+export default Properties ;

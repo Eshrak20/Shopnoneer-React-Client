@@ -26,10 +26,10 @@ const Navbar = ({ visible }) => {
         <Link
           to="/detail"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-800" : "gray-100"
+            isFixed ? "gray-100" : "gray-100"
           }`}
         >
-          Properties
+          অ্যাপার্টমেন্ট
         </Link>
       </li>
 
@@ -37,10 +37,10 @@ const Navbar = ({ visible }) => {
         <Link
           to="/contact"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-800" : "gray-100"
+            isFixed ? "white" : "gray-100"
           }`}
         >
-          Contact
+          যোগাযোগ
         </Link>
       </li>
 
@@ -48,10 +48,10 @@ const Navbar = ({ visible }) => {
         <Link
           to="/favouritePage"
           className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-800" : "gray-100"
+            isFixed ? "gray-100" : "gray-100"
           }`}
         >
-          Saved
+          পছন্দনীও 
         </Link>
       </li>
     </>
@@ -63,14 +63,14 @@ const Navbar = ({ visible }) => {
         <div
           className={`navbar ${
             isFixed
-              ? "lg:bg-base-100 lg:max-w-screen-2xl lg:bg-opacity-35 lg:fixed "
+              ? "bg-black bg-opacity-45 lg:max-w-screen-2xl lg:fixed "
               : "bg-black max-w-screen-2xl sticky top-0"
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
             <div
               className={`font-bold text-3xl dropdown  lg:hidden text-${
-                isFixed ? "black" : "white"
+                isFixed ? "white" : "white"
               }`}
             >
               <button tabIndex={0} className="mr-5">
@@ -102,18 +102,18 @@ const Navbar = ({ visible }) => {
               to="/"
               className={`flex bg-transparent items-center  font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r ${
                 isFixed
-                  ? "from-gray-800 via-gray-800 to-gray-800"
+                  ? "from-gray-100 via-gray-100 to-gray-100"
                   : "from-lime-100 via-lime-100 to-lime-100"
               }`}
             >
               <div className="flex items-center space-x-2 lg:space-x-4">
                 <img
                   src="/final-removebg-preview.png"
-                  alt="Shopnoneer Logo"
+                  alt="স্বপ্ননীড়  Logo"
                   className="w-24 sm:w-32  lg:w-24 h-auto hidden lg:flex"
                 />
                 <span className="text-2xl lg:text-3xl font-semibold">
-                  Shopnoneer
+                  স্বপ্ননীড় 
                 </span>
               </div>
             </Link>

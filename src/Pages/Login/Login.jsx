@@ -66,21 +66,21 @@ const Login = () => {
         </Link>
 
         <div className="lg:bg-teal-500 text-white p-4 rounded-t-lg lg:bg-transparent sm:text-black">
-          <h1 className="text-2xl font-bold text-center sm:text-lg">Shopnoneer</h1>
+          <h1 className="text-2xl font-bold text-center sm:text-lg">স্বপ্ননীড় </h1>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="card-body p-6 rounded-b-lg sm:p-4" noValidate>
           <div className="form-control">
             <label className="label">
-              <span className="label-text text-white lg:text-black">Email</span>
+              <span className="label-text text-white lg:text-black">ইমেইল</span>
             </label>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="ইমেইল"
               className="input input-bordered w-full sm:text-sm"
               aria-invalid={errors.email ? "true" : "false"}
               {...register("email", {
-                required: "Email is required",
+                required: "ইমেইল is required",
                 pattern: {
                   value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                   message: "Invalid email format",
@@ -92,19 +92,19 @@ const Login = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text text-white lg:text-black">Password</span>
+              <span className="label-text text-white lg:text-black">পাসওয়ার্ড</span>
             </label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder="পাসওয়ার্ড"
                 className="input input-bordered w-full sm:text-sm"
                 aria-invalid={errors.password ? "true" : "false"}
                 {...register("password", {
-                  required: "Password is required",
+                  required: "পাসওয়ার্ড প্রয়োজন",
                   minLength: {
                     value: 6,
-                    message: "Password must be at least 6 characters",
+                    message: "পাসওয়ার্ড কমপক্ষে ৬টি অক্ষরের হওয়া উচিত",
                   },
                 })}
               />

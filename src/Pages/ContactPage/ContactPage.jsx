@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Shared/Navbar/Navbar";
 
 const ContactPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="max-w-screen-2xl mx-auto">
@@ -11,11 +14,11 @@ const ContactPage = () => {
           {/* Header Section */}
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-gray-800">
-              Ask about the property
+            ফ্ল্যাট সম্পর্কে জানুন
             </h2>
             <p className="text-lg text-gray-600">
-              Managed by{" "}
-              <span className="font-semibold text-teal-600">Shopnoneer</span>
+            ম্যানেজড বাই{" "}
+              <span className="font-semibold text-teal-600">স্বপ্ননীড় </span>
             </p>
           </div>
 
@@ -25,14 +28,14 @@ const ContactPage = () => {
               <div className="mb-4">
                 <input
                   type="text"
-                  placeholder="First Name"
+                  placeholder="প্রথম নাম "
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
                 />
               </div>
               <div className="mb-4">
                 <input
                   type="text"
-                  placeholder="Last Name"
+                  placeholder="শেষ নাম"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
                 />
               </div>
@@ -42,20 +45,20 @@ const ContactPage = () => {
                 </span>
                 <input
                   type="tel"
-                  placeholder="Phone Number"
+                  placeholder="ফোন নাম্বার "
                   className="w-full pl-16 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
                 />
               </div>
               <div className="mb-4">
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="ইমেইল"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
                 />
               </div>
               <div className="mb-6">
                 <textarea
-                  placeholder="Message"
+                  placeholder="মেসেজ"
                   rows="8"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
                 ></textarea>
@@ -64,19 +67,19 @@ const ContactPage = () => {
                 type="submit"
                 className="w-full bg-teal-500 text-white py-3 rounded-lg font-semibold hover:bg-teal-600 transition-colors duration-300"
               >
-                Contact Us
+                আমাদের সাথে যোগাযোগ করুন
               </button>
             </form>
 
             {/* Terms and Conditions */}
             <p className="text-gray-600 text-sm mt-4 text-center">
-              By clicking Contact Seller, you are accepting Shopnoneer's{" "}
+            Contact Seller ক্লিক করে, আপনি স্বপ্ননীড় এর {" "}
               <a href="#" className="text-teal-500 hover:underline">
-                Terms and Conditions
+              শর্তাবলী
               </a>{" "}
-              and{" "}
+              এবং{" "}
               <a href="#" className="text-teal-500 hover:underline">
-                Privacy Policy
+              গোপনীয়তা নীতিমালা গ্রহণ করছেন।
               </a>
               .
             </p>

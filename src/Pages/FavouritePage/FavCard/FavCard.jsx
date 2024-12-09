@@ -64,14 +64,15 @@ const FavCard = () => {
   return (
     <section className="my-7 px-10 sm:px-6 lg:px-8">
       <SectionTitle
-        heading="Your Favourite Properties"
-        subHeading="Discover and save the properties you love"
+        heading="আপনার পছন্দের ফ্ল্যাট  "
+        subHeading="যে ফ্ল্যাটগুলো আপনার হৃদয়ে স্থান পেয়েছে, সেগুলো আবিষ্কার করুন এবং সহজেই সংরক্ষণ করুন"
+
       />
       {loading ? (
         <LoadingLottie />
       ) : favCard.length === 0 ? (
         <p className="text-center text-gray-500 text-lg">
-          You have no favorite properties yet.
+          আপনার এখনো কোনো পছন্দের ফ্ল্যাট নেই।
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 my-4">
@@ -119,10 +120,16 @@ const FavCard = () => {
                   <span>{data.no_of_balcony || 0}</span>
                 </div>
                 <h2 className="flex justify-between text-base sm:text-lg font-semibold text-teal-600 my-2">
-                  From ৳{" "}
-                  {data.total_price
-                    ? data.total_price.toLocaleString()
-                    : "Price is upcoming"}
+                  <div>
+                    {data.total_price ? (
+                      <>
+                        শুরু মাত্র ৳ {data.total_price.toLocaleString()}
+                        &nbsp;থেকে
+                      </>
+                    ) : (
+                      <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
+                    )}
+                  </div>
                   <div className="-mt-4">
                     <Link
                       to={`/detailsPropMain/${data.id}`}
@@ -142,7 +149,7 @@ const FavCard = () => {
           to="/detail"
           className="btn mb-14 bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"
         >
-          View All Properties
+          সব অ্যাপার্টমেন্ট দেখুন
         </Link>
       </div>
     </section>
