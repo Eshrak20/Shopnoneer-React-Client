@@ -15,12 +15,15 @@ const Detail = () => {
   const [bedCount, setBedCount] = useState(""); // Add bed count state
   const [bathCount, setBathCount] = useState(""); // Add bed count state
   const [balconyCount, setBalconyCount] = useState(""); // Add bed count state
+  const [housing, setHousing] = useState(""); 
+  console.log(housingId);
   
   const { projects, isLoading, error } = useProjectList(
+    housing,
     housingId,
     bedCount,
     bathCount,
-    balconyCount
+    balconyCount,
   ); // Pass bed count
 
   const ErrorMessage = () => (
@@ -60,6 +63,8 @@ const Detail = () => {
               setBedCount={setBedCount}
               setBathCount={setBathCount}
               setBalconyCount={setBalconyCount}
+              setHousing={setHousing}
+              housingId={housingId}
             />
             <div className="flex-1 p-6">
               <DetailCard

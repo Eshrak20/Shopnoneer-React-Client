@@ -29,7 +29,7 @@ const HousingWiseProject = () => {
         {projects.slice(0, 6).map((project, index) => (
           <Link
             key={index}
-            to={`/detail/${project.id}`} // Pass housing ID in the URL
+            to={`/detail/${project.id}`} // Pass housing ID in the URL {project.name} also
           >
             <div className="project-card bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-xl shadow-md hover:shadow-lg transition-transform duration-200 ease-in-out transform hover:scale-102 flex flex-col items-center">
               <div className="flex flex-col justify-center items-center mb-4 h-40">

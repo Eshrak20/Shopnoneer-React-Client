@@ -25,9 +25,9 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/detail"
-          className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-100" : "gray-100"
-          }`}
+          className={`nav-item  text-${
+            isFixed ? "gray-800" : "gray-800"
+          }   lg:text-2xl lg:text-${isFixed ? "gray-100" : "gray-100"}`}
         >
           অ্যাপার্টমেন্ট
         </Link>
@@ -36,9 +36,9 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/contact"
-          className={`nav-item   lg:text-2xl text-${
-            isFixed ? "white" : "gray-100"
-          }`}
+          className={`nav-item  text-${
+            isFixed ? "gray-800" : "gray-800"
+          }   lg:text-2xl lg:text-${isFixed ? "gray-100" : "gray-100"}`}
         >
           যোগাযোগ
         </Link>
@@ -47,11 +47,11 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/favouritePage"
-          className={`nav-item   lg:text-2xl text-${
-            isFixed ? "gray-100" : "gray-100"
-          }`}
+          className={`nav-item  text-${
+            isFixed ? "gray-800" : "gray-800"
+          }   lg:text-2xl lg:text-${isFixed ? "gray-100" : "gray-100"}`}
         >
-          পছন্দনীও 
+          পছন্দনীয়
         </Link>
       </li>
     </>
@@ -68,12 +68,8 @@ const Navbar = ({ visible }) => {
           } z-10 max-auto px-7`}
         >
           <div className="navbar-start">
-            <div
-              className={`font-bold text-3xl dropdown  lg:hidden text-${
-                isFixed ? "white" : "white"
-              }`}
-            >
-              <button tabIndex={0} className="mr-5">
+            <div className={`font-bold text-3xl dropdown lg:hidden `}>
+              <button tabIndex={0} className="mr-5 text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-7 w-7"
@@ -91,9 +87,9 @@ const Navbar = ({ visible }) => {
               </button>
               <ul
                 tabIndex={0}
-                className="font-semibold menu menu-sm dropdown-content mt-3 w-52 shadow"
+                className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-lg shadow-lg transition-transform duration-300"
               >
-                <div className={`bg-${isFixed ? "white" : "black"}`}>
+                <div >
                   {navOptions}
                 </div>
               </ul>
@@ -113,7 +109,7 @@ const Navbar = ({ visible }) => {
                   className="w-24 sm:w-32  lg:w-24 h-auto hidden lg:flex"
                 />
                 <span className="text-2xl lg:text-3xl font-semibold">
-                  স্বপ্ননীড় 
+                  স্বপ্ননীড়
                 </span>
               </div>
             </Link>

@@ -18,8 +18,6 @@ export class Housing {
       const result = await response.json();
       const housing = result || [];
       const housingModel = housing.map(housing => new Housing(housing));
-      console.log(housingModel);
-      
       return{
         housing:housingModel
       };

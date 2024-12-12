@@ -10,16 +10,17 @@ import {
 import MinCard from "../MinCard/MinCard";
 import { Link } from "react-router-dom";
 import fetchHomeCardData from "../../../Models/HomeModel/HomeCardModel/HomeCardModel";
+import Swal from "sweetalert2";
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 import FavAdd from "../../../Models/FavModel/FavAdd.js";
-import FavRemove from "../../../Models/FavModel/FavRemove";
-import Swal from "sweetalert2";
+import FavRemove from "../../../Models/FavModel/FavRemove.js";
 import FavModel from "../../../Models/FavModel/FavModel.js";
 
 const HomeCard = forwardRef((props, ref) => {
   const [homeCard, setHomeCard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [bookmarked, setBookmarked] = useState({});
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -93,24 +94,23 @@ const HomeCard = forwardRef((props, ref) => {
             {displayedCards.map((data, index) => (
               <div
                 key={data.id || index}
-                className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative"
+                className="card bg-base-100 shadow-md rounded-lg w-full relative"
               >
-                <div className="absolute top-2 right-2 z-10">
-                  <FontAwesomeIcon
-                    icon={faBookmark}
-                    className={`text-2xl cursor-pointer transition duration-300 ${
-                      bookmarked[data.id] ? "text-teal-400" : "text-gray-50"
-                    }`}
-                    onClick={() => handleBookmarkClick(data.id)}
-                  />
-                </div>
-                <Link to={`/detailsPropMain/${data.id}`}>
+                <div className="relative group overflow-hidden w-full rounded-t-lg">
                   <img
                     src={data.images[0]}
                     alt={data.title}
-                    className="w-full h-48 sm:h-56 object-cover rounded-t-lg"
+                    className={`w-full h-48 sm:h-56 object-cover rounded-t-lg transition-transform duration-300 transform group-hover:scale-105`}
                   />
-                </Link>
+                  {/* Book Now Button */}
+                  <div
+                    className={`absolute inset-0 flex items-center justify-center text-xl cursor-pointer text-white bg-gray-800 bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    onClick={() => handleBookmarkClick(data.id)}
+                  >
+                    {bookmarked[data.id] ? "Already Booked" : "Book Now"}
+                  </div>
+                </div>
+
                 <div className="card-body p-4 sm:p-6">
                   <Link to={`/detailsPropMain/${data.id}`}>
                     <h2 className="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">
@@ -145,7 +145,7 @@ const HomeCard = forwardRef((props, ref) => {
                         <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
                       )}
                     </div>
-                    <div className="flex justify-end items-center lg:-mr-3">
+                    <div className="flex justify-end items-center -mr-3">
                       <button
                         onClick={() =>
                           window.open(
@@ -153,7 +153,7 @@ const HomeCard = forwardRef((props, ref) => {
                             "_self"
                           )
                         }
-                        className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"
+                        className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base shadow-lg mr-1"
                       >
                         কল
                       </button>
@@ -164,7 +164,7 @@ const HomeCard = forwardRef((props, ref) => {
                             "_self"
                           )
                         }
-                        className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
+                        className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base shadow-lg"
                       >
                         ইমেইল
                       </button>
@@ -178,7 +178,7 @@ const HomeCard = forwardRef((props, ref) => {
         <div className="text-center my-14">
           <Link
             to="/detail"
-            className="btn mb-14 bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 hover:bg-teal-600 transition duration-300 shadow-lg"
+            className="btn mb-14 bg-teal-500 text-white px-4 py-2 sm:px-6 sm:py-2 transition duration-300 shadow-lg"
           >
             সব অ্যাপার্টমেন্ট দেখুন
           </Link>

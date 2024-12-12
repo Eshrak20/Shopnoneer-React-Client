@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-const useProjectList = (housingId, bedCount, bathCount,balconyCount) => {
+const useProjectList = (
+  housing,
+  housingId,
+  bedCount,
+  bathCount,
+  balconyCount
+) => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,6 +15,8 @@ const useProjectList = (housingId, bedCount, bathCount,balconyCount) => {
       setIsLoading(true);
       setError(null);
       try {
+        console.log(housingId);
+
         const token = localStorage.getItem("user_token");
         const response = await fetch(
           "https://sna.shopnoneer.com/api/get-project-by-filter",
@@ -20,10 +28,10 @@ const useProjectList = (housingId, bedCount, bathCount,balconyCount) => {
             },
             body: JSON.stringify({
               filters: {
-                housing_id: housingId || "",
                 no_of_beds: bedCount || "", // Use bed count filter
                 no_of_baths: bathCount || "", // Use bed count filter
                 no_of_balcony: balconyCount || "", // Use bed count filter
+                housing_id:  housing || housingId || "",
               },
             }),
           }
@@ -47,7 +55,7 @@ const useProjectList = (housingId, bedCount, bathCount,balconyCount) => {
     };
 
     fetchProjects();
-  }, [housingId, bedCount, bathCount, balconyCount]); // Re-fetch when bed count changes
+  }, [housing, housingId, bedCount, bathCount, balconyCount]); // Re-fetch when bed count changes
 
   return {
     projects,

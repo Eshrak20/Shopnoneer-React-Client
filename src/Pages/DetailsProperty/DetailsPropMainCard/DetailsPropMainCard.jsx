@@ -10,19 +10,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleMap from "../../../Components/GoogleMap/GoogleMap";
 import "./DetailsPropMainCard.css";
-import FavAdd from "../../../Models/FavModel/FavAdd.js"; 
+import FavAdd from "../../../Models/FavModel/FavAdd.js";
 import FavRemove from "../../../Models/FavModel/FavRemove.js";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 import FavModel from "../../../Models/FavModel/FavModel.js";
 
 const DetailsPropMainCard = ({ property }) => {
-  const [bookmarked, setBookmarked] = useState({}); 
+  const [bookmarked, setBookmarked] = useState({});
   useEffect(() => {
     const loadData = async () => {
       try {
-        const FavItem = await FavModel(); 
+        const FavItem = await FavModel();
         const initialBookmarks = FavItem.reduce((acc, item) => {
-          acc[item.project_id] = true; 
+          acc[item.project_id] = true;
           return acc;
         }, {});
         setBookmarked(initialBookmarks);
@@ -32,10 +32,9 @@ const DetailsPropMainCard = ({ property }) => {
         setLoading(false);
       }
     };
-  
+
     loadData();
   }, []);
-  
 
   const capitalizeFirstChar = (str) => {
     if (!str || str.trim() === "") {
@@ -43,14 +42,6 @@ const DetailsPropMainCard = ({ property }) => {
     }
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 100,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, []);
 
   const handleBookmarkClick = async (id) => {
     try {
@@ -88,25 +79,29 @@ const DetailsPropMainCard = ({ property }) => {
       <div className="pb-4 mb-7">
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
           <div className="lg:col-span-2 space-y-6 bg-white rounded-lg">
-            <div className="flex items-center z-10 py-2 lg:py-0">
-              <h1 className="text-3xl mr-4 font-bold text-gray-900 lg:text-5xl text-left">
-                {property.title}
-              </h1>
-              <button
-                className={`px-4 py-2 rounded group ${
-                  bookmarked[property.id] ? "bg-white" : " bg-teal-500"
-                }`}
-              >
-                <FontAwesomeIcon
-                  icon={faBookmark}
-                  className={`text-lg lg:text-2xl ${
+            <div className="flex lg:mr-10 flex-wrap items-center z-10 py-2 lg:py-0">
+              <div className="w-full lg:flex-1">
+                <h1 className="text-2xl font-bold text-gray-900 lg:text-4xl text-left">
+                  {property.title}
+                </h1>
+              </div>
+              <div className="mt-2 lg:mt-0">
+                <button
+                  className={`px-3 py-2 rounded-lg shadow-lg transition-all duration-300 group ${
                     bookmarked[property.id]
-                      ? "text-teal-500 "
-                      : " text-gray-100"
+                      ? "bg-white border border-teal-500"
+                      : "bg-teal-500 hover:bg-teal-600"
                   }`}
                   onClick={() => handleBookmarkClick(property.id)}
-                />
-              </button>
+                >
+                  <FontAwesomeIcon
+                    icon={faBookmark}
+                    className={`text-xl lg:text-2xl transition-all duration-300 ${
+                      bookmarked[property.id] ? "text-teal-500" : "text-white"
+                    }`}
+                  />
+                </button>
+              </div>
             </div>
 
             <h4 className="text-xl text-teal-600 flex flex-col mb-4">

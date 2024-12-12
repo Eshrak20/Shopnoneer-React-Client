@@ -6,14 +6,31 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FavAdd from "../../../Models/FavModel/FavAdd";
 import FavRemove from "../../../Models/FavModel/FavRemove";
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 import Swal from "sweetalert2";
+import FavModel from "../../../Models/FavModel/FavModel";
 
 const DetailCard = ({ sortedProjects, isLoading }) => {
-  const [bookmarked, setBookmarked] = useState({});
+  const [bookmarked, setBookmarked] = useState({}); 
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const FavItem = await FavModel(); 
+        const initialBookmarks = FavItem.reduce((acc, item) => {
+          acc[item.project_id] = true; 
+          return acc;
+        }, {});
+        setBookmarked(initialBookmarks);
+      } catch (error) {
+        console.error("Failed to fetch home card data:", error);
+      }
+    };
+  
+    loadData();
+  }, []);
 
   const handleBookmarkClick = async (id) => {
     try {
@@ -108,7 +125,7 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
                 )}
               </div>
 
-              <div className="flex justify-end items-center -mr-3">
+              <div className="flex justify-end items-center lg:-mr-2">
                 <button
                   onClick={() => window.open(`tel:${data.phone}`, "_self")}
                   className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"

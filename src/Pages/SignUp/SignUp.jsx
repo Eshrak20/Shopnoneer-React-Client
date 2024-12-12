@@ -65,7 +65,7 @@ const SignUp = () => {
         <div className="text-center mb-8 absolute top-5 lg:mb-0 lg:w-1/2">
           <h1 className="text-4xl font-extrabold text-teal-500">স্বপ্ননীড় </h1>
           <p className="text-lg mt-2 text-gray-600">
-            Your one-stop solution for everything!
+            আপনার সবকিছুর জন্য একক সমাধান!
           </p>
         </div>
         <div className="hero-content flex flex-col lg:flex-row justify-between w-full max-w-7xl p-0 ">
@@ -87,7 +87,7 @@ const SignUp = () => {
                   </span>
                 </Link>
                 <h2 className="text-2xl font-semibold text-center">
-                  Create Your Account
+                আপনার অ্যাকাউন্ট তৈরি করুন।
                 </h2>
               </div>
 
@@ -98,7 +98,7 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="Your name"
+                  placeholder="আপনার নাম"
                   className="input input-bordered "
                   {...register("name", {
                     required: "Name is required",
@@ -138,17 +138,17 @@ const SignUp = () => {
               {/* Phone Number Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Phone Number</span>
+                  <span className="label-text">ফোন নম্বর</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Phone number"
+                  placeholder="ফোন নম্বর"
                   className="input input-bordered"
                   {...register("phone_number", {
-                    required: "Phone number is required",
+                    required: "ফোন নম্বর প্রয়োজন।",
                     pattern: {
                       value: /^[0-9]{11}$/,
-                      message: "Invalid phone number",
+                      message: "ইনভ্যালিড ফোন নম্বর।",
                     },
                   })}
                 />
@@ -160,17 +160,17 @@ const SignUp = () => {
               {/* Password Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text">পাসওয়ার্ড</span>
                 </label>
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="পাসওয়ার্ড"
                   className="input input-bordered"
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
                       value: 6,
-                      message: "Password must be at least 6 characters",
+                      message: "পাসওয়ার্ডটি কমপক্ষে ৬ অক্ষরের হতে হবে।",
                     },
                   })}
                 />
@@ -182,16 +182,16 @@ const SignUp = () => {
               {/* Confirm Password Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Confirm Password</span>
+                  <span className="label-text">পাসওয়ার্ড নিশ্চিত করুন</span>
                 </label>
                 <input
                   type="password"
-                  placeholder="Confirm password"
+                  placeholder="পাসওয়ার্ড নিশ্চিত করুন"
                   className="input input-bordered"
                   {...register("confirm_password", {
-                    required: "Confirm Password is required",
+                    required: "পাসওয়ার্ড নিশ্চিত করুন ",
                     validate: (value) =>
-                      value === password || "Passwords do not match",
+                      value === password || "পাসওয়ার্ডগুলো মিলছে না।",
                   })}
                 />
                 {errors.confirm_password && (
@@ -207,19 +207,19 @@ const SignUp = () => {
                   disabled={loading}
                   className="btn bg-teal-500 text-white hover:bg-teal-600"
                 >
-                  {loading ? "Creating account..." : "Sign Up"}
+                  {loading ? "Creating account..." : "সাইন আপ"}
                 </button>
               </div>
 
               <p className="text-center mt-2 text-teal-500">
-                Already have an account?{" "}
+              আপনার কি ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
                 <Link to="/login" className="text-teal-600">
-                  Log In
+                লগ ইন করুন
                 </Link>
               </p>
             </form>
           </div>
-
+Ï
           {/* Animation Section */}
           <div className="mt-0 lg:mt-0 lg:w-1/2">
             <Player
