@@ -25,9 +25,7 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/detail"
-          className={`nav-item  text-${
-            isFixed ? "gray-800" : "gray-800"
-          }   lg:text-2xl lg:text-${isFixed ? "gray-100" : "gray-100"}`}
+          className="nav-item text-gray-800  lg:text-2xl lg:text-white"
         >
           অ্যাপার্টমেন্ট
         </Link>
@@ -36,9 +34,7 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/contact"
-          className={`nav-item  text-${
-            isFixed ? "gray-800" : "gray-800"
-          }   lg:text-2xl lg:text-${isFixed ? "gray-100" : "gray-100"}`}
+          className="nav-item text-gray-800  lg:text-2xl lg:text-white"
         >
           যোগাযোগ
         </Link>
@@ -47,9 +43,7 @@ const Navbar = ({ visible }) => {
       <li>
         <Link
           to="/favouritePage"
-          className={`nav-item  text-${
-            isFixed ? "gray-800" : "gray-800"
-          }   lg:text-2xl lg:text-${isFixed ? "gray-100" : "gray-100"}`}
+          className="nav-item text-gray-800  lg:text-2xl lg:text-white"
         >
           পছন্দনীয়
         </Link>
@@ -89,9 +83,7 @@ const Navbar = ({ visible }) => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-lg shadow-lg transition-transform duration-300"
               >
-                <div >
-                  {navOptions}
-                </div>
+                <div>{navOptions}</div>
               </ul>
             </div>
             <Link
