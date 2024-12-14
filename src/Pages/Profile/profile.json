@@ -1,0 +1,10 @@
+{
+    "fullName": "John Doe",
+    "religion": "Christianity",
+    "occupation": "Software Developer",
+    "address": "1234 Elm Street, Some City, Some Country",
+    "email": "johndoe@example.com",
+    "phone": "+1234567890",
+    "gender": "Male"
+  }
+  

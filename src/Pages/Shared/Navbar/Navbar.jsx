@@ -119,7 +119,7 @@ const Navbar = ({ visible }) => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content font-semibold bg-base-100 rounded-lg shadow-lg transition-transform duration-300 scale-95 opacity-0 transform-gpu origin-top-right mt-3 w-52 p-2 group-open:scale-100 group-open:opacity-100 z-10"
                 >
-                  <Link to="#" className="p-2 block">
+                  <Link to="/profile" className="p-2 block">
                     প্রোফাইল
                   </Link>
                   <Link to="/signUp" className={`p-2 block `}>
