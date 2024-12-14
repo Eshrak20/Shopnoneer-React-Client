@@ -10,13 +10,12 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    
     <div>
       <Helmet>
-        <title>স্বপ্ননীড়  | Home</title>
+        <title>স্বপ্ননীড় | Home</title>
       </Helmet>
+      <Banner />
       <div className="max-w-screen-2xl mx-auto">
-        <Banner />
         <div className="lg:mx-20">
           <HousingWiseProject />
           <FeatureSlider />

@@ -42,26 +42,26 @@ const Banner = () => {
         bgImageAlt="the banner"
         strength={-30}
       >
-        <div className="hero min-h-screen ">
+        <div className="hero min-h-screen">
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="mt-[-150px] lg:mt-0 hero-content text-neutral-content text-center">
             <div className="mx-auto px-4">
               <div className="relative z-10 text-center text-white">
-                <h1 className="text-3xl sm:text-5xl font-bold mb-2">
+                <h1 className="text-3xl sm:text-5xl font-bold mb-4 animate__animated animate__fadeIn animate__delay-1.5s">
                   আপনার স্বপ্নের
                 </h1>
-                <h1 className="text-2xl sm:text-4xl font-semibold mb-2">
+                <h1 className="text-2xl sm:text-4xl font-semibold mb-4 animate__animated animate__fadeIn animate__delay-1s">
                   প্রজেক্ট
                 </h1>
-                <h1 className="text-xl sm:text-3xl font-light mb-6">
+                <h1 className="text-xl sm:text-3xl font-light mb-8 animate__animated animate__fadeIn animate__delay-2s">
                   শুধু ১ ক্লিকে খুঁজুন
                 </h1>
-                <div className="join text-black mb-4 flex flex-col sm:flex-row items-center">
+                <div className="join text-black mb-6 flex flex-col sm:flex-row items-center justify-center">
                   <input
-                    className="input input-bordered join-item mb-2 sm:mb-0 sm:w-2/3"
+                    className="input input-bordered join-item mb-2 sm:mb-0 sm:w-2/3 text-lg"
                     placeholder="অনুসন্ধান"
                   />
-                  <select className="select select-bordered join-item mb-2 sm:mb-0 sm:w-1/3">
+                  <select className="select select-bordered join-item mb-2 sm:mb-0 sm:w-1/3 text-lg">
                     <option>অ্যাপার্টমেন্ট</option>
                     <option>বাড়ি</option>
                     <option>ভিলা</option>
@@ -71,14 +71,14 @@ const Banner = () => {
                     <span className="indicator-item badge badge-accent text-yellow-50">
                       অফার!
                     </span>
-                    <button className="btn join-item mt-2 sm:mt-0 sm:ml-2">
+                    <button className="btn join-item mt-2 sm:mt-0 sm:ml-2 hover:scale-105 transition-all duration-300">
                       অনুসন্ধান করুন
                     </button>
                   </div>
                 </div>
               </div>
               <button
-                className="btn  bg-teal-500 hover:bg-teal-600 my-3 text-yellow-50"
+                className="btn bg-teal-500 hover:bg-teal-600 my-3 text-yellow-50 shadow-lg transform hover:scale-110 transition-all duration-300"
                 onClick={scrollToNextSection} // Trigger scroll on click
               >
                 শুরু করুন

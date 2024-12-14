@@ -35,8 +35,8 @@ const SignUp = () => {
       reset();
 
       Swal.fire({
-        title: "Success!",
-        text: "Account created successfully!",
+        title: "সাফল্য!",
+        text: "একাউন্ট সফলভাবে তৈরি হয়েছে!",
         icon: "success",
         timer: 1000,
         showConfirmButton: false,
@@ -47,11 +47,10 @@ const SignUp = () => {
       }, 1500);
     } catch (err) {
       Swal.fire({
-        title: "Error!",
-        text:
-          err.message || "An error occurred during sign-up. Please try again.",
+        title: "ত্রুটি!",
+        text: err.message || "সাইন-আপের সময় একটি ত্রুটি ঘটেছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
         icon: "error",
-        confirmButtonText: "Okay",
+        confirmButtonText: "ঠিক আছে",
       });
     } finally {
       setLoading(false);
@@ -94,7 +93,7 @@ const SignUp = () => {
               {/* Name Field */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">আপনার নাম</span>
                 </label>
                 <input
                   type="text"

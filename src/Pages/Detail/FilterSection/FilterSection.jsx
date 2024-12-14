@@ -13,8 +13,8 @@ const FilterSection = ({
 }) => {
   const [housings, setHousings] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedHousingId, setSelectedHousingId] = useState(housingId || ""); 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const [selectedHousingId, setSelectedHousingId] = useState(housingId || "");
+  const navigate = useNavigate();
 
   // Fetch the housing data
   useEffect(() => {
@@ -30,170 +30,139 @@ const FilterSection = ({
   }, []);
 
   // Retrieve initial values from query parameters
-  const initialBedCount = searchParams.get("bedCount") || "";
-  const initialBathCount = searchParams.get("bathCount") || "";
-  const initialBalconyCount = searchParams.get("balconyCount") || "";
-  const initialHousing = searchParams.get("housingId") || "";
+  const initialValues = {
+    bedCount: searchParams.get("bedCount") || "",
+    bathCount: searchParams.get("bathCount") || "",
+    balconyCount: searchParams.get("balconyCount") || "",
+    housing: searchParams.get("housingId") || "",
+  };
 
-  // Handle housing ID change
-  const handleHousingChange = (value) => {
-    setSelectedHousingId(value); // Update selectedHousingId state
-    if (value === "") {
-      navigate("/detail"); // Reset to /detail if "সব" is selected
-    } else {
-      setSelectedHousingId(value);
-      setSearchParams((prevParams) => {
-        prevParams.set("housingId", value); // Set new housingId
-        return prevParams;
-      });
-      setHousing(value);
+  // Handle changes in filter
+  const handleFilterChange = (type, value) => {
+    setSearchParams((prevParams) => {
+      if (value) prevParams.set(type, value);
+      else prevParams.delete(type);
+      return prevParams;
+    });
+    switch (type) {
+      case "housingId":
+        setSelectedHousingId(value);
+        setHousing(value);
+        if (value === "") navigate("/detail");
+        break;
+      case "bedCount":
+        setBedCount(value);
+        break;
+      case "bathCount":
+        setBathCount(value);
+        break;
+      case "balconyCount":
+        setBalconyCount(value);
+        break;
+      default:
+        break;
     }
-  };
-  
-  
-
-  // Handle other filter changes (bedCount, bathCount, balconyCount)
-  const handleBedChange = (value) => {
-    setSearchParams((prevParams) => {
-      prevParams.set("bedCount", value);
-      return prevParams;
-    });
-    setBedCount(value);
-  };
-
-  const handleBathChange = (value) => {
-    setSearchParams((prevParams) => {
-      prevParams.set("bathCount", value);
-      return prevParams;
-    });
-    setBathCount(value);
-  };
-
-  const handleBalconyChange = (value) => {
-    setSearchParams((prevParams) => {
-      prevParams.set("balconyCount", value);
-      return prevParams;
-    });
-    setBalconyCount(value);
   };
 
   // Synchronize query parameters with parent state on initial load
   useEffect(() => {
-    setBedCount(initialBedCount);
-    setBathCount(initialBathCount);
-    setBalconyCount(initialBalconyCount);
-    setHousing(initialHousing);
-  }, [
-    initialBedCount,
-    initialBathCount,
-    initialBalconyCount,
-    initialHousing,
-    setBedCount,
-    setBathCount,
-    setBalconyCount,
-    setHousing,
-  ]);
+    setBedCount(initialValues.bedCount);
+    setBathCount(initialValues.bathCount);
+    setBalconyCount(initialValues.balconyCount);
+    setHousing(initialValues.housing);
+  }, [initialValues, setBedCount, setBathCount, setBalconyCount, setHousing]);
 
   return (
-    <>
-      <div className="w-full lg:w-1/4 h-full bg-white shadow-lg rounded-lg p-6 space-y-6 lg:sticky top-36 mb-10">
-        <h2 className="text-3xl font-bold text-teal-600 mb-4">ফিল্টার</h2>
+    <div className="w-full lg:w-1/4 h-full bg-white lg:shadow rounded-lg p-4 space-y-5 lg:sticky top-32 mb-8">
+      <h2 className="text-xl font-semibold text-teal-700 mb-3">ফিল্টার</h2>
 
-        {/* Housing Filter */}
-        <div>
-          <label className="text-teal-600 font-medium text-lg block mb-2">
-            হাউজিং নির্বাচন করুন
-          </label>
-
-          <select
-            value={selectedHousingId}
-            onChange={(e) => handleHousingChange(e.target.value)}
-            className="border rounded-lg p-3 bg-white text-teal-600 text-lg w-full"
-          >
-            <option value="">সব</option>
-            {housings.map((housing) => (
-              <option key={housing.id} value={housing.id}>
-                {housing.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Sort Option */}
-        <div>
-          <label className="text-teal-600 font-medium text-lg block mb-2">
-            বাছাই করুন
-          </label>
-          <select
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-            className="border rounded-lg p-3 bg-white text-teal-600 text-lg w-full"
-          >
-            <option value="newest">নতুন</option>
-            <option value="oldest">পুরাতুন</option>
-            <option value="priceHighToLow">মূল্য: উচ্চ থেকে নিম্ন</option>
-            <option value="priceLowToHigh">মূল্য: নিম্ন থেকে উচ্চ</option>
-          </select>
-        </div>
-
-        {/* Bed Count */}
-        <div>
-          <label className="text-teal-600 font-medium text-lg block mb-2">
-            বেডের সংখ্যা
-          </label>
-          <select
-            value={initialBedCount}
-            onChange={(e) => handleBedChange(e.target.value)}
-            className="border rounded-lg p-3 bg-white text-teal-600 text-lg w-full"
-          >
-            <option value="">সব</option>
-            <option value="1">১</option>
-            <option value="2">২</option>
-            <option value="3">৩</option>
-            <option value="4">৪</option>
-            <option value="5">৫</option>
-          </select>
-        </div>
-
-        {/* Bath Count */}
-        <div>
-          <label className="text-teal-600 font-medium text-lg block mb-2">
-            বাথরুমের সংখ্যা
-          </label>
-          <select
-            value={initialBathCount}
-            onChange={(e) => handleBathChange(e.target.value)}
-            className="border rounded-lg p-3 bg-white text-teal-600 text-lg w-full"
-          >
-            <option value="">সব</option>
-            <option value="1">১</option>
-            <option value="2">২</option>
-            <option value="3">৩</option>
-            <option value="4">৪</option>
-            <option value="5">৫</option>
-          </select>
-        </div>
-
-        {/* Balcony Count */}
-        <div>
-          <label className="text-teal-600 font-medium text-lg block mb-2">
-            ব্যালকনির সংখ্যা
-          </label>
-          <select
-            value={initialBalconyCount}
-            onChange={(e) => handleBalconyChange(e.target.value)}
-            className="border rounded-lg p-3 bg-white text-teal-600 text-lg w-full"
-          >
-            <option value="">সব</option>
-            <option value="1">১</option>
-            <option value="2">২</option>
-            <option value="3">৩</option>
-            <option value="4">৪</option>
-            <option value="5">৫</option>
-          </select>
-        </div>
+      {/* Housing Filter */}
+      <div>
+        <label className="text-gray-700 font-medium text-sm block mb-1">
+          হাউজিং নির্বাচন করুন
+        </label>
+        <select
+          value={selectedHousingId}
+          onChange={(e) => handleFilterChange("housingId", e.target.value)}
+          className="border rounded p-2 bg-white text-gray-700 focus:outline-none w-full"
+        >
+          <option value="">সব</option>
+          {housings.map((housing) => (
+            <option key={housing.id} value={housing.id}>
+              {housing.name}
+            </option>
+          ))}
+        </select>
       </div>
-    </>
+
+      {/* Sort Option */}
+      <div>
+        <label className="text-gray-700 font-medium text-sm block mb-1">
+          বাছাই করুন
+        </label>
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="border rounded p-2 bg-white text-gray-700 focus:outline-none w-full"
+        >
+          <option value="newest">নতুন</option>
+          <option value="oldest">পুরাতুন</option>
+          <option value="priceHighToLow">মূল্য: উচ্চ থেকে নিম্ন</option>
+          <option value="priceLowToHigh">মূল্য: নিম্ন থেকে উচ্চ</option>
+        </select>
+      </div>
+
+      {/* Bed Count */}
+      <div>
+        <label className="text-gray-700 font-medium text-sm block mb-1">
+          বেডের সংখ্যা
+        </label>
+        <select
+          value={initialValues.bedCount}
+          onChange={(e) => handleFilterChange("bedCount", e.target.value)}
+          className="border rounded p-2 bg-white text-gray-700 focus:outline-none w-full"
+        >
+          <option value="">সব</option>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>{`${num}`}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Bath Count */}
+      <div>
+        <label className="text-gray-700 font-medium text-sm block mb-1">
+          বাথরুমের সংখ্যা
+        </label>
+        <select
+          value={initialValues.bathCount}
+          onChange={(e) => handleFilterChange("bathCount", e.target.value)}
+          className="border rounded p-2 bg-white text-gray-700 focus:outline-none w-full"
+        >
+          <option value="">সব</option>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>{`${num}`}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Balcony Count */}
+      <div>
+        <label className="text-gray-700 font-medium text-sm block mb-1">
+          ব্যালকনির সংখ্যা
+        </label>
+        <select
+          value={initialValues.balconyCount}
+          onChange={(e) => handleFilterChange("balconyCount", e.target.value)}
+          className="border rounded p-2 bg-white text-gray-700 focus:outline-none w-full"
+        >
+          <option value="">সব</option>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>{`${num}`}</option>
+          ))}
+        </select>
+      </div>
+    </div>
   );
 };
 

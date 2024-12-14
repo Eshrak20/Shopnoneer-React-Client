@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Autoplay } from "swiper/modules";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import fetchProjects from "../../../Models/HomeModel/FeatureSliderModel/FeatureSliderModel"; // Import the model function
 import LoadingLottie from "../../../assets/loadingLottie/loadingLottie"; // Import your loading component
@@ -13,7 +12,6 @@ import "./FeatureSlider.css";
 const FeatureSlider = () => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
-  const [swiper, setSwiper] = useState(null);
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -33,18 +31,17 @@ const FeatureSlider = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-[400px]">
+      <div className="flex justify-center items-center h-[600px]">
         <LoadingLottie />
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-20 relative">
+    <div className="max-w-7xl mx-auto py-10 px-5 relative">
       <SectionTitle heading="হাইলাইটেড প্রজেক্টস" subHeading="আমাদের নতুন কাজগুলো এক নজরে দেখুন" />
       <div>
         <Swiper
-          onSwiper={setSwiper}
           slidesPerView={1}
           breakpoints={{
             640: { slidesPerView: 1, spaceBetween: 20 },
@@ -55,7 +52,7 @@ const FeatureSlider = () => {
           freeMode={true}
           speed={800}
           autoplay={{
-            delay: 2500,
+            delay: 1500,
             disableOnInteraction: false,
           }}
           pagination={{
@@ -67,16 +64,16 @@ const FeatureSlider = () => {
           {projects.map((project) => (
             <SwiperSlide
               key={project.id}
-              className="relative rounded-lg transition-all duration-300 ease-in-out transform flex flex-col items-center"
+              className="relative rounded-lg overflow-hidden shadow-lg group transform transition-all duration-300 ease-in-out"
             >
-              <div className="relative overflow-hidden w-full rounded-md group">
+              <div className="relative w-full h-[300px] lg:h-[500px]">
                 <img
                   src={project.images[0]}
                   alt={project.housing}
-                  className="w-full h-[250px] lg:h-[500px] object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <h3 className="text-center text-white text-2xl font-bold">
+                <div className="absolute inset-0 bg-gradient-to-b from-teal-700 to-transparent opacity-80 flex items-center justify-center transition-opacity duration-500 group-hover:opacity-100">
+                  <h3 className="text-center text-white text-2xl font-semibold transform transition-all duration-300 group-hover:scale-110">
                     {project.housing}
                   </h3>
                 </div>
@@ -84,16 +81,6 @@ const FeatureSlider = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        {/* Custom Pagination Controls */}
-        <div className="custom-pagination-controls flex justify-between absolute bottom-1/2 transform translate-y-1/2 w-full px-4">
-          <button onClick={() => swiper.slidePrev()} className="pagination-btn">
-            <IoIosArrowBack size={30} color="#4A5568" />
-          </button>
-          <button onClick={() => swiper.slideNext()} className="pagination-btn">
-            <IoIosArrowForward size={30} color="#4A5568" />
-          </button>
-        </div>
       </div>
     </div>
   );

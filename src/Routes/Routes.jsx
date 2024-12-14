@@ -9,6 +9,7 @@ import Detail from "../Pages/Detail/Detail";
 import DetailsPropMain from "../Pages/DetailsProperty/DetailsPropMain/DetailsPropMain";
 import ContactPage from "../Pages/ContactPage/ContactPage";
 import FavouritePage from "../Pages/FavouritePage/FavouritePage";
+import Profile from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp />,
+      },
+      {
+        path:"/profile",
+        element:<Profile/>,
       },
       {
         path: "/contact",

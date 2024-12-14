@@ -1,31 +1,116 @@
-/* Enhanced card styling */
 .project-card {
-  background: linear-gradient(135deg, #e6fffa, #b2f5ea); /* Soft teal gradient */
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 8px rgba(0, 128, 128, 0.2); /* Initial shadow */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, #4a6d72, #303c3d); /* Deep teal and dark gray */
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .project-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 128, 128, 0.3); /* Teal shadow on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2), 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.project-card .icon-bg {
+  background: linear-gradient(135deg, #2b8e84, #314f51); /* Rich teal gradient */
+  padding: 1.25rem;
+  border-radius: 50%;
 }
 
 .project-card h2 {
-  color: #065f46; /* Darker teal for title */
-  transition: color 0.3s ease;
-}
-
-.project-card:hover h2 {
-  color: #a8a8a8; /* Light gray on hover */
+  color: #e5e5e5; /* Soft white for the heading */
+  font-size: 1.875rem; /* Larger heading for emphasis */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .project-card span {
-  color: #2c7a7b; /* Accent color for project count */
-  transition: color 0.3s ease;
+  color: #6c757d; /* Subtle gray color */
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
-.project-card:hover span {
-  color: #a8a8a8; /* Light gray on hover */
+.project-card:hover h2 {
+  color: #f9fafb; /* Light white on hover for better contrast */
+}
+
+.project-card .icon-bg svg {
+  fill: #fff; /* White icon color */
+}
+
+/* Grid styling */
+.grid {
+  padding: 2rem;
+  gap: 1.5rem;
+}
+
+/* Section Title */
+h2.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+p.section-subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+}
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, #4a6d72, #303c3d); /* Deep teal and dark gray */
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2), 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.project-card .icon-bg {
+  background: linear-gradient(135deg, #2b8e84, #314f51); /* Rich teal gradient */
+  padding: 1.25rem;
+  border-radius: 50%;
+}
+
+.project-card h2 {
+  color: #e5e5e5; /* Soft white for the heading */
+  font-size: 1.875rem; /* Larger heading for emphasis */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.project-card span {
+  color: #6c757d; /* Subtle gray color */
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.project-card:hover h2 {
+  color: #f9fafb; /* Light white on hover for better contrast */
+}
+
+.project-card .icon-bg svg {
+  fill: #fff; /* White icon color */
+}
+
+/* Grid styling */
+.grid {
+  padding: 2rem;
+  gap: 1.5rem;
+}
+
+/* Section Title */
+h2.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+p.section-subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
 }

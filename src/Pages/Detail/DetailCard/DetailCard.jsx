@@ -14,23 +14,27 @@ import Swal from "sweetalert2";
 import FavModel from "../../../Models/FavModel/FavModel";
 
 const DetailCard = ({ sortedProjects, isLoading }) => {
-  const [bookmarked, setBookmarked] = useState({}); 
+  const [bookmarked, setBookmarked] = useState({});
+  const data = sortedProjects;
+
   useEffect(() => {
     const loadData = async () => {
       try {
-        const FavItem = await FavModel(); 
-        const initialBookmarks = FavItem.reduce((acc, item) => {
-          acc[item.project_id] = true; 
-          return acc;
-        }, {});
+        const FavItem = await FavModel();
+        const initialBookmarks = {};
+        data.forEach((item) => {
+          if (FavItem.some((fav) => fav.id === item.id)) {
+            initialBookmarks[item.id] = true;
+          }
+        });
         setBookmarked(initialBookmarks);
       } catch (error) {
         console.error("Failed to fetch home card data:", error);
       }
     };
-  
+
     loadData();
-  }, []);
+  }, [data]);
 
   const handleBookmarkClick = async (id) => {
     try {
@@ -39,8 +43,8 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
         setBookmarked((prev) => ({ ...prev, [id]: false }));
         Swal.fire({
           icon: "success",
-          title: "Bookmark Removed",
-          text: "This property has been removed from your favorites.",
+          title: "বুকমার্ক মুছে ফেলা হয়েছে",
+          text: "এই সম্পত্তিটি আপনার প্রিয় তালিকা থেকে মুছে ফেলা হয়েছে।",
           confirmButtonColor: "#e53e3e",
         });
       } else {
@@ -48,16 +52,16 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
         setBookmarked((prev) => ({ ...prev, [id]: true }));
         Swal.fire({
           icon: "success",
-          title: "Bookmarked!",
-          text: "This property has been added to your favorites.",
+          title: "বুকমার্ক করা হয়েছে!",
+          text: "এই ফ্ল্যাটটি আপনার প্রিয় তালিকায় যোগ করা হয়েছে।",
           confirmButtonColor: "#38b2ac",
         });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Action Failed",
-        text: "An error occurred while processing your request.",
+        title: "ক্রিয়া ব্যর্থ হয়েছে",
+        text: "আপনার অনুরোধ প্রক্রিয়া করার সময় একটি ত্রুটি ঘটেছে।",
         confirmButtonColor: "#e53e3e",
       });
       console.error("Failed to toggle bookmark:", error);
@@ -69,31 +73,41 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-6 my-4 mx-2 lg:mx-0">
+    <div className="lg:px-7 p-0 grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-6 my-4 mx-2 lg:mx-0">
       {sortedProjects.map((data, index) => (
         <div
           key={data.id || index}
           className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative"
         >
           <div className="absolute top-2 right-2 z-10">
-            <FontAwesomeIcon
-              icon={faBookmark}
-              className={`text-2xl cursor-pointer transition duration-300 ${
-                bookmarked[data.id] ? "text-teal-400" : "text-gray-50"
-              }`}
-              onClick={() => handleBookmarkClick(data.id)}
-            />
+            <div className="relative group">
+              <FontAwesomeIcon
+                icon={faBookmark}
+                className={`text-2xl cursor-pointer transition duration-300 ${
+                  bookmarked[data.id] ? "text-teal-400" : "text-gray-50"
+                } group-hover:text-gray-600`} // Hover color effect
+                onClick={() => handleBookmarkClick(data.id)}
+              />
+              {/* Tooltip */}
+              <span className="absolute bottom-full mb-6 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-gray-700">
+                  {bookmarked[data.id] ? "Remove" : "Save"}
+                </p>
+              </span>
+            </div>
           </div>
-          <Link to={`/detailsPropMain/${data.id}`}>
-            <img
-              src={data.images[0]}
-              alt={data.title}
-              className="w-full h-48 sm:h-56 object-cover rounded-t-lg"
-            />
+          <Link to={`/detailsPropMain/${data.id}`} className="relative group">
+            <div className="overflow-hidden rounded-t-lg">
+              <img
+                src={data.images[0]}
+                alt={data.title}
+                className="w-full h-48 sm:h-56 object-cover group-hover:scale-y-105  group-hover:scale-x-110 transition-all duration-300 ease-out"
+              />
+            </div>
           </Link>
           <div className="card-body p-4 sm:p-6">
             <Link to={`/detailsPropMain/${data.id}`}>
-              <h2 className="card-title text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+              <h2 className="card-title text-xl font-semibold text-gray-800 mb-3 hover:text-teal-500">
                 {data.title}
               </h2>
             </Link>
@@ -113,7 +127,7 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               <FontAwesomeIcon icon={faHome} />
               <span>{data.no_of_balcony}</span>
             </div>
-            <h2 className="flex justify-between text-base sm:text-lg font-semibold text-teal-600 my-2">
+            <h2 className="flex items-center justify-between lg:text-lg font-semibold text-teal-600 my-2">
               <div>
                 {data.total_price ? (
                   <>
@@ -124,17 +138,26 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
                   <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
                 )}
               </div>
-
-              <div className="flex justify-end items-center lg:-mr-2">
+              <div className="flex justify-end items-center">
                 <button
-                  onClick={() => window.open(`tel:${data.phone}`, "_self")}
-                  className="px-4 py-2 rounded-md bg-teal-500 text-white text-xs lg:text-base hover:bg-teal-600 transition duration-300 shadow-lg mr-1"
+                  onClick={() =>
+                    window.open(
+                      `tel:${data.phone || "+880 1521-498303"}`,
+                      "_self"
+                    )
+                  }
+                  className="px-4 py-2  text-xs lg:text-base  rounded-md bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg"
                 >
                   কল
                 </button>
                 <button
-                  onClick={() => window.open(`mailto:${data.email}`, "_self")}
-                  className="px-4 py-2 rounded-md bg-gray-500 text-white text-xs lg:text-base hover:bg-gray-600 transition duration-300 shadow-lg"
+                  onClick={() =>
+                    window.open(
+                      `mailto:${data.email || "Shohag.cse3@gmail.com"}`,
+                      "_self"
+                    )
+                  }
+                  className="px-4 py-2  text-xs lg:text-base   rounded-md bg-gray-500 text-white hover:bg-gray-600 transition duration-300 shadow-lg ml-2"
                 >
                   ইমেইল
                 </button>

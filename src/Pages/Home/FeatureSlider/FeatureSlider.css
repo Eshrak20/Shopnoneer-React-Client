@@ -7,27 +7,19 @@
   padding: 0 1rem;
 }
 
+/* Remove the custom pagination button styles */
 .pagination-btn {
- /*  background: rgba(74, 85, 104, 0.8); /* Grayish background with opacity */
- /*  border: 2px solid #277259; /* Teal border for contrast */
-  color: #E2E8F0; /* Light gray text color */
-  border-radius: 50%;
-  padding: 0.5rem;
-  cursor: pointer;
-  outline: none;
-  transition: transform 0.3s ease, background 0.3s ease;
+  /* Delete or comment out the previous custom styles here */
 }
 
-/* Hover effect for buttons */
+/* Optional: Remove hover effect for buttons */
 .pagination-btn:hover {
- /*  background: #1A202C; /* Dark background on hover */
- /*  color: #81E6D9; /* Teal color for icon on hover */
-  transform: scale(1.1);
+  /* Delete or comment out the hover effect here */
 }
 
-/* Optional: Make buttons more prominent */
+/* Optional: Remove focus styles */
 .pagination-btn:focus {
- /*  box-shadow: 0 0 0 3px rgba(129, 230, 217, 0.5); /* Teal focus outline */
+  /* Delete or comment out the focus styles here */
 }
 
 /* Image text overlay styling */
@@ -36,7 +28,6 @@
   bottom: 0;
   left: 0;
   right: 0;
- /* background: rgba(26, 32, 44, 0.7); Dark overlay background */
   color: #E2E8F0; /* Light gray text color */
   opacity: 0;
   display: flex;
@@ -59,7 +50,7 @@
 }
 
 .swiper-slide:hover {
-/*   box-shadow: 0px 10px 20px rgba(9, 255, 173, 0.2); /* Subtle shadow on hover */
+  /* Optional: Remove hover shadow effect */
 }
 
 .project-card {

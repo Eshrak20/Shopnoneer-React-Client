@@ -10,7 +10,6 @@ const FavRemove = async (id) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ project_id: id }),
-
     });
   };
 

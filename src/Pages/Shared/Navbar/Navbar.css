@@ -1,53 +1,81 @@
-.nav-item {
-    position: relative;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s ease;
-   /* color: black;  Set base color according to theme */
-  }
-  
-  .nav-item:hover {
-    color: #ffffff; /* Text color on hover based on theme */
-  }
-  
-  .nav-item::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background-color: #53d2a6; /* Underline color matching hover text color */
-    transition: width 0.3s ease;
-  }
-  
-  .nav-item:hover::after {
-    width: 100%; /* Expands underline from left to right on hover */
-  }
-  
-  .dropdown-content {
-    padding: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-
-  /* Navbar.css */
-.nav-item {
-    /* Your existing styles */
-    padding: 10px;
+/* Navbar.css */
+.navbar {
+  transition: all 0.3s ease-in-out; /* Smooth background transition */
 }
 
-.nav-item a {
-    /* Default styles for anchor elements inside nav items */
-    text-decoration: none;
+.navbar .nav-item {
+  padding: 10px;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Additional styles based on conditions */
-.text-black {
-    color: black; /* Ensure this class is defined */
+.navbar .nav-item:hover {
+  color: #ffffff; /* Hover color */
+  transform: scale(1.05); /* Slight scaling effect */
 }
 
-.text-white {
-    color: white; /* Ensure this class is defined */
+.navbar .nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #53d2a6; /* Underline color */
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-item:hover::after {
+  width: 100%;
+}
+
+.navbar .btn {
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.navbar .btn:hover {
+  background-color: #053c3c; /* Darker shade on hover */
+  transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.dropdown-content {
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-content.scale-95 {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.dropdown-content.group-open\\:scale-100 {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.avatar img {
+  transition: all 0.3s ease;
+}
+
+.avatar img:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Navbar background effects */
+.bg-opacity-60 {
+  background-color: rgba(0, 0, 0, 0.6); /* Dark background with transparency */
+}
+
+.bg-opacity-45 {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
 }

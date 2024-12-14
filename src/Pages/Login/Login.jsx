@@ -25,8 +25,8 @@ const Login = () => {
       reset();
 
       Swal.fire({
-        title: "Success!",
-        text: "Login successful!",
+        title: "সাফল্য!",
+        text: "লগইন সফল হয়েছে!",
         icon: "success",
         timer: 1000,
         showConfirmButton: false,
@@ -35,11 +35,12 @@ const Login = () => {
       setTimeout(() => navigate("/", { replace: true }), 1500);
     } catch (err) {
       Swal.fire({
-        title: "Error!",
+        title: "ত্রুটি!",
         text:
-          err.message || "An error occurred during login. Please try again.",
+          err.message ||
+          "লগইন করার সময় একটি ত্রুটি ঘটেছে। দয়া করে আবার চেষ্টা করুন।",
         icon: "error",
-        confirmButtonText: "Okay",
+        confirmButtonText: "ঠিক আছে",
       });
     } finally {
       setLoading(false);
@@ -168,7 +169,7 @@ const Login = () => {
               disabled={loading}
               className="btn bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg w-full sm:text-sm"
             >
-              {loading ? "Logging in..." : "লগ ইন"}
+              {loading ? "লগইন হচ্ছে..." : "লগ ইন"}
             </button>
           </div>
 

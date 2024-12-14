@@ -15,8 +15,6 @@ const useProjectList = (
       setIsLoading(true);
       setError(null);
       try {
-        console.log(housingId);
-
         const token = localStorage.getItem("user_token");
         const response = await fetch(
           "https://sna.shopnoneer.com/api/get-project-by-filter",

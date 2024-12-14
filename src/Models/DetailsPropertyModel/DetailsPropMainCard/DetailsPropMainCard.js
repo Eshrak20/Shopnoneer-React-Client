@@ -3,7 +3,9 @@ export class Facility {
   constructor(data) {
 
     this.name =  data.name||"Unknown Facility";
-    this.category_id =  data.category_id|| "Unknown Facility";
+    this.category_name =  data.category|| "Unknown Facility";
+    this.latitude =  data.latitude|| "Unknown latitude";
+    this.longitude =  data.longitude|| "Unknown longitude";
   }
 }
 
@@ -22,6 +24,8 @@ export class DetailsPropertyModel {
     this.division = data.division || "Unknown Division";
     this.district = data.district || "Unknown District";
     this.upazila = data.upazila || "Unknown Upazila";
+    this.latitude = data.latitude || "Unknown Housing";
+    this.longitude = data.longitude || "Unknown Housing";
     this.housing = data.housing || "Unknown Housing";
     this.road = data.road || "N/A";
     this.block = data.block || "N/A";

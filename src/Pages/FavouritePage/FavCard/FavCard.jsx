@@ -3,7 +3,6 @@ import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 import fetchFavCardData from "../../../Models/FavModel/FavModel";
-import fetchFavDataDetails from "../../../Models/FavModel/FavData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBath,
@@ -20,12 +19,10 @@ const FavCard = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const projectIds = await fetchFavCardData();
 
       try {
-        const projectDetails = await Promise.all(
-          projectIds.map((id) => fetchFavDataDetails(id))
-        );
+      
+        const projectDetails = await fetchFavCardData();
 
         // Flatten the results or filter as needed
         const validDetails = projectDetails.flat();
@@ -46,15 +43,15 @@ const FavCard = () => {
       setFavCard((prev) => prev.filter((item) => item.id !== id)); // Remove from the list
       Swal.fire({
         icon: "success",
-        title: "Bookmark Removed",
-        text: "This property has been removed from your favorites.",
+        title: "বুকমার্ক সরানো হয়েছে",
+        text: "এই প্রপার্টি আপনার প্রিয় তালিকা থেকে সরানো হয়েছে।",
         confirmButtonColor: "#e53e3e",
       });
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Action Failed",
-        text: "An error occurred while processing your request.",
+        title: "কর্ম ব্যর্থ হয়েছে",
+        text: "আপনার অনুরোধ প্রক্রিয়া করার সময় একটি ত্রুটি ঘটেছে।",
         confirmButtonColor: "#e53e3e",
       });
       console.error("Failed to toggle bookmark:", error);

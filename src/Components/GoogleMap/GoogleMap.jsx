@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 
-const GoogleMap = ({ property }) => {
+const GoogleMap = ({ property ,facility }) => {
   const mapRef = useRef(null);
+console.log(facility);
+console.log(property);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -21,9 +23,9 @@ const GoogleMap = ({ property }) => {
     };
 
     const initializeMap = () => {
-      // Get the latitude and longitude, fallback to default values if null
-      const lat = property?.latitude || 23.756724360562256;
-      const lng = property?.longitude || 90.35648582209016;
+      
+      const lat = Number(property?.latitude )|| 23.756724360562256;
+      const lng = Number(property?.longitude )|| 90.35648582209016;
 
       const map = new google.maps.Map(mapRef.current, {
         center: { lat, lng },

@@ -16,7 +16,6 @@ const Detail = () => {
   const [bathCount, setBathCount] = useState(""); // Add bed count state
   const [balconyCount, setBalconyCount] = useState(""); // Add bed count state
   const [housing, setHousing] = useState(""); 
-  console.log(housingId);
   
   const { projects, isLoading, error } = useProjectList(
     housing,
