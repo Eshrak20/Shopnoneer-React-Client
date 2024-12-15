@@ -29,7 +29,7 @@ console.log(property);
 
       const map = new google.maps.Map(mapRef.current, {
         center: { lat, lng },
-        zoom: 18,
+        zoom: 16,
       });
 
       // Use the standard marker if AdvancedMarkerElement is unavailable

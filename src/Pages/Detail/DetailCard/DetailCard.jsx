@@ -3,7 +3,7 @@ import {
   faBath,
   faBed,
   faBookmark,
-  faHome,
+  faCity,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -131,15 +131,14 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               <span className="border-r-2 pr-2">{data.no_of_beds}</span>
               <FontAwesomeIcon icon={faBath} />
               <span className="border-r-2 pr-2">{data.no_of_baths}</span>
-              <FontAwesomeIcon icon={faHome} />
+              <FontAwesomeIcon icon={faCity} />
               <span>{data.no_of_balcony}</span>
             </div>
             <h2 className="flex items-center justify-between lg:text-lg font-semibold text-teal-600 my-2">
               <div>
                 {data.total_price ? (
                   <>
-                    শুরু মাত্র ৳ {data.total_price.toLocaleString()}
-                    &nbsp;থেকে
+                    ৳{data.total_price.toLocaleString()} টাকা
                   </>
                 ) : (
                   <>মূল্য শীঘ্রই প্রকাশিত হবে!</>

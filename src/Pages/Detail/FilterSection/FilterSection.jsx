@@ -73,9 +73,8 @@ const FilterSection = ({
   }, [initialValues, setBedCount, setBathCount, setBalconyCount, setHousing]);
 
   return (
-    <div className="w-full lg:w-1/4 h-full bg-white lg:shadow rounded-lg p-4 space-y-5 lg:sticky top-32 mb-8">
-      <h2 className="text-xl font-semibold text-teal-700 mb-3">ফিল্টার</h2>
-
+    <div className="w-full lg:w-1/4 h-full bg-white lg:shadow rounded-lg p-4 space-y-5 lg:sticky top-24 mb-8">
+      <h2 className="text-xl font-semibold text-teal-700 -mb-3">ফিল্টার</h2>
       {/* Housing Filter */}
       <div>
         <label className="text-gray-700 font-medium text-sm block mb-1">

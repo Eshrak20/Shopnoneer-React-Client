@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBath,
   faBed,
-  faHome,
   faBookmark,
+  faCity,
 } from "@fortawesome/free-solid-svg-icons";
 import MinCard from "../MinCard/MinCard";
 import { Link } from "react-router-dom";
@@ -88,7 +88,7 @@ const HomeCard = forwardRef((props, ref) => {
         {loading ? (
           <LoadingLottie />
         ) : (
-          <div className="p-0 lg:p-10  max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 ">
+          <div className="p-0 lg:p-14  max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 ">
             {displayedCards.map((data, index) => (
               <div
                 key={data.id || index}
@@ -154,15 +154,14 @@ const HomeCard = forwardRef((props, ref) => {
                     <span className="border-r-2 pr-2">{data.no_of_beds}</span>
                     <FontAwesomeIcon icon={faBath} />
                     <span className="border-r-2 pr-2">{data.no_of_baths}</span>
-                    <FontAwesomeIcon icon={faHome} />
+                    <FontAwesomeIcon icon={faCity} />
                     <span>{data.no_of_balcony}</span>
                   </div>
                   <h2 className="flex items-center justify-between lg:text-lg font-semibold text-teal-600 my-2">
                     <div>
                       {data.total_price ? (
                         <>
-                          শুরু মাত্র ৳ {data.total_price.toLocaleString()}
-                          <p>থেকে</p>
+                          ৳{data.total_price.toLocaleString()} টাকা
                         </>
                       ) : (
                         <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
