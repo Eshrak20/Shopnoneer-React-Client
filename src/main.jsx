@@ -6,7 +6,7 @@ import "./index.css";
 import AuthProvider from "./Providers/AuthProvider";
 import { HelmetProvider } from "react-helmet-async";
 import '../src/config/fontawesome/fontawesome';
-// document.addEventListener('contextmenu', (e) => e.preventDefault());
+document.addEventListener('contextmenu', (e) => e.preventDefault());
 document.onkeydown = function (e) {
   if (
     e.key === "F12" || 

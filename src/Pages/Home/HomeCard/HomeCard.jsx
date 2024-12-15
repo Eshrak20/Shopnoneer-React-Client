@@ -88,36 +88,38 @@ const HomeCard = forwardRef((props, ref) => {
         {loading ? (
           <LoadingLottie />
         ) : (
-          <div className="p-0 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 ">
+          <div className="p-0 lg:p-10  max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-6 ">
             {displayedCards.map((data, index) => (
               <div
                 key={data.id || index}
                 className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative "
               >
-               <div className="absolute top-2 right-2 z-10">
-            <div className="relative group">
-              <FontAwesomeIcon
-                icon={faBookmark}
-                className={`text-2xl cursor-pointer transition duration-300 ${
-                  bookmarked[data.id]
-                    ? "text-teal-400 group-hover:text-orange-500"
-                    : "text-gray-100 group-hover:text-teal-500"
-                }`}
-                onClick={() => handleBookmarkClick(data.id)}
-              />
+                <div className="absolute top-2 right-2 z-10">
+                  <div className="relative group">
+                    <FontAwesomeIcon
+                      icon={faBookmark}
+                      className={`text-2xl cursor-pointer transition duration-300 ${
+                        bookmarked[data.id]
+                          ? "text-teal-400 group-hover:text-orange-500"
+                          : "text-gray-100 group-hover:text-teal-500"
+                      }`}
+                      onClick={() => handleBookmarkClick(data.id)}
+                    />
 
-              {/* Tooltip */}
-              <span className="absolute bottom-full mb-6 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p
-                  className={`${
-                    bookmarked[data.id] ? "text-orange-500" : "text-teal-500"
-                  } transition-colors duration-300`}
-                >
-                  {bookmarked[data.id] ? "Remove" : "Save"}
-                </p>
-              </span>
-            </div>
-          </div>
+                    {/* Tooltip */}
+                    <span className="absolute bottom-full mb-6 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <p
+                        className={`${
+                          bookmarked[data.id]
+                            ? "text-orange-500"
+                            : "text-teal-500"
+                        } transition-colors duration-300`}
+                      >
+                        {bookmarked[data.id] ? "Remove" : "Save"}
+                      </p>
+                    </span>
+                  </div>
+                </div>
 
                 <Link
                   to={`/detailsPropMain/${data.id}`}
@@ -156,42 +158,41 @@ const HomeCard = forwardRef((props, ref) => {
                     <span>{data.no_of_balcony}</span>
                   </div>
                   <h2 className="flex items-center justify-between lg:text-lg font-semibold text-teal-600 my-2">
-              <div>
-                {data.total_price ? (
-                  <>
-                    শুরু মাত্র ৳ {data.total_price.toLocaleString()}
-                    <p>থেকে</p>
-                    
-                  </>
-                ) : (
-                  <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
-                )}
-              </div>
-              <div className="flex justify-end items-center">
-                <button
-                  onClick={() =>
-                    window.open(
-                      `tel:${data.phone || "+880 1521-498303"}`,
-                      "_self"
-                    )
-                  }
-                  className="px-4 py-2  text-xs lg:text-base  rounded-md bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg"
-                >
-                  কল
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      `mailto:${data.email || "Shohag.cse3@gmail.com"}`,
-                      "_self"
-                    )
-                  }
-                  className="px-4 py-2  text-xs lg:text-base   rounded-md bg-gray-500 text-white hover:bg-gray-600 transition duration-300 shadow-lg ml-2"
-                >
-                  ইমেইল
-                </button>
-              </div>
-            </h2>
+                    <div>
+                      {data.total_price ? (
+                        <>
+                          শুরু মাত্র ৳ {data.total_price.toLocaleString()}
+                          <p>থেকে</p>
+                        </>
+                      ) : (
+                        <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
+                      )}
+                    </div>
+                    <div className="flex justify-end items-center">
+                      <button
+                        onClick={() =>
+                          window.open(
+                            `tel:${data.phone || "+880 1521-498303"}`,
+                            "_self"
+                          )
+                        }
+                        className="px-4 py-2  text-xs lg:text-base  rounded-md bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg"
+                      >
+                        কল
+                      </button>
+                      <button
+                        onClick={() =>
+                          window.open(
+                            `mailto:${data.email || "Shohag.cse3@gmail.com"}`,
+                            "_self"
+                          )
+                        }
+                        className="px-4 py-2  text-xs lg:text-base   rounded-md bg-gray-500 text-white hover:bg-gray-600 transition duration-300 shadow-lg ml-2"
+                      >
+                        ইমেইল
+                      </button>
+                    </div>
+                  </h2>
                 </div>
               </div>
             ))}
