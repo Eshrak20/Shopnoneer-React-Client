@@ -59,7 +59,7 @@ const FavCard = () => {
   };
 
   return (
-    <section className="my-7 px-10 sm:px-6 lg:px-8">
+    <section className="my-7 lg:px-8">
       <SectionTitle
         heading="আপনার পছন্দের ফ্ল্যাট  "
         subHeading="যে ফ্ল্যাটগুলো আপনার হৃদয়ে স্থান পেয়েছে, সেগুলো আবিষ্কার করুন এবং সহজেই সংরক্ষণ করুন"

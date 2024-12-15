@@ -110,7 +110,7 @@ const Navbar = ({ visible }) => {
             {user ? (
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} className="avatar">
-                  <div className="w-auto rounded-full">
+                  <div className="w-8 lg:w-10 rounded-full">
                     <img src={user.profilePicture} alt="Profile" />
                   </div>
                 </div>
