@@ -98,16 +98,18 @@ const DetailsPropMainCard = ({ property }) => {
                       bookmarked[property.id] ? "text-teal-500" : "text-white"
                     }`}
                   />
+                  <span className="absolute bottom-full mb-10 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p
+                      className={`${
+                        bookmarked[property.id]
+                          ? "text-orange-500"
+                          : "text-teal-500"
+                      } transition-colors duration-300`}
+                    >
+                      {bookmarked[property.id] ? "Remove" : "Save"}
+                    </p>
+                  </span>
                 </button>
-                {/* Tooltip */}
-                {/* <div
-                  className="absolute w-32  bg-transparent bottom-full mb-16 z-30 hidden group-hover:block bg-teal-900 text-white text-xs rounded-md py-1 px-2 shadow-md transition-all duration-300"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {bookmarked[property.id]
-                    ? "Remove Bookmark"
-                    : "Add to Bookmark"}
-                </div> */}
               </div>
             </div>
 

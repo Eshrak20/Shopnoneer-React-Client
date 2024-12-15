@@ -81,7 +81,7 @@ const FavCard = () => {
               <div className="absolute top-2 right-2 z-10">
                 <FontAwesomeIcon
                   icon={faBookmark}
-                  className="text-2xl text-teal-400 cursor-pointer transition duration-300"
+                  className="text-2xl text-orange-600 cursor-pointer transition duration-300"
                   onClick={() => handleBookmarkClick(data.id)}
                 />
               </div>

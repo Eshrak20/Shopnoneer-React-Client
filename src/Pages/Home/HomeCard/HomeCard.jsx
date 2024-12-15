@@ -94,23 +94,30 @@ const HomeCard = forwardRef((props, ref) => {
                 key={data.id || index}
                 className="card bg-base-100 shadow-md hover:shadow-xl transition-transform duration-300 ease-in-out transform rounded-lg w-full relative "
               >
-                <div className="absolute top-2 right-2 z-10">
-                  <div className="relative group">
-                    <FontAwesomeIcon
-                      icon={faBookmark}
-                      className={`text-2xl cursor-pointer transition duration-300 ${
-                        bookmarked[data.id] ? "text-teal-400" : "text-gray-50"
-                      } group-hover:text-gray-600`} // Hover color effect
-                      onClick={() => handleBookmarkClick(data.id)}
-                    />
-                    {/* Tooltip */}
-                    <span className="absolute bottom-full mb-6 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <p className="text-gray-700">
-                        {bookmarked[data.id] ? "Remove" : "Save"}
-                      </p>
-                    </span>
-                  </div>
-                </div>
+               <div className="absolute top-2 right-2 z-10">
+            <div className="relative group">
+              <FontAwesomeIcon
+                icon={faBookmark}
+                className={`text-2xl cursor-pointer transition duration-300 ${
+                  bookmarked[data.id]
+                    ? "text-teal-400 group-hover:text-orange-500"
+                    : "text-gray-100 group-hover:text-teal-500"
+                }`}
+                onClick={() => handleBookmarkClick(data.id)}
+              />
+
+              {/* Tooltip */}
+              <span className="absolute bottom-full mb-6 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p
+                  className={`${
+                    bookmarked[data.id] ? "text-orange-500" : "text-teal-500"
+                  } transition-colors duration-300`}
+                >
+                  {bookmarked[data.id] ? "Remove" : "Save"}
+                </p>
+              </span>
+            </div>
+          </div>
 
                 <Link
                   to={`/detailsPropMain/${data.id}`}
@@ -120,7 +127,7 @@ const HomeCard = forwardRef((props, ref) => {
                     <img
                       src={data.images[0]}
                       alt={data.title}
-                      className="w-full h-48 sm:h-56 object-cover group-hover:scale-y-105  group-hover:scale-x-110 transition-all duration-300 ease-out"
+                      className="w-full h-48 sm:h-56 object-cover"
                     />
                   </div>
                 </Link>

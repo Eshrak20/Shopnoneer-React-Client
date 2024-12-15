@@ -84,13 +84,20 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               <FontAwesomeIcon
                 icon={faBookmark}
                 className={`text-2xl cursor-pointer transition duration-300 ${
-                  bookmarked[data.id] ? "text-teal-400" : "text-gray-50"
-                } group-hover:text-gray-600`} // Hover color effect
+                  bookmarked[data.id]
+                    ? "text-teal-500 group-hover:text-orange-500"
+                    : "text-gray-100 group-hover:text-teal-500"
+                }`}
                 onClick={() => handleBookmarkClick(data.id)}
               />
+
               {/* Tooltip */}
               <span className="absolute bottom-full mb-6 left-1/2 transform -translate-x-1/2 text-sm rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-gray-700">
+                <p
+                  className={`${
+                    bookmarked[data.id] ? "text-orange-500" : "text-teal-500"
+                  } transition-colors duration-300`}
+                >
                   {bookmarked[data.id] ? "Remove" : "Save"}
                 </p>
               </span>
@@ -101,7 +108,7 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               <img
                 src={data.images[0]}
                 alt={data.title}
-                className="w-full h-48 sm:h-56 object-cover group-hover:scale-y-105  group-hover:scale-x-110 transition-all duration-300 ease-out"
+                className="w-full h-48 sm:h-56 object-cover  transition-all duration-300 ease-out"
               />
             </div>
           </Link>
