@@ -24,17 +24,17 @@ const HomeCard = forwardRef((props, ref) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const FavItem = await FavModel();
+        // const FavItem = await FavModel();
         const data = await fetchHomeCardData();
         setHomeCard(data);
         // Prepare initial bookmarked state
-        const initialBookmarks = {};
-        data.forEach((item) => {
-          if (FavItem.some((fav) => fav.id === item.id)) {
-            initialBookmarks[item.id] = true;
-          }
-        });
-        setBookmarked(initialBookmarks);
+        // const initialBookmarks = {};
+        // data.forEach((item) => {
+        //   if (FavItem.some((fav) => fav.id === item.id)) {
+        //     initialBookmarks[item.id] = true;
+        //   }
+        // });
+        // setBookmarked(initialBookmarks);
       } finally {
         setLoading(false);
       }

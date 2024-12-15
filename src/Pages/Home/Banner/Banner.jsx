@@ -4,6 +4,7 @@ import bannerImage from "../../../assets/Banner Images/Favourite/ban-s1.jpg";
 
 import Navbar from "../../Shared/Navbar/Navbar";
 import HomeCard from "../../Home/HomeCard/HomeCard"; // Import your HomeCard component
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
@@ -41,6 +42,7 @@ const Banner = () => {
         bgImage={bannerImage}
         bgImageAlt="the banner"
         strength={-30}
+        onContextMenu={(e) => e.preventDefault()}
       >
         <div className="hero min-h-screen">
           <div className="hero-overlay bg-opacity-60"></div>
@@ -62,18 +64,20 @@ const Banner = () => {
                     placeholder="অনুসন্ধান"
                   />
                   <select className="select select-bordered join-item mb-2 sm:mb-0 sm:w-1/3 text-lg">
-                    <option>অ্যাপার্টমেন্ট</option>
-                    <option>বাড়ি</option>
-                    <option>ভিলা</option>
-                    <option>জমি</option>
+                    <option>মোহাম্মদপুর</option>
+                    <option>বসিলা</option>
+                    <option>ঘাটারচর</option>
+                    <option>আঁটিবাজার</option>
                   </select>
-                  <div className="indicator mt-2 sm:mt-0 sm:ml-2">
-                    <span className="indicator-item badge badge-accent text-yellow-50">
+                  <div className="mt-2 sm:mt-0 sm:ml-2 relative">
+                    <span className="badge badge-accent text-yellow-50 absolute -top-3 right-0 transform translate-x-1 translate-y-1 z-10">
                       অফার!
                     </span>
-                    <button className="btn join-item mt-2 sm:mt-0 sm:ml-2 hover:scale-105 transition-all duration-300">
-                      অনুসন্ধান করুন
-                    </button>
+                    <Link to={"/detail"}>
+                      <button className="btn join-item mt-2 sm:mt-0 sm:ml-2 hover:scale-105 transition-all duration-300">
+                        অনুসন্ধান করুন 
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import FavCard from "./FavCard/FavCard";
-import Navbar from "../Shared/Navbar/Navbar";
+import FavCard from "../FavCard/FavCard";
+import Navbar from "../../Shared/Navbar/Navbar";
 import { Helmet } from "react-helmet";
 
 const FavouritePage = () => {

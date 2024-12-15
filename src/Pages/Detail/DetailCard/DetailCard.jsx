@@ -20,14 +20,14 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const FavItem = await FavModel();
-        const initialBookmarks = {};
-        data.forEach((item) => {
-          if (FavItem.some((fav) => fav.id === item.id)) {
-            initialBookmarks[item.id] = true;
-          }
-        });
-        setBookmarked(initialBookmarks);
+        // const FavItem = await FavModel();
+        // const initialBookmarks = {};
+        // data.forEach((item) => {
+        //   if (FavItem.some((fav) => fav.id === item.id)) {
+        //     initialBookmarks[item.id] = true;
+        //   }
+        // });
+        // setBookmarked(initialBookmarks);
       } catch (error) {
         console.error("Failed to fetch home card data:", error);
       }

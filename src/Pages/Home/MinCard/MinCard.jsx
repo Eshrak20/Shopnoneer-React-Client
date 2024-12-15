@@ -41,7 +41,7 @@ const MinCard = () => {
       {cardData.map((card, index) => (
         <div
           key={index}
-          className="bg-gray-800 p-4  rounded-lg shadow-md border border-gray-700 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out transform"
+          className="bg-gray-800 p-4 rounded-lg shadow-md border border-gray-700 hover:shadow-2xl  transition-transform duration-300 ease-in-out transform"
         >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-white">

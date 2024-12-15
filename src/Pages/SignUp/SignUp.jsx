@@ -220,7 +220,7 @@ const SignUp = () => {
           </div>
 Ï
           {/* Animation Section */}
-          <div className="mt-0 lg:mt-0 lg:w-1/2">
+          <div className="mt-0 hidden lg:block lg:mt-0 lg:w-1/2">
             <Player
               autoplay
               loop
