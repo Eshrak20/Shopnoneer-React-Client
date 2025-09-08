@@ -1,93 +1,70 @@
-# Shopnoneer Frontend (React)
+# 🏡 Shopnoneer - React Client
 
-- [Live Link](http://shopnoneer.com/)
+> A modern, responsive, and user-friendly frontend application for managing property and housing operations. Built with **React**, **Vite**, and a powerful stack of UI libraries.
 
-This is the React frontend for the Shopnoneer project, built with modern tools and libraries.
-
----
-
-## Prerequisites
-
-Make sure you have these installed:
-
-- **Node.js** (v18 or newer) — includes npm  
-- A code editor (e.g., VS Code)  
-- A working internet connection (WiFi or Ethernet) to download dependencies and run the dev server
+This is the frontend client for the [Shopnoneer Backend API](https://github.com/mahbub-shohag/shopnoneer).
 
 ---
 
+## 📌 Quick Links
 
+- **🎥 Overview Video (Upcoming, stay tuned):** [Watch on YouTube](https://www.youtube.com/@EshrakG-xy)  
+- **🌐 Live Demo (Frontend):** [Shopnoneer Live](https://shopnoneer.netlify.app/)  
+- **⚙️ Backend API:** [Repository & Docs](https://github.com/mahbub-shohag/shopnoneer)
 
-## Important Packages Used
+---
 
-### Dependencies
+## ✨ Features
 
-- **react**, **react-dom** — Core React library  
-- **react-router-dom** — For client-side routing  
-- **tailwindcss** & **daisyui** — Utility-first CSS framework and UI components  
-- **vite** — Development build tool and dev server  
-- **axios** — For making API calls to the backend  
-- **react-hook-form** — For easy form handling and validation  
-- **framer-motion** — For animations and gestures  
-- **react-toastify** — For notification toasts  
-- **sweetalert** & **sweetalert2** — For beautiful popup alerts  
-- **swiper**, **react-responsive-carousel** — For sliders and carousels  
-- **@fortawesome/react-fontawesome**, **@fortawesome/fontawesome-free**, **react-icons** — Icon libraries  
-- **@heroicons/react** — Icon set from Heroicons  
-- **@lottiefiles/react-lottie-player**, **lottie-react** — For Lottie animations  
-- **animate.css** — CSS animation library  
-- **chart.js**, **react-chartjs-2** — Charting libraries  
-- **cropperjs**, **react-easy-crop** — Image cropping tools  
-- **firebase** — Firebase services integration  
-- **lucide-react** — Another icon set  
-- **multi-range-slider-react** — Range slider component  
-- **number-to-words**, **number-to-words-in-bengali** — Number formatting utilities  
-- **react-circular-progressbar** — Circular progress bars  
-- **react-helmet**, **react-helmet-async** — Manage document head and meta tags  
-- **react-intersection-observer** — Detect when components are visible on screen  
-- **react-modal** — Accessible modal dialogs  
-- **react-number-format** — Formatting number inputs  
-- **react-parallax** — Parallax scrolling effects  
-- **react-photo-album** — Photo gallery layout  
-- **react-simple-captcha** — Simple captcha verification  
-- **react-sweetalert2** — Sweetalert2 React wrapper  
-- **react-typewriter-effect** — Typewriter text animation  
-- **yet-another-react-lightbox** — Image lightbox  
- 
-### DevDependencies
+- **🏠 Property Listings:** Browse and search flats, houses, and land based on area, facilities, and budget.  
+- **👤 Authentication System:** Secure login, registration, OTP verification, and password reset.  
+- **📊 Data Visualization:** Charts, stats, and reports powered by Chart.js and React ChartJS 2.  
+- **🎨 Modern UI:** Styled with Tailwind CSS + DaisyUI for a clean, responsive design.  
+- **🎭 Smooth Animations:** Engaging UI powered by Framer Motion and Animate.css.  
+- **🌓 Dark/Light Mode:** Custom theming support for better user experience.  
+- **📢 Notifications & Alerts:** Toastify, SweetAlert, and interactive modals.  
+- **📷 Image Handling:** CropperJS, carousels, and photo albums for better media management.  
+- **🛠️ Form Handling:** React Hook Form for validation and smooth form management.  
 
-- **eslint** & related plugins (**eslint-plugin-react**, **eslint-plugin-react-hooks**, **eslint-plugin-react-refresh**, **@eslint/js**) — Linting and code style checks  
-- **@types/react**, **@types/react-dom** — TypeScript typings for React  
-- **@vitejs/plugin-react** — Vite plugin to support React  
-- **autoprefixer** & **postcss** — CSS post-processing  
-- **globals** — Provides global variables for ESLint  
+---
 
+## 🛠️ Tech Stack
 
-## How to Run the Project Locally
+- **⚛️ Framework:** [React 18](https://react.dev/)  
+- **🚀 Build Tool:** [Vite](https://vitejs.dev/)  
+- **🎨 Styling:** [Tailwind CSS](https://tailwindcss.com/) + [DaisyUI](https://daisyui.com/)  
+- **📊 Charts:** [Chart.js](https://www.chartjs.org/) + [React ChartJS 2](https://react-chartjs-2.js.org/)  
+- **📷 Media:** [CropperJS](https://github.com/fengyuanchen/cropperjs) + [React Easy Crop](https://github.com/ValentinH/react-easy-crop) + [Swiper](https://swiperjs.com/) + [Yet Another React Lightbox](https://yet-another-react-lightbox.com/)  
+- **📝 Forms:** [React Hook Form](https://react-hook-form.com/)  
+- **🔄 Routing:** [React Router DOM](https://reactrouter.com/)  
+- **✨ Animations:** [Framer Motion](https://www.framer.com/motion/) + [Animate.css](https://animate.style/)  
+- **📢 Notifications:** [React Toastify](https://fkhadra.github.io/react-toastify/introduction) + [SweetAlert2](https://sweetalert2.github.io/)  
+- **🛠️ Utilities:** Axios, Lucide-React, Heroicons, FontAwesome, Bengali number conversion  
 
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-Ensure you have the following installed:
+- **Node.js** (v18 or higher)  
+- **npm** or **yarn** or **pnpm**  
+- The [Backend API](https://github.com/mahbub-shohag/shopnoneer) should be running.  
 
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/)
+### Installation
 
-
-1. **Clone the repository:**
-
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/mahbub-shohag/shopnoneer_client
-   cd shopnoneer-client
-
-
-   
-- **npm install** — For install node modules  
-- **npm run dev** —  For run the project in local pc 
-- **npm run dev -- --host** —   For run the project in your network through wifi 
-
-```bash 
+   git clone https://github.com/your-username/shopnoneer-react-client.git
+   cd shopnoneer-react-client
 npm install
+# or
+yarn install
+# or
+pnpm install
+VITE_API_BASE_URL=http://localhost:5000/api
 npm run dev
-npm run dev -- --host
+# or
+yarn dev
+# or
+pnpm dev
