@@ -6,8 +6,9 @@ import { DetailsPropertyModel } from "../../../Models/DetailsPropertyModel/Detai
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Amenities from "../Amenities/Amenities";
-import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
+import LoadingLottie from "../../../../public/assets/loadingLottie/loadingLottie";
 import DetailPropBanner from "../DetailPropBanner/DetailPropBanner";
+import Spinner from "../../../../public/assets/loadingSpinner/Spinner";
 
 const DetailsPropMain = () => {
   useEffect(() => {
@@ -23,7 +24,6 @@ const DetailsPropMain = () => {
       try {
         const { property, facilities, amenities } =
           await DetailsPropertyModel.fetchById(id);
-
         setProperty(property);
         setFacilities(facilities);
         setAmenities(amenities);
@@ -38,7 +38,11 @@ const DetailsPropMain = () => {
   }, [id]);
 
   if (loading) {
-    return <LoadingLottie />;
+    return (
+      <>
+        <LoadingLottie/>
+      </>
+    );
   }
 
   if (!property) {
@@ -49,13 +53,13 @@ const DetailsPropMain = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto mb-3">
-      <div className="lg:mx-20">
+      <div className="md:mx-32 2xl:mx-20">
         <Navbar visible={true}></Navbar>
         <DetailPropBanner property={property} />
-        <div className="mx-5 lg:mx-0">
-        <DetailsPropMainCard property={property} />
-        <NearestFacilities facilities={facilities} />
-        <Amenities amenities={amenities} />
+        <div className="mx-5 lg:mx-0 ">
+          <DetailsPropMainCard property={property} />
+          <NearestFacilities facilities={facilities} />
+          <Amenities amenities={amenities} />
         </div>
       </div>
     </div>

@@ -6,9 +6,15 @@ import SignUp from "../Pages/SignUp/SignUp";
 import ResetPass from "../Pages/ResetPass/ResetPass";
 import Detail from "../Pages/Detail/Detail";
 import DetailsPropMain from "../Pages/DetailsProperty/DetailsPropMain/DetailsPropMain";
-import ContactPage from "../Pages/ContactPage/ContactPage";
-import FavouritePage from "../Pages/FavouritePage/FavouritePageMain/FavouritePageMain";
 import Profile from "../Pages/Profile/Profile";
+import ProfileMain from "../Pages/Profile/ProfileMain";
+import Contact from "../Pages/Contact/Contact";
+import Favourite from "../Pages/Favourite/FavouriteMain/FavouriteMain";
+import Faq from "../Pages/Faq/Faq";
+import Error from "../Pages/Error/Error";
+import LoadingLottie from "../../public/assets/loadingLottie/loadingLottie";
+import LegalPage from "../Pages/LegalPage/LegalPage";
+import ForgotPasswordForm from "../Pages/ForgotPass/ForgotPasswordForm";
 
 export const router = createBrowserRouter([
   {
@@ -31,18 +37,21 @@ export const router = createBrowserRouter([
         path: "/resetPass",
         element: <ResetPass />,
       },
-
+      {
+        path: "/forgotPassForm",
+        element: <ForgotPasswordForm />,
+      },
       {
         path:"/profile",
         element:<Profile/>,
       },
       {
-        path: "/contact",
-        element: <ContactPage/>,
+        path:"/profile-edit",
+        element:<ProfileMain/>,
       },
       {
-        path: "/about",
-        element: <ContactPage/>,
+        path: "/contact",
+        element: <Contact/>,
       },
       {
         path: "/detail/:housingId?",
@@ -54,7 +63,23 @@ export const router = createBrowserRouter([
       },
       {
         path: "/favouritePage",
-        element: <FavouritePage/>,
+        element: <Favourite/>,
+      },
+      {
+        path: "/faq",
+        element: <Faq/>,
+      },
+      {
+        path: "/legal",
+        element: <LegalPage/>,
+      },
+      {
+        path: "*", // This will match any undefined route
+        element: <Error />, // Show the ErrorPage component
+      },
+      {
+        path: "loadingLottie", // This will match any undefined route
+        element: <LoadingLottie />, // Show the ErrorPage component
       },
     ],
   },

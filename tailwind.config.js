@@ -1,17 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+  // content: [
+  //   "./index.html",
+  //   "./src/**/*.{js,ts,jsx,tsx}",
+  // ],
+  purge: {
+  content: ['./src/**/*.{js,jsx,ts,tsx,html}'],
+  safelist: [
+    'loading', 
+    'loading-bars', 
+    'loading-lg', 
+    'loading-spinner', 
+    'loading-ring', 
+    'loading-dots', 
+    'loading-ball'
   ],
-  theme: {
-    extend: {
-      maxWidth: {
-        'screen-md': '15.6in', // Custom max width for medium screens
-        'screen-lg': '23.8in',  // Custom max width for large screens
-      },
-    },
-  },
+},
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
@@ -19,14 +23,15 @@ export default {
         mytheme: {
           "primary": "#570df8",
           "secondary": "#f000b8",
-          "accent": "#37cdbe",
+          "accent": "#37cdbe", // Change if you want accent to match teal
           "neutral": "#3d4451",
           "base-100": "#ffffff",
-          // Add more custom colors if needed
+          "success": "#53D2A6", // Add custom teal for success
         },
       },
-      "light",  // Ensure light theme is active
+      "light", // Ensure light theme is active
     ],
     darkTheme: false, // Disable automatic dark theme
+    
   },
 };

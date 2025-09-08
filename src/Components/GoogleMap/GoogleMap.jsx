@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 
 const GoogleMap = ({ property ,facility }) => {
   const mapRef = useRef(null);
-console.log(facility);
-console.log(property);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -29,7 +27,7 @@ console.log(property);
 
       const map = new google.maps.Map(mapRef.current, {
         center: { lat, lng },
-        zoom: 16,
+        zoom: 15,
       });
 
       // Use the standard marker if AdvancedMarkerElement is unavailable

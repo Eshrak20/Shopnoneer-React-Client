@@ -1,77 +1,115 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../Shared/Navbar/Navbar";
 import FilterSection from "./FilterSection/FilterSection";
 import useProjectList from "../../Models/DetailModel/DetailCardModel/DetailCardModel";
 import DetailCard from "./DetailCard/DetailCard";
-
+import Pagination from "./PaginationSection/PaginationSection";
+import Error404 from "../../../public/assets/loadingLottie/404";
 const Detail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { housingId } = useParams();
-  const [sortOption, setSortOption] = useState("newest");
-  const [bedCount, setBedCount] = useState(""); // Add bed count state
-  const [bathCount, setBathCount] = useState(""); // Add bed count state
-  const [balconyCount, setBalconyCount] = useState(""); // Add bed count state
-  const [housing, setHousing] = useState(""); 
-  
-  const { projects, isLoading, error } = useProjectList(
-    housing,
-    housingId,
-    bedCount,
-    bathCount,
-    balconyCount,
-  ); // Pass bed count
 
-  const ErrorMessage = () => (
-    <div className="flex justify-center items-center text-red-600">{error}</div>
+  const location = useLocation();
+  const { housingId } = location.state || {};
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Initialize state from search parameters
+  const [filters, setFilters] = useState({
+    sortOption: searchParams.get("sortOption") || "",
+    bedCount: searchParams.get("bedCount") || "",
+    bathCount: searchParams.get("bathCount") || "",
+    balconyCount: searchParams.get("balconyCount") || "",
+    housing: housingId || "",
+    minPrice: searchParams.get("minPrice") || "",
+    maxPrice: searchParams.get("maxPrice") || "",
+    minSqr: searchParams.get("minSqr") || "",
+    maxSqr: searchParams.get("maxSqr") || "",
+  });
+
+  const [page, setPage] = useState(1);
+
+  // Fetch project list based on filters
+  const { projects, totalProject, isLoading, error } = useProjectList(
+    filters.housing,
+    housingId,
+    filters.bedCount,
+    filters.bathCount,
+    filters.balconyCount,
+    page,
+    filters.minPrice,
+    filters.maxPrice,
+    filters.minSqr,
+    filters.maxSqr
+
   );
 
-  const sortedProjects = [...projects];
-  if (sortOption === "newest") {
-    sortedProjects.sort(
-      (a, b) => new Date(b.created_at) - new Date(a.created_at)
-    );
-  } else if (sortOption === "oldest") {
-    sortedProjects.sort(
-      (a, b) => new Date(a.created_at) - new Date(b.created_at)
-    );
-  } else if (sortOption === "priceHighToLow") {
-    sortedProjects.sort((a, b) => b.total_price - a.total_price);
-  } else if (sortOption === "priceLowToHigh") {
-    sortedProjects.sort((a, b) => a.total_price - b.total_price);
-  }
+  // Sorting logic
+  const sortedProjects = useMemo(() => {
+    return [...projects].sort((a, b) => {
+      switch (filters.sortOption) {
+        case "newest":
+          return new Date(b.created_at) - new Date(a.created_at);
+        case "oldest":
+          return new Date(a.created_at) - new Date(b.created_at);
+        case "priceHighToLow":
+          return b.total_price - a.total_price;
+        case "priceLowToHigh":
+          return a.total_price - b.total_price;
+        default:
+          return 0;
+      }
+    });
+  }, [projects, filters.sortOption]);
 
-  // if (isLoading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage />;
+  // Update search params whenever any filter changes
+  useEffect(() => {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+    });
+    setSearchParams(params);
+  }, [filters, setSearchParams]);
+
+  // Handle error state
+  if (error)
+    return (
+      <div className="flex justify-center items-center text-red-600">
+        {/* {error}  */}
+        <Error404 />
+      </div>
+    );
 
   return (
     <div>
       <Helmet>
-        <title>স্বপ্ননীড়  | Properties </title>
+        <title>স্বপ্ননীড় | ফ্ল্যাট সমূহও</title>
       </Helmet>
       <div className="max-w-screen-2xl mx-auto">
-        <div className="lg:mx-20">
+        <div className="md:mx-32 2xl:mx-20">
           <Navbar visible={true} />
           <div className="flex flex-wrap">
-            <FilterSection
-              sortOption={sortOption}
-              setSortOption={setSortOption}
-              setBedCount={setBedCount}
-              setBathCount={setBathCount}
-              setBalconyCount={setBalconyCount}
-              setHousing={setHousing}
-              housingId={housingId}
-            />
-            <div className="flex-1 p-6">
+            <FilterSection filters={filters} setFilters={setFilters} />
+            <div className="flex-1 p-3 lg:pr-0">
               <DetailCard
                 sortedProjects={sortedProjects}
                 isLoading={isLoading}
-              ></DetailCard>
+              />
+              <div className="mt-3 lg:mt-8 lg:pl-6 px-3">
+                <Pagination
+                  onPageChange={setPage}
+                  totalProjects={totalProject}
+                />
+              </div>
             </div>
           </div>
+          {/* {isLoading && (
+            <div className="flex justify-center mt-4">
+              <Spinner />
+            </div>
+          )} */}
         </div>
       </div>
     </div>

@@ -1,142 +1,227 @@
-import { createContext, useState, useEffect } from "react";
-import axios from "axios"; // Import axios
+import {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
+import axios from "axios";
 import Swal from "sweetalert2";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+  signInWithPopup,
+  signOut,
+} from "../../src/firebase/firebase.config";
+
 export const AuthContext = createContext(null);
 
+// Helper functions
+const storeUserData = (userData) => {
+  const {
+    token,
+    profile_photo_url,
+    profile_photo_path,
+    profile = {},
+  } = userData;
+  const profilePhoto =
+    profile_photo_url || profile_photo_path || profile?.profilePhoto || "";
+
+  localStorage.setItem("user_token", token);
+  localStorage.setItem("user_profile_pic", profilePhoto);
+};
+const storeFirebaseData = (firebaseData) => {
+  const { photoURL } = firebaseData;
+  const fireBasePhoto = photoURL;
+  localStorage.setItem("user_google_pic", fireBasePhoto);
+};
+
+const clearUserData = () => {
+  localStorage.clear();
+  sessionStorage.clear();
+};
+
+const handleAuthError = (error) => {
+  console.error(
+    "Auth error:",
+    error.response ? error.response.data : error.message
+  );
+  throw error;
+};
+
 const AuthProvider = ({ children }) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
-  // Load user data from session storage when the component mounts
+  // Initialize user from localStorage
   useEffect(() => {
-    const storedName = localStorage.getItem("user_name");
-    const storedEmail = localStorage.getItem("user_email");
-    const storedProfilePic = localStorage.getItem("user_profile_pic");
-
-    if (storedName && storedEmail && storedProfilePic) {
+    const token = localStorage.getItem("user_token");
+    if (token) {
       setUser({
-        name: storedName,
-        email: storedEmail,
-        profilePicture: storedProfilePic,
+        profilePicture: localStorage.getItem("user_profile_pic"),
+        token,
       });
     }
-    setLoading(false); // Stop loading after checking session storage
+    setLoading(false);
   }, []);
-  // const navigate = useNavigate();
-  // Function to create a new user (sign-up)
-  const createUser = async (
-    name,
-    email,
-    phone_number,
-    password,
-    confirm_password,
-    role_id = 2
-  ) => {
+
+  //! Common auth handler
+  const handleAuthResponse = useCallback((response) => {
+    if (response.data.success) {
+      const userData = response.data.data || response.data.user;
+
+      storeUserData(userData);
+      setUser(userData);
+
+      // Redirect if needed
+      const redirectUrl = sessionStorage.getItem("redirectAfterLogin") || "/";
+      sessionStorage.removeItem("redirectAfterLogin");
+      window.location.href = redirectUrl;
+
+      return userData;
+    }
+    throw new Error(response.data.message || "Authentication failed");
+  }, []);
+
+  //! Normal Auth methods
+  const createUser = async (name, email, password, confirm_password) => {
     setLoading(true);
     try {
-      const response = await axios.post(
-        `https://sna.shopnoneer.com/api/signupapi`,
-        { name, email, phone_number, password, confirm_password, role_id } // Add role_id here
-      );
-      if (response.data.success) {
-        const userData = response.data.user;
-        setUser(userData);
-        return userData;
-      } else {
-        throw new Error("Sign-up failed. Please check your credentials.");
-      }
+      const response = await axios.post(`${apiUrl}/api/signupapi`, {
+        name,
+        email,
+        password,
+        confirm_password,
+      });
+      return handleAuthResponse(response);
     } catch (error) {
-      console.error(
-        "Sign-up error:",
-        error.response ? error.response.data : error.message
-      );
+      return handleAuthError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signIn = async (email, password) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(`${apiUrl}/api/loginapi`, {
+        email,
+        password,
+      });
+      return handleAuthResponse(response);
+    } catch (error) {
+      return handleAuthError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const logOut = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("user_token");
+
+      if (token) {
+        await axios.delete(`${apiUrl}/api/logoutapi`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+
+      await signOut(auth);
+      clearUserData();
+      setUser(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+      Swal.fire({
+        title: "ত্রুটি!",
+        text: "লগ আউট করতে ব্যর্থ হয়েছেন। অনুগ্রহ করে আবার চেষ্টা করুন।",
+        icon: "error",
+        timer: 1000,
+        confirmButtonText: "ঠিক আছে",
+        confirmButtonColor: "#38b2ac",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //! Google auth handler
+  const googleAuth = useCallback(async () => {
+    setGoogleLoading(true);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      storeFirebaseData(result.user);
+      const { displayName: name, email, uid } = result.user;
+      // 2. Send to backend
+      const response = await axios.post(`${apiUrl}/api/google-auth`, {
+        name,
+        email,
+        google_token: uid,
+      });
+      return handleAuthResponse(response);
+    } catch (error) {
+      setGoogleLoading(false);
+      if (error.code === "auth/popup-closed-by-user") {
+        console.warn("User closed the Google sign-in popup.");
+        return null;
+      } else {
+        console.error("Google auth error:", error);
+      }
+    } finally {
+      setGoogleLoading(false);
+    }
+  }, [apiUrl, handleAuthResponse]);
+
+  //! Facebook auth handler
+  const facebookAuth = useCallback(async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, facebookProvider); //Import from firebase_config
+      console.log(result);
+      const { displayName: name, email, uid } = result.user;
+      const response = await axios.post(`${apiUrl}/api/google-auth`, {
+        name,
+        email,
+        facebook_token: uid,
+      });
+
+      // 4. Handle your backend response
+      return handleAuthResponse(response);
+    } catch (error) {
+      console.error("Facebook auth error:", error);
       throw error;
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiUrl, handleAuthResponse]);
 
-  // Function to sign in a user (login)
-  const signIn = async (email, password) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        `https://sna.shopnoneer.com/api/loginapi`,
-        { email, password }
-      );
-
-      if (response.data.success) {
-        const userData = response.data.data; // Access user data from response
-        const { name, email, profile_photo_url, token } = userData; // Destructure necessary fields
-
-        // Save user data in session storage
-        localStorage.setItem("user_name", name);
-        localStorage.setItem("user_email", email);
-        localStorage.setItem("user_profile_pic", profile_photo_url);
-        localStorage.setItem("user_token", token);
-
-        setUser(userData); // Store user info in state
-        console.log("User data after login:", userData);
-        return userData;
-      } else {
-        throw new Error(
-          response.data.message ||
-            "Login failed. Please check your credentials."
-        );
-      }
-    } catch (error) {
-      console.error(
-        "Login error:",
-        error.response ? error.response.data : error.message
-      );
-      throw error; // Handle error in the login component
-    } finally {
-      setLoading(false); // Reset loading state
-    }
-  };
-
-  // Function to log out the user
-  const logOut = async () => {
-    setLoading(true);
-    try {
-      // Retrieve the token from local storage
-      const token = localStorage.getItem("user_token"); // Assuming 'token' is the key used in local storage
-      console.log("Token:", token); // Log the token to check if it's correct
-      const response = await fetch("https://sna.shopnoneer.com/api/logoutapi", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 200) {
-        localStorage.clear(); // Clear all data from local storage on logout
-        setUser(null); // Clear user data from state
-      } else {
-        throw new Error("Logout failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Logout failed:", error);
-      // Optional: Show error alert using Swal
-      Swal.fire({
-        title: "Error!",
-        text: error.message || "Failed to log out. Please try again.",
-        icon: "error",
-        confirmButtonText: "Okay",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Providing the authentication state and functions
-  const authInfo = {
-    user,
-    loading,
-    createUser,
-    signIn,
-    logOut,
-  };
+  const authInfo = useMemo(
+    () => ({
+      user,
+      loading,
+      googleLoading,
+      createUser,
+      signIn,
+      logOut,
+      googleAuth,
+      facebookAuth,
+    }),
+    [
+      user,
+      loading,
+      googleLoading,
+      createUser,
+      signIn,
+      logOut,
+      googleAuth,
+      facebookAuth,
+    ]
+  );
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -30,7 +30,7 @@ const DetailPropBanner = ({ property }) => {
             <img
               src={img.src}
               alt={`Slide ${index + 1}`}
-              className="w-full h-[250px] lg:h-[550px] object-cover cursor-pointer "
+              className="w-full h-[250px] md:h-[400px] 2xl:h-[750px] object-cover cursor-pointer"
             />
           </div>
         ))}

@@ -1,19 +1,18 @@
 // In your module file
 export class Facility {
   constructor(data) {
-
-    this.name =  data.name||"Unknown Facility";
-    this.category_name =  data.category|| "Unknown Facility";
-    this.latitude =  data.latitude|| "Unknown latitude";
-    this.longitude =  data.longitude|| "Unknown longitude";
+    this.name = data.name || "Unknown Facility";
+    this.category_name = data.category || "Unknown Facility";
+    this.latitude = data.latitude || "Unknown latitude";
+    this.longitude = data.longitude || "Unknown longitude";
+    this.distance = data.distance || "Unknown distance";
   }
 }
 
 export class Amenity {
   constructor(data) {
-
-    this.name =  data.name||"Unknown Facility";
-    this.web_icon =  data.web_icon|| "Unknown Facility";
+    this.name = data.name || "Unknown Facility";
+    this.web_icon = data.web_icon || "Unknown Facility";
   }
 }
 
@@ -58,44 +57,40 @@ export class DetailsPropertyModel {
   }
 
   static async fetchById(id) {
-    const token = localStorage.getItem("user_token");
-
     try {
-      const response = await fetch(
-        "https://sna.shopnoneer.com/api/get-project-by-id",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Correct template literal syntax
-          },
-          body: JSON.stringify({ project_id: id }),
-        }
-      );
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const apiToken = import.meta.env.VITE_API_TOKEN;
+
+      const response = await fetch(`${apiUrl}/api/get-project-by-id`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          api_token: `${apiToken}`,
+        },
+        body: JSON.stringify({ project_id: id }),
+      });
 
       if (!response.ok) throw new Error("Failed to fetch project data.");
 
       const result = await response.json();
-
       const propertyModel = new DetailsPropertyModel(result.data);
-      
 
       // Create the Facility model instances, if facilities exist
       const facilities = result.data.facilities || [];
-      const facilityModel = facilities.map(facility => new Facility(facility));
-
+      const facilityModel = facilities.map(
+        (facility) => new Facility(facility)
+      );
 
       const amenity = result.data.amenities || [];
-    //  console.log(amenity);
-     
-      const amenityModel = amenity.map(amenity => new Amenity(amenity));
+      //  console.log(amenity);
+
+      const amenityModel = amenity.map((amenity) => new Amenity(amenity));
 
       return {
         property: propertyModel,
         facilities: facilityModel,
         amenities: amenityModel,
       };
-
     } catch (error) {
       console.error("Error fetching property data:", error);
       throw error;

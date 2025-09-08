@@ -3,38 +3,24 @@ import {
   faBath,
   faBed,
   faBookmark,
-  faCity,
+  faBuilding,
+  faEnvelope,
+  faHome,
+  faMapMarkerAlt,
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FavAdd from "../../../Models/FavModel/FavAdd";
 import FavRemove from "../../../Models/FavModel/FavRemove";
-import LoadingLottie from "../../../assets/loadingLottie/loadingLottie";
+import LoadingLottie from "../../../../public/assets/loadingLottie/loadingLottie";
+import NoDataLottie from "../../../../public/assets/loadingLottie/noDataLottie";
 import Swal from "sweetalert2";
-import FavModel from "../../../Models/FavModel/FavModel";
 
 const DetailCard = ({ sortedProjects, isLoading }) => {
   const [bookmarked, setBookmarked] = useState({});
-  const data = sortedProjects;
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // const FavItem = await FavModel();
-        // const initialBookmarks = {};
-        // data.forEach((item) => {
-        //   if (FavItem.some((fav) => fav.id === item.id)) {
-        //     initialBookmarks[item.id] = true;
-        //   }
-        // });
-        // setBookmarked(initialBookmarks);
-      } catch (error) {
-        console.error("Failed to fetch home card data:", error);
-      }
-    };
-
-    loadData();
-  }, [data]);
+  useEffect(() => {}, [sortedProjects]);
 
   const handleBookmarkClick = async (id) => {
     try {
@@ -46,34 +32,39 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
           title: "বুকমার্ক মুছে ফেলা হয়েছে",
           text: "এই সম্পত্তিটি আপনার প্রিয় তালিকা থেকে মুছে ফেলা হয়েছে।",
           confirmButtonColor: "#e53e3e",
+          confirmButtonText: "ঠিক আছে",
         });
       } else {
-        await FavAdd(id);
-        setBookmarked((prev) => ({ ...prev, [id]: true }));
-        Swal.fire({
-          icon: "success",
-          title: "বুকমার্ক করা হয়েছে!",
-          text: "এই ফ্ল্যাটটি আপনার প্রিয় তালিকায় যোগ করা হয়েছে।",
-          confirmButtonColor: "#38b2ac",
-        });
+        const success = await FavAdd(id);
+        if (success) {
+          setBookmarked((prev) => ({ ...prev, [id]: true }));
+          Swal.fire({
+            icon: "success",
+            title: "বুকমার্ক করা হয়েছে!",
+            text: "এই ফ্ল্যাটটি আপনার প্রিয় তালিকায় যোগ করা হয়েছে।",
+            confirmButtonColor: "#38b2ac",
+            confirmButtonText: "ঠিক আছে",
+          });
+        }
       }
     } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "ক্রিয়া ব্যর্থ হয়েছে",
-        text: "আপনার অনুরোধ প্রক্রিয়া করার সময় একটি ত্রুটি ঘটেছে।",
-        confirmButtonColor: "#e53e3e",
+        title: "অনুগ্রহ করে লগইন করুন",
+        text: "আপনার প্রিয় তালিকা দেখার জন্য আপনাকে লগইন করতে হবে।",
+        icon: "warning",
+        confirmButtonColor: "#38b2ac",
+        confirmButtonText: "লগ ইন",
+        timer: 3000,
       });
       console.error("Failed to toggle bookmark:", error);
     }
   };
 
-  const LoadingSpinner = () => <LoadingLottie />;
-
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingLottie />;
+  if (!sortedProjects || sortedProjects.length === 0) return <NoDataLottie />;
 
   return (
-    <div className="lg:px-7 p-0 grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-6 my-4 mx-2 lg:mx-0">
+    <div className="lg:pl-7 p-0 grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-6 my-4 mx-2 lg:mx-0">
       {sortedProjects.map((data, index) => (
         <div
           key={data.id || index}
@@ -98,7 +89,7 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
                     bookmarked[data.id] ? "text-orange-500" : "text-teal-500"
                   } transition-colors duration-300`}
                 >
-                  {bookmarked[data.id] ? "Remove" : "Save"}
+                  {bookmarked[data.id] ? "মুছুন" : "সংরক্ষণ"}
                 </p>
               </span>
             </div>
@@ -112,12 +103,22 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
               />
             </div>
           </Link>
+
           <div className="card-body p-4 sm:p-6">
             <Link to={`/detailsPropMain/${data.id}`}>
               <h2 className="card-title text-xl font-semibold text-gray-800 mb-3 hover:text-teal-500">
                 {data.title}
               </h2>
             </Link>
+            <div className="text-base text-teal-600 flex flex-col -mt-1 mb-3">
+              <span className="flex lg:items-center">
+                <FontAwesomeIcon
+                  icon={faMapMarkerAlt}
+                  className="mt-1 lg:mt-0 mr-2"
+                />
+                {data.housing},{data.upazila},{data.district}
+              </span>
+            </div>
             <p className="text-gray-500 text-sm sm:text-base my-2">
               {data.description?.length > 35
                 ? `${data.description
@@ -126,49 +127,125 @@ const DetailCard = ({ sortedProjects, isLoading }) => {
                     .replace(/[,;:.!?]$/, "")}...`
                 : data.description || ""}
             </p>
-            <div className="flex gap-3 my-3">
-              <FontAwesomeIcon icon={faBed} />
-              <span className="border-r-2 pr-2">{data.no_of_beds}</span>
-              <FontAwesomeIcon icon={faBath} />
-              <span className="border-r-2 pr-2">{data.no_of_baths}</span>
-              <FontAwesomeIcon icon={faCity} />
-              <span>{data.no_of_balcony}</span>
+            <div className="flex gap-4 my-4 md:text-xs 2xl:text-base">
+              {/* Bed with animated tooltip */}
+              <div className="relative group">
+                <div className="transition-all duration-200 group-hover:scale-110">
+                  <FontAwesomeIcon
+                    icon={faBed}
+                    className="text-gray-600 group-hover:text-teal-600"
+                  />
+                  <span className="border-r-2 border-gray-200 pr-3 ml-1">
+                    {data.no_of_beds}
+                  </span>
+                </div>
+                <div className="absolute z-10 hidden group-hover:flex animate-fadeIn -top-20 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-gray-800 text-white text-xs rounded-lg py-1.5 px-3 shadow-lg">
+                    বিছানার সংখ্যা {data.no_of_beds}
+                  </div>
+                </div>
+              </div>
+
+              {/* Bath with animated tooltip */}
+              <div className="relative group">
+                <div className="transition-all duration-200 group-hover:scale-110">
+                  <FontAwesomeIcon
+                    icon={faBath}
+                    className="text-gray-600 group-hover:text-teal-600"
+                  />
+                  <span className="border-r-2 border-gray-200 pr-3 ml-1">
+                    {data.no_of_baths}
+                  </span>
+                </div>
+                <div className="absolute z-10 hidden group-hover:flex animate-fadeIn -top-20 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-gray-800 text-white text-xs rounded-lg py-1.5 px-3 shadow-lg">
+                    গোসলখানার সংখ্যা {data.no_of_baths}
+                  </div>
+                </div>
+              </div>
+
+              {/* Building with animated tooltip */}
+              <div className="relative group">
+                <div className="transition-all duration-200 group-hover:scale-110">
+                  <FontAwesomeIcon
+                    icon={faBuilding}
+                    className="text-gray-600 group-hover:text-teal-600"
+                  />
+                  <span className="lg:border-r-2 border-gray-200 pr-3 ml-1">
+                    {data.no_of_balcony}
+                  </span>
+                </div>
+                <div className="absolute z-10 hidden group-hover:flex animate-fadeIn -top-20 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-gray-800 text-white text-xs rounded-lg py-1.5 px-3 shadow-lg">
+                    বারান্দার সংখ্যা {data.no_of_balcony}
+                  </div>
+                </div>
+              </div>
+
+              {/* Home with animated tooltip (hidden on mobile) */}
+              <div className="hidden lg:block relative group">
+                <div className="transition-all duration-200 group-hover:scale-110">
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    className="text-gray-600 group-hover:text-teal-600"
+                  />
+                  <span className="ml-2 text-sm">
+                    {data.floor_area} বর্গফুট
+                  </span>
+                </div>
+                <div className="absolute z-10 hidden group-hover:flex animate-fadeIn -top-20 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-gray-800 text-white text-xs rounded-lg py-3 px-3 shadow-lg">
+                    জায়গা {data.floor_area}বর্গফুট
+                  </div>
+                </div>
+              </div>
             </div>
-            <h2 className="flex items-center justify-between lg:text-lg font-semibold text-teal-600 my-2">
-              <div>
+            <div className="flex items-center justify-between  md:sm 2xl:lg font-semibold text-teal-600 my-2">
+              <div className="text-xs md:text-sm 2xl:text-lg">
                 {data.total_price ? (
-                  <>
-                    ৳{data.total_price.toLocaleString()} টাকা
-                  </>
+                  <>৳{data.total_price.toLocaleString()} টাকা</>
                 ) : (
                   <>মূল্য শীঘ্রই প্রকাশিত হবে!</>
                 )}
               </div>
-              <div className="flex justify-end items-center">
-                <button
-                  onClick={() =>
-                    window.open(
-                      `tel:${data.phone || "+880 1521-498303"}`,
-                      "_self"
-                    )
-                  }
-                  className="px-4 py-2  text-xs lg:text-base  rounded-md bg-teal-500 text-white hover:bg-teal-600 transition duration-300 shadow-lg"
+              <div className="flex justify-end items-center space-x-2">
+                <div className="space-x-1 flex">
+                  {/* Call Button */}
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `tel:${data.phone || "+880 1521-498303"}`,
+                        "_self"
+                      )
+                    }
+                    className="flex items-center justify-center text-xs 2xl:text-sm px-2 py-1 2xl:px-3 2xl:py-2 rounded-sm 2xl:rounded-md bg-teal-500 text-white hover:bg-teal-700 transition duration-300"
+                  >
+                    <FontAwesomeIcon icon={faPhone} />
+                  </button>
+
+                  {/* Email Button */}
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `mailto:${data.email || "Shohag.cse3@gmail.com"}`,
+                        "_self"
+                      )
+                    }
+                    className="flex items-center justify-center text-xs 2xl:text-sm px-2 py-1 2xl:px-3 2xl:py-2 rounded-sm 2xl:rounded-md bg-red-500 text-white  hover:bg-red-700 transition duration-300"
+                  >
+                    <FontAwesomeIcon icon={faEnvelope} />
+                  </button>
+                </div>
+
+                {/* বিস্তারিত Button */}
+                <Link
+                  to={`/detailsPropMain/${data.id}`}
+                  className="px-3 py-1 2xl:px-2 2xl:py-1 text-xs 2xl:text-base rounded-sm 2xl:rounded-md bg-gray-900 text-white  hover:bg-gray-700 hover:text-gray-100 transition duration-300"
                 >
-                  কল
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      `mailto:${data.email || "Shohag.cse3@gmail.com"}`,
-                      "_self"
-                    )
-                  }
-                  className="px-4 py-2  text-xs lg:text-base   rounded-md bg-gray-500 text-white hover:bg-gray-600 transition duration-300 shadow-lg ml-2"
-                >
-                  ইমেইল
-                </button>
+                  বিস্তারিত
+                </Link>
               </div>
-            </h2>
+            </div>
           </div>
         </div>
       ))}

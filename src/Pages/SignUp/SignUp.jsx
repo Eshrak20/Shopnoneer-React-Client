@@ -1,14 +1,17 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import "@lottiefiles/lottie-player";
 import { Player } from "@lottiefiles/react-lottie-player";
-import loadingAnimation from "../../assets/loadingLottie/loadingLottie.json";
+import loadingAnimation from "../../../public/assets/loadingLottie/loadingLottie.json";
+import { useForm } from "react-hook-form";
+import GoogleLogin from "../../Components/SocialLogin/GoogleLogin";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -24,13 +27,15 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     setLoading(true);
 
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
     try {
       const user = await createUser(
         data.name,
         data.email,
-        data.phone_number,
         data.password,
         data.confirm_password
+        // data.phone_number
       );
       reset();
 
@@ -42,13 +47,15 @@ const SignUp = () => {
         showConfirmButton: false,
       });
 
-      setTimeout(() => {
-        navigate("/login", { replace: true });
-      }, 1500);
+      // Wait for 0.5 seconds before navigating to login
+      await delay(500);
+      navigate("/login", { replace: true });
     } catch (err) {
       Swal.fire({
         title: "ত্রুটি!",
-        text: err.message || "সাইন-আপের সময় একটি ত্রুটি ঘটেছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+        text:
+          err.message ||
+          "সাইন-আপের সময় একটি ত্রুটি ঘটেছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
         icon: "error",
         confirmButtonText: "ঠিক আছে",
       });
@@ -81,12 +88,12 @@ const SignUp = () => {
                   to="/login"
                   className="text-teal-500 hover:text-teal-600 transition duration-200 mr-4"
                 >
-                  <span role="img" aria-label="Go back" className="text-2xl">
+                  <span role="img" aria-label="Go back" className="text-4xl">
                     ←
                   </span>
                 </Link>
                 <h2 className="text-2xl font-semibold text-center">
-                আপনার অ্যাকাউন্ট তৈরি করুন।
+                  আপনার অ্যাকাউন্ট তৈরি করুন।
                 </h2>
               </div>
 
@@ -135,7 +142,7 @@ const SignUp = () => {
               </div>
 
               {/* Phone Number Field */}
-              <div className="form-control">
+              {/* <div className="form-control">
                 <label className="label">
                   <span className="label-text">ফোন নম্বর</span>
                 </label>
@@ -154,25 +161,42 @@ const SignUp = () => {
                 {errors.phone_number && (
                   <p className="text-red-500">{errors.phone_number.message}</p>
                 )}
-              </div>
+              </div> */}
 
               {/* Password Field */}
-              <div className="form-control">
+              <div className="form-control ">
                 <label className="label">
                   <span className="label-text">পাসওয়ার্ড</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="পাসওয়ার্ড"
-                  className="input input-bordered"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "পাসওয়ার্ডটি কমপক্ষে ৬ অক্ষরের হতে হবে।",
-                    },
-                  })}
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="পাসওয়ার্ড"
+                    className="input input-bordered w-full"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "পাসওয়ার্ডটি কমপক্ষে ৬ অক্ষরের হতে হবে।",
+                      },
+                    })}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-5 right-3 flex items-center text-gray-500 hover:text-gray-700"
+                  >
+                    {showPassword ? (
+                      <span role="img" aria-label="Hide password">
+                        👁️
+                      </span>
+                    ) : (
+                      <span role="img" aria-label="Show password">
+                        👁️‍🗨️
+                      </span>
+                    )}
+                  </button>
+                </div>
                 {errors.password && (
                   <p className="text-red-500">{errors.password.message}</p>
                 )}
@@ -184,7 +208,7 @@ const SignUp = () => {
                   <span className="label-text">পাসওয়ার্ড নিশ্চিত করুন</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="পাসওয়ার্ড নিশ্চিত করুন"
                   className="input input-bordered"
                   {...register("confirm_password", {
@@ -206,19 +230,20 @@ const SignUp = () => {
                   disabled={loading}
                   className="btn bg-teal-500 text-white hover:bg-teal-600"
                 >
-                  {loading ? "Creating account..." : "সাইন আপ"}
+                  {loading ? "অ্যাকাউন্ট তৈরি করা হচ্ছে..." : "সাইন আপ"}
                 </button>
               </div>
 
               <p className="text-center mt-2 text-teal-500">
-              আপনার কি ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
+                আপনার কি ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
                 <Link to="/login" className="text-teal-600">
-                লগ ইন করুন
+                  লগ ইন করুন
                 </Link>
               </p>
             </form>
+            <GoogleLogin />
           </div>
-Ï
+
           {/* Animation Section */}
           <div className="mt-0 hidden lg:block lg:mt-0 lg:w-1/2">
             <Player

@@ -1,8 +1,4 @@
 /* Navbar.css */
-.navbar {
-  transition: all 0.3s ease-in-out; /* Smooth background transition */
-}
-
 .navbar .nav-item {
   padding: 10px;
   position: relative;
@@ -12,6 +8,13 @@
 .navbar .nav-item:hover {
   color: #ffffff; /* Hover color */
   transform: scale(1.05); /* Slight scaling effect */
+}
+
+.navbar .nav-item.active {
+  color: #53d2a6; /* Color for active link */
+  font-weight: bold; /* Bold font for active link */
+  transform: scale(1.05); /* Slight scaling effect on active */
+  /* border-bottom: 2px solid #53d2a6;  */
 }
 
 .navbar .nav-item::after {
@@ -78,4 +81,17 @@
 
 .transition-all {
   transition: all 0.3s ease-in-out;
+}
+
+/* In your App.css or a global CSS file */
+.nav-link {
+  @apply p-2 block rounded-md transition-all duration-300 hover:bg-gray-800 mt-1 hover:text-white focus:bg-gray-300;
+}
+
+.nav-link-active {
+  @apply bg-gray-800 text-white;
+}
+
+.nav-link-logout {
+  @apply bg-red-600 text-white w-full p-2 rounded-lg shadow-md transition-all mt-1 duration-200 hover:bg-red-700 focus:bg-red-800;
 }

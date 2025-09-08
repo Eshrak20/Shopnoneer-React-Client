@@ -1,43 +1,54 @@
-import FavModel from "./FavModel";
+import Swal from "sweetalert2";
 
 const FavAdd = async (id) => {
   try {
-    // Get the token from local storage
     const token = localStorage.getItem("user_token");
 
-    // Fetch current favorite IDs using FavModel
-    const existingFavorites = await FavModel();
+    if (!token) {
+      // Save the current URL for redirection after login
+      const currentUrl = window.location.href;
+      sessionStorage.setItem("redirectAfterLogin", currentUrl);
 
-    // Check if the ID is already in the list of favorites
-    const isAlreadyFavorite = existingFavorites.some(
-      (favorite) => favorite.project_id === id
-    );
+      // Show SweetAlert and redirect to login
+      Swal.fire({
+        title: "অনুগ্রহ করে লগইন করুন",
+        text: "আপনার প্রিয় তালিকা দেখার জন্য আপনাকে লগইন করতে হবে।",
+        icon: "warning",
+        confirmButtonColor: "#38b2ac",
+        confirmButtonText: "লগ ইন",
+        showCancelButton: true,
+        cancelButtonText: "পরে করব",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = window.location.origin + '/login';
+        } else {
+          console.log("User chose not to log in.");
+        }
+      });
 
-    if (isAlreadyFavorite) {
-      console.log("This property is already in your favorites.");
-      return; // Exit the function if the ID is already a favorite
+      return; // Exit early since user is not logged in
     }
 
-    // If not a favorite, proceed to add it
-    const response = await fetch(
-      "https://sna.shopnoneer.com/api/add-favourite",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ project_id: id }),
-      }
-    );
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const apiToken = import.meta.env.VITE_API_TOKEN;
+
+    const response = await fetch(`${apiUrl}/api/add-favourite`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        api_token: `${apiToken}`,
+      },
+      body: JSON.stringify({ project_id: id }),
+    });
 
     if (!response.ok) {
       throw new Error("Failed to add to favorites");
     }
-
-    console.log("Property added to favorites successfully.");
+    return true;
   } catch (error) {
     console.error("Error in FavAdd:", error.message);
+    return false;
   }
 };
 
