@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Tashrif",
+    "employment_type": "Full Stack Developer",
+    "experience_years": 3,
+    "specialization": "Laravel, React, TailwindCSS",
+    "bio": "ওয়েব এবং অ্যাপ ডেভেলপমেন্টে অভিজ্ঞ, নিরাপদ এবং স্কেলেবল সলিউশন তৈরি করতে ভালোবাসি।",
+    "skills": [
+      "Laravel",
+      "React",
+      "TailwindCSS",
+      "MySQL"
+    ],
+    "profilePhotoPath": "/assets/ProfileImages/myPic1.png",
+    "linkedin": "https://www.linkedin.com/in/eshrakg/",
+    "github": "https://github.com/Eshrak20",
+    "portfolio_url": "https://eshrakg.netlify.app"
+  },
+  {
+    "id": 2,
+    "title": "Hasan",
+    "employment_type": "Frontend Developer",
+    "experience_years": 2,
+    "specialization": "UI/UX Design, Figma, Prototyping",
+    "bio": "ব্যবহারকারী-বান্ধব ইন্টারফেস ডিজাইন করতে ভালোবাসি, যাতে প্রপার্টি কেনা-বেচা আরও সহজ হয়।",
+    "skills": [
+      "HTMl",
+      "Tailwind",
+      "ShadeCN",
+      "CSS"
+    ],
+    "profilePhotoPath": "/assets/ProfileImages/myPic3.JPG",
+    "linkedin": "https://www.linkedin.com/in/eshrakg/",
+    "github": "https://github.com/Eshrak20",
+    "portfolio_url": "https://eshrakg.netlify.app"
+  },
+  {
+    "id": 3,
+    "title": "Jilan",
+    "employment_type": "React Js Developer",
+    "experience_years": 3,
+    "specialization": "React, Next.js, Vue",
+    "bio": "ফ্রন্টএন্ড ডেভেলপার হিসেবে ব্যবহারকারীদের জন্য দ্রুত এবং রেসপন্সিভ UI তৈরি করি।",
+    "skills": [
+      "React",
+      "Next.js",
+      "JavaScript",
+      "TypeScript"
+    ],
+    "profilePhotoPath": "/assets/ProfileImages/myPic4.jpg",
+    "linkedin": "https://www.linkedin.com/in/eshrakg/",
+    "github": "https://github.com/Eshrak20",
+    "portfolio_url": "https://eshrakg.netlify.app"
+  },
+  {
+    "id": 4,
+    "title": "Eshrak",
+    "employment_type": "Backend Engineer",
+    "experience_years": 4,
+    "specialization": "PHP, Node.js, API Development",
+    "bio": "Shopnoneer-এর ব্যাকএন্ড আর্কিটেকচারের দায়িত্বে আছি। নিরাপত্তা এবং কার্যকারিতা নিয়ে কাজ করতে আগ্রহী।",
+    "skills": [
+      "PHP",
+      "Node.js",
+      "Express",
+      "MongoDB"
+    ],
+    "profilePhotoPath": "/assets/ProfileImages/myPic2.jpg",
+    "linkedin": "https://www.linkedin.com/in/eshrakg/",
+    "github": "https://github.com/Eshrak20",
+    "portfolio_url": "https://eshrakg.netlify.app"
+  }
+]

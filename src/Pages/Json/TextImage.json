@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "ফ্ল্যাট কেনা",
+    "short_description": "সহজে এবং নির্ভরযোগ্যভাবে আপনার পছন্দের এলাকায় ফ্ল্যাট কিনুন।",
+    "image": "/assets/TextImages/flatBuy.jfif"
+  },
+  {
+    "id": 2,
+    "title": "ফ্ল্যাট বিক্রি",
+    "short_description": "আপনার ফ্ল্যাট দ্রুত বিক্রির জন্য সঠিক ক্রেতার সাথে সংযোগ করুন।",
+    "image": "/assets/TextImages/flatSell.jfif"
+  },
+  {
+    "id": 3,
+    "title": "ভাড়া দেওয়া",
+    "short_description": "বাড়ি বা ফ্ল্যাট ভাড়া দেওয়ার জন্য বিশ্বস্ত ভাড়াটিয়াদের খুঁজে পান।",
+    "image": "/assets/TextImages/flatRent.jfif"
+  },
+  {
+    "id": 4,
+    "title": "প্রপার্টি কনসালটেন্সি",
+    "short_description": "প্রপার্টি কেনা-বেচার সঠিক পরামর্শ ও সহায়তা পান।",
+    "image": "/assets/TextImages/consantelsi.jfif"
+  }
+]
