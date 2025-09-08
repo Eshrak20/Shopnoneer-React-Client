@@ -49,7 +49,7 @@ This is the frontend client for the [Shopnoneer Backend API](https://github.com/
 
 - **Node.js** (v18 or higher)  
 - **npm** or **yarn** or **pnpm**  
-- The [Backend API](https://github.com/mahbub-shohag/shopnoneer) should be running.  
+- The [Backend API](https://github.com/Eshrak20/Shopnoneer-Express-JS) should be running.  
 
 ### Installation
 
