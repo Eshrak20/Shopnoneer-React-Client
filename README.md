@@ -10,7 +10,8 @@ This is the frontend client for the [Shopnoneer Backend API](https://github.com/
 
 - **🎥 Overview Video (Upcoming, stay tuned):** [Watch on YouTube](https://www.youtube.com/@EshrakG-xy)  
 - **🌐 Live Demo (Frontend):** [Shopnoneer Live](https://shopnoneer.netlify.app/)  
-- **⚙️ Backend API:** [Repository & Docs](https://github.com/mahbub-shohag/shopnoneer)
+- **⚙️ Backend API:** [Express JS version (NEW)](https://github.com/Eshrak20/Shopnoneer-Express-JS)
+- **⚙️ Backend API:** [Laravel Version (OLD)](https://github.com/mahbub-shohag/shopnoneer)
 
 ---
 
@@ -58,13 +59,4 @@ This is the frontend client for the [Shopnoneer Backend API](https://github.com/
    git clone https://github.com/your-username/shopnoneer-react-client.git
    cd shopnoneer-react-client
 npm install
-# or
-yarn install
-# or
-pnpm install
-VITE_API_BASE_URL=http://localhost:5000/api
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
