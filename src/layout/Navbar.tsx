@@ -3,7 +3,6 @@ import {
   HouseIcon,
   InfoIcon,
   StarIcon,
-  DollarSignIcon,
   HelpCircleIcon,
   PhoneIcon,
   UserIcon,
@@ -47,8 +46,8 @@ import { motion } from "framer-motion";
 const navigationLinks = [
   { href: "/", label: "হোম", icon: HouseIcon },
   { href: "/about", label: "আমাদের সম্পর্কে", icon: InfoIcon },
-  { href: "/feature", label: "ফ্ল্যাটসমূহ", icon: StarIcon },
-  { href: "/pricing", label: "উইশলিস্ট", icon: DollarSignIcon },
+  { href: "/projects", label: "ফ্ল্যাটসমূহ", icon: StarIcon },
+  // { href: "/pricing", label: "উইশলিস্ট", icon: DollarSignIcon },
   { href: "/faq", label: "প্রশ্নোত্তর", icon: HelpCircleIcon },
   { href: "/contact", label: "যোগাযোগ", icon: PhoneIcon },
 ];

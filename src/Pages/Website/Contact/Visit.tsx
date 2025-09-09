@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 const Visit = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentDate, setCurrentDate] = useState("");
+  const [, setCurrentDate] = useState("");
   const [showStreetView, setShowStreetView] = useState(false);
 
   useEffect(() => {

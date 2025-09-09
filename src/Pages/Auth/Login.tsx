@@ -42,7 +42,8 @@ const Login = () => {
         toast.error(`User is ${result?.data?.user?.is_active}`);
       } else {
         toast.success("Logged in successfully!");
-        navigate("/");
+        navigate("/"); // navigate to home
+        window.location.reload(); // reload the page
       }
     } catch (err: any) {
       handleApiError(err);
@@ -52,8 +53,8 @@ const Login = () => {
   // Function to fill demo user credentials
   const fillDemoUserCredentials = () => {
     setForm({
-      email: "user@demo.com",
-      password: "demopassword123"
+      email: "user@example.com",
+      password: "1234",
     });
     toast.info("Demo user credentials filled");
   };
@@ -61,8 +62,8 @@ const Login = () => {
   // Function to fill demo admin credentials
   const fillDemoAdminCredentials = () => {
     setForm({
-      email: "admin@demo.com",
-      password: "adminpassword123"
+      email: "admin@example.com",
+      password: "1234",
     });
     toast.info("Demo admin credentials filled");
   };

@@ -2,30 +2,30 @@
 
 > A modern, responsive, and user-friendly frontend application for managing Shopnoneer operations. Built with React, TypeScript, and a powerful stack of UI libraries.
 
-This is the frontend client for the [Shopnoneer Backend API](https://github.com/your-username/backend-digital-wallet).
+This is the Backend API for the [Shopnoneer Backend API](https://github.com/Eshrak20/Shopnoneer-Express-JS).
 
 ---
 
 ## 📌 Quick Links
 
-- **🎥 Overview Video Upcoming , Keep eyes on my youTube:** [Watch on YouTube](https://www.youtube.com/@EshrakG-xy)
-- **🌐 Live Demo (Frontend):** [[Netlify Link Here](https://digital-wallet-react-redux.netlify.app/)]
-- **🧠 Backend ER Diagram:** [View Diagram](https://drive.google.com/file/d/1QCTlaziJvm-ju8ES27C4qvEUh6Xemuyz/view)
-- **⚙️ Backend API:** [Repository & Docs](https://github.com/your-username/backend-digital-wallet)
+- **🎥 Overview Video (Upcoming, stay tuned):** [Watch on YouTube](https://www.youtube.com/@EshrakG-xy)  
+- **🌐 Live Demo (Frontend):** [Shopnoneer Live](https://shopnoneer.netlify.app/)  
+- **⚙️ Backend API:** [Express JS version (NEW)](https://github.com/Eshrak20/Shopnoneer-Express-JS)
 
 ---
 
 ## ✨ Features
 
 - **👥 Role-Based Dashboard:** Tailored experiences for Users, Agents, and Admins.
-- **💼 Wallet Management:** View balance, add funds, withdraw, and transfer money.
-- **📊 Transaction History:** Interactive charts and data tables for all financial activities.
-- **🎨 Modern UI:** Built with shadcn/ui (Radix + Tailwind CSS) for a beautiful, accessible experience.
-- **🎭 Smooth Animations:** Powered by Framer Motion for engaging user interactions.
-- **🌓 Dark/Light Mode:** Full theme support using `next-themes`.
-- **🔒 State Management:** Robust state handling with Redux Toolkit.
-- **📝 Form Management:** Complex forms made easy with React Hook Form and Zod validation.
-- **🍪 Authentication:** JWT-based auth with secure cookie storage.
+- **🏠 Property Listings:** Browse and search flats, houses, and land based on area, facilities, and budget.  
+- **👤 Authentication System:** Secure login, registration, OTP verification, and password reset.  
+- **📊 Data Visualization:** Charts, stats, and reports powered by Chart.js and React ChartJS 2.  
+- **🎨 Modern UI:** Styled with Tailwind CSS + DaisyUI for a clean, responsive design.  
+- **🎭 Smooth Animations:** Engaging UI powered by Framer Motion and Animate.css.  
+- **🌓 Dark/Light Mode:** Custom theming support for better user experience.  
+- **📢 Notifications & Alerts:** Toastify, SweetAlert, and interactive modals.  
+- **📷 Image Handling:** CropperJS, carousels, and photo albums for better media management.  
+- **🛠️ Form Handling:** React Hook Form for validation and smooth form management.  
 
 ---
 

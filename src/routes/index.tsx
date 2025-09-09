@@ -16,12 +16,14 @@ import Home from "@/Pages/Website/Home/Home/Home";
 import About from "@/Pages/Website/About/About";
 import Faq from "@/Pages/Website/Faq/Faq";
 import Contact from "@/Pages/Website/Contact/Contact";
+import Project from "@/Pages/Website/Project/Project";
+import SingleProject from "@/Pages/Website/SingleProject/SingleProject";
 
 export const router = createBrowserRouter([
   {
     Component: App,
     path: "/",
-    errorElement: <ErrorPage />, 
+    errorElement: <ErrorPage />,
     children: [
       {
         Component: Home,
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
       {
         Component: About,
         path: "/about",
+      },
+      {
+        Component: Project,
+        path: "/projects",
+      },
+      {
+        Component: SingleProject,
+        path: "/projects/:id",
       },
       {
         Component: Faq,

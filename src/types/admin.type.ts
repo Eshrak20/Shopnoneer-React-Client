@@ -49,16 +49,6 @@ export interface Division {
 }
 
 
-export interface Transaction {
-  _id: string;
-  user: string; // user id reference
-  type: "TRANSFER" | "DEPOSIT" | "WITHDRAW" | string;
-  amount: number;
-  transaction_fee: number;
-  status: "PENDING" | "COMPLETED" | "FAILED" | string;
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
-}
 
 interface Meta {
   page: number;
@@ -67,79 +57,82 @@ interface Meta {
   totalPage: number;
 }
 
-export interface TransactionResponseData {
-  data: Transaction[];
-  meta: Meta;
-}
 
-export interface TransactionUiProps {
-  data: Transaction[];
-}
-
-export interface TransactionApiResponse {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data: TransactionResponseData;
-}
-
-export interface Commission {
-  _id: string;
-  agent_id: string;
-  amount: number;
-  type: "CASHOUT" | "REFERRAL";
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
-}
-
-export interface CommissionResponse {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data: {
-    data: Commission[];
-  };
-}
-
-export interface WalletUiProps {
-  data: Wallet[];
-}
-export interface Wallet {
-  _id: string;
-  user: string;
-  balance: number;
-  status: "ACTIVE" | "INACTIVE" | string; // extendable if more statuses exist
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
-}
-
-export interface AllWalletApiResponse {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data: {
-    data: Wallet[];
-  };
-}
-
-export interface WalletData {
-  _id: string;
-  user: string;
-  balance: number;
-  status: "ACTIVE" | "BLOCKED";
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface WalletApiResponse {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data: WalletData;
-}
 export interface UpdateUserRoleApiResponse {
   statusCode: number;
   success: boolean;
   message: string;
   data: User;
+}
+export interface Amenity {
+  _id: string;
+  name: string;
+  nameBn: string;
+  iconWeb: string;
+  iconAndroid?: string;
+  iconIos?: string;
+}
+export interface LocationRef {
+  _id: string;
+  name: string;
+  nameBn: string;
+  latitude?: string;
+  longitude?: string;
+}
+
+export interface Project {
+  _id: string;
+  name: string;
+  nameBn: string;
+  division: LocationRef | null;
+  district: LocationRef | null;
+  upazila: LocationRef | null;
+  housing: LocationRef | null;
+  road?: string;
+  block?: string;
+  plotNumber?: string;
+  plotSize?: number;
+  plotFace?: string;
+  storied?: number;
+  noOfUnits?: number;
+  noOfBeds?: number;
+  noOfBaths?: number;
+  noOfBalcony?: number;
+  floorArea?: number;
+  floorNo?: number;
+  ownerName: string;
+  ownerPhone: string;
+  ownerEmail?: string;
+  totalPrice: number;
+  ratePerSqr: number;
+  isCorner?: boolean;
+  parkingAvailable?: boolean;
+  description: string;
+  address: string;
+  projectImages: string[];
+  amenities: Amenity[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+
+export interface ProjectMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPage: number;
+}
+
+export interface ProjectsResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: ProjectMeta;
+  data: Project[];
+}
+export interface SingleProjectResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: Project; // not Project[]
 }

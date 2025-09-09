@@ -1,0 +1,22 @@
+.custom-carousel .thumb {
+  display: inline-flex;
+  max-height: 60px;
+  max-width: 100px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.custom-carousel .thumb img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.custom-carousel .thumb.selected {
+  border: 2px solid #00b4d8;
+  transform: scale(1.1);
+}
+
+
+

@@ -5,15 +5,17 @@ import Navbar from "./Navbar";
 interface IProps {
   children: ReactNode;
 }
-const noHeaderFooter =
-  location.pathname.includes("login") || location.pathname.includes("signup");
+// const noHeaderFooter =
+//   location.pathname.includes("login") || location.pathname.includes("signup");
 
 export default function CommonLayout({ children }: IProps) {
   return (
     <>
-        {noHeaderFooter || <Navbar />}
-        <div>{children}</div>
-        {noHeaderFooter || <Footer />}
+      {/* {noHeaderFooter || <Navbar />} */}
+      <Navbar />
+      <div>{children}</div>
+      <Footer />
+      {/* {noHeaderFooter || <Footer />} */}
     </>
   );
 }
