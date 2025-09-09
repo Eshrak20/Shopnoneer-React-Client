@@ -13,15 +13,15 @@ const BuySellCard = () => {
   });
 
   return (
-    <div className="hidden lg:block pb-20" ref={ref}>
+    <div className="hidden lg:block " ref={ref}>
       <Parallax
-        className="h-[60vh] my-10"
+        className=""
         blur={{ min: -15, max: 15 }}
         bgImage={adviserImage}
         bgImageAlt="the banner"
         strength={-200}
       >
-        <div className="flex items-center justify-center min-h-[60vh] bg-black/60">
+        <div className="flex items-center justify-center min-h-screen bg-black/60">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -37,7 +37,8 @@ const BuySellCard = () => {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="mb-8 text-lg md:text-xl font-medium drop-shadow-md"
             >
-              নতুন সম্পত্তি কিনতে বা পুরোনো বিক্রি করতে চান? আমরা দিচ্ছি দুর্দান্ত সমাধান!
+              নতুন সম্পত্তি কিনতে বা পুরোনো বিক্রি করতে চান? আমরা দিচ্ছি
+              দুর্দান্ত সমাধান!
             </motion.p>
             <div className="flex justify-center space-x-6">
               <Link to="/detail">

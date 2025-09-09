@@ -32,13 +32,7 @@ const Home = () => {
             />
           ))}
         </div>
-        <div className="max-w-screen-2xl mx-auto">
-        <div className="md:mx-32 2xl:mx-20">
-          {/* <HousingWiseProject /> */}
-          {/* <FeatureSlider /> */}
-          <BuySellCard />
-        </div>
-      </div>
+        <BuySellCard />
       </div>
     </>
   );

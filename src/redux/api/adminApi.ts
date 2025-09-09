@@ -26,13 +26,6 @@ export const adminApi = baseApi.injectEndpoints({
       providesTags: ["Admin"],
     }),
 
-    // getSingleProject: builder.query<Project, string>({
-    //   query: (id) => ({
-    //     url: `/project/get-single-project/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["Admin"],
-    // }),
     getSingleProject: builder.query<SingleProjectResponse, string>({
       query: (id) => ({
         url: `/project/get-single-project/${id}`,

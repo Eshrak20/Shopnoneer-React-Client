@@ -82,7 +82,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {/* User info */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center text-white font-bold text-lg">
+          <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white font-bold text-lg">
             {userData?.data?.data?.name?.charAt(0) || "U"}
           </div>
           <div className="flex-1 min-w-0">
@@ -126,7 +126,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       asChild
                       className={`mx-2 my-1 rounded-md transition-all duration-200 ${
                         location.pathname === item.url
-                          ? "bg-pink-600 text-white shadow-sm"
+                          ? "bg-teal-600 text-white shadow-sm"
                           : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
                       }`}
                     >
